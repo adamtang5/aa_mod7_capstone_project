@@ -4,15 +4,30 @@ from app.models import db, User
 # Adds a demo user, you can add other users here if you want
 def seed_users():
     demo = User(
-        username='Demo', email='demo@aa.io', password='password')
-    marnie = User(
-        username='marnie', email='marnie@aa.io', password='password')
-    bobbie = User(
-        username='bobbie', email='bobbie@aa.io', password='password')
+        email='demo@aa.io', password='password', display_name='Demo User')
+    dad = User(
+        email='dad@coder.io',
+        password='dadisawesome!',
+        display_name='Coder Dad',
+        avatar_url='https://m.media-amazon.com/images/I/71SPIoQQxuL._AC_SX466_.jpg')
+    mom = User(
+        email='mom@super.io',
+        password='momissupper!',
+        avatar_url='https://media.newyorker.com/photos/5b23e1b240328426ed9a8b49/2:2/w_378,h_378,c_limit/Lane-Incredibles-2.jpg')
+    dash = User(
+        email='dash@kids.io',
+        password='imthefastest!',
+        avatar_url='https://cdn.costumewall.com/wp-content/uploads/2018/09/dash.jpg')
+    monkey_boy = User(
+        email='monkeyboy@kids.io',
+        password='immonkeyking!',
+        avatar_url='https://img.freepik.com/free-vector/monkey-king-mascot-design_26838-117.jpg')
 
     db.session.add(demo)
-    db.session.add(marnie)
-    db.session.add(bobbie)
+    db.session.add(dad)
+    db.session.add(mom)
+    db.session.add(dash)
+    db.session.add(monkey_boy)
 
     db.session.commit()
 
