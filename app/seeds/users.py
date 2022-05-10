@@ -13,14 +13,17 @@ def seed_users():
     mom = User(
         email='mom@super.io',
         password='momissupper!',
+        display_name='Super Mom',
         avatar_url='https://media.newyorker.com/photos/5b23e1b240328426ed9a8b49/2:2/w_378,h_378,c_limit/Lane-Incredibles-2.jpg')
     dash = User(
         email='dash@kids.io',
         password='imthefastest!',
+        display_name='The Name is Dash',
         avatar_url='https://cdn.costumewall.com/wp-content/uploads/2018/09/dash.jpg')
     monkey_boy = User(
         email='monkeyboy@kids.io',
         password='immonkeyking!',
+        display_name='Monkey Boy',
         avatar_url='https://img.freepik.com/free-vector/monkey-king-mascot-design_26838-117.jpg')
 
     db.session.add(demo)
@@ -32,11 +35,11 @@ def seed_users():
     db.session.commit()
 
 
-# Uses a raw SQL query to TRUNCATE the users table.
+# Uses a raw SQL query to TRUNCATE the "Users" table.
 # SQLAlchemy doesn't have a built in function to do this
 # TRUNCATE Removes all the data from the table, and RESET IDENTITY
 # resets the auto incrementing primary key, CASCADE deletes any
 # dependent entities
 def undo_users():
-    db.session.execute('TRUNCATE users RESTART IDENTITY CASCADE;')
+    db.session.execute('TRUNCATE "Users" RESTART IDENTITY CASCADE;')
     db.session.commit()
