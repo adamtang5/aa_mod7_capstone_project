@@ -1,4 +1,4 @@
-from .db import db, Issue
+from .db import db
 from .user import User
 from .project import Project
 from .issue_type import IssueType
@@ -24,7 +24,7 @@ class Issue(db.Model):
     project = db.relationship("Project", back_populates="issues")
 
     def to_dict(self):
-        return (
+        return {
             'id': self.id,
             'submitter_id': self.submitter_id,
             'submitter': User.query.get(self.submitter_id),
@@ -38,4 +38,4 @@ class Issue(db.Model):
             'assignee': User.query.get(self.assignee_id),
             'created_at': self.created_at,
             'updated_at': self.updated_at
-        )
+        }
