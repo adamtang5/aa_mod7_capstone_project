@@ -24,6 +24,7 @@ class Issue(db.Model):
     submitter = db.relationship("User", foreign_keys=[submitter_id], back_populates="issues_submitted")
     assignee = db.relationship("User", foreign_keys=[assignee_id], back_populates="issues_assigned")
     project = db.relationship("Project", back_populates="issues")
+    comments = db.relationship("Comment", back_populates="issue")
 
     invitees = db.relationship("User", secondary=invites, back_populates="invited_to")
 
@@ -44,7 +45,8 @@ class Issue(db.Model):
             'type': IssueType.query.get(self.type_id),
             'assignee_id': self.assignee_id,
             'assignee': User.query.get(self.assignee_id),
-            'authorized_users': User.query.filter(User.id in deduped_user_ids).all(),
+            'authorized_users': [user.to_dict() for user in User.query.filter(User.id in deduped_user_ids)],
+            'comments': [comment.to_dict() for comment in self.comments],
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
