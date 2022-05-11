@@ -1,6 +1,6 @@
 from .db import db
 from .join_u_p import users_projects
-from .invites_i_u import invites
+from .join_i_u import issues_users
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
@@ -18,14 +18,15 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
-    issues_submitted = db.relationship("Issue", back_populates="submitter")
-    issues_assigned = db.relationship("Issue", back_populates="assignee")
-
-    invited_to = db.relationship("Issue", secondary=invites, back_populates="invitees")
-
     projects = db.relationship(
         "Project",
         secondary=users_projects,
+        back_populates="users"
+    )
+
+    issues = db.relationship(
+        "Issue",
+        secondary=issues_users,
         back_populates="users"
     )
 
@@ -48,6 +49,7 @@ class User(db.Model, UserMixin):
             'display_name': self.display_name,
             'avatar_url': self.avatar_url,
             'projects': self.projects,
+            'issues': [issue.id for issue in self.issues],
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
