@@ -14,6 +14,8 @@ class Project(db.Model):
         back_populates="projects"
     )
 
+    issues = db.relationship("Issue", back_populates="project")
+
     def to_dict(self):
         return {
             'id': self.id,

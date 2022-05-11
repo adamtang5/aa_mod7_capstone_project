@@ -17,6 +17,10 @@ class User(db.Model, UserMixin):
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
 
+    issues_submitted = db.relationship("Issue", back_populates="submitter")
+    issues_assigned = db.relationship("Issue", back_populates="assignee")
+
+
     projects = db.relationship(
         "Project",
         secondary=users_projects,
