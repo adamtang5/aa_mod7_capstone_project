@@ -1,0 +1,42 @@
+[
+    {
+        "status": "Open",
+        "description": "The issue is open and ready for the assignee to start work on it.",
+        "adjacency_list": "[2, 4, 5]"
+    },
+    {
+        "status": "In Progress",
+        "description": "This issue is being actively worked on at the moment by the assignee.",
+        "adjacency_list": "[3, 4, 5, 6]"
+    },
+    {
+        "status": "Pending",
+        "description": "This issue cannot be actively worked on at the moment because of a dependency.",
+        "adjacency_list": "[2, 4, 5]"
+    },
+    {
+        "status": "Declined",
+        "description": "This issue will not be worked on by the assignee due to external reason.",
+        "adjacency_list": "[7]"
+    },
+    {
+        "status": "Canceled",
+        "description": "This issue is canceled by the submitter.",
+        "adjacency_list": "[7]"
+    },
+    {
+        "status": "Done",
+        "description": "This issue is completed by the assignee.",
+        "adjacency_list": "[7]"
+    },
+    {
+        "status": "Closed",
+        "description": "The issue is considered completed. Issues which are closed can be reopened.",
+        "adjacency_list": "[8]"
+    },
+    {
+        "status": "Reopened",
+        "description": "This issue was once closed, but the resolution was deemed incorrect.",
+        "adjacency_list": "[2, 4, 5]"
+    }
+]
