@@ -1,4 +1,5 @@
 from .db import db
+from .join_u_p import users_projects
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
@@ -15,6 +16,12 @@ class User(db.Model, UserMixin):
     avatar_url = db.Column(db.String)
     created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
     updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+
+    projects = db.relationship(
+        "Project",
+        secondary=users_projects,
+        back_populates="users"
+    )
 
     @property
     def password(self):
@@ -34,6 +41,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'display_name': self.display_name,
             'avatar_url': self.avatar_url,
+            'projects': self.projects,
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
