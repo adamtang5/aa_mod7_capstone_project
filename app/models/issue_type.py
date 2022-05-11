@@ -6,9 +6,11 @@ class IssueType(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(50), nullable=True, unique=True)
+    description = db.Column(db.String, nullable=False)
 
     def to_dict(self):
         return {
             'id': self.id,
-            'type': self.type
+            'type': self.type,
+            'description': self.description
         }
