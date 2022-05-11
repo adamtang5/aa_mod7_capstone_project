@@ -18,6 +18,6 @@ class Project(db.Model):
         return {
             'id': self.id,
             'name': self.name,
-            'key': self.key
+            'key': self.key,
             'users': self.users
         }
