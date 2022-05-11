@@ -1,5 +1,6 @@
 from .db import db
 from .join_u_p import users_projects
+from .invites_i_u import invites
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
 from datetime import datetime
@@ -20,6 +21,7 @@ class User(db.Model, UserMixin):
     issues_submitted = db.relationship("Issue", back_populates="submitter")
     issues_assigned = db.relationship("Issue", back_populates="assignee")
 
+    invited_to = db.relationship("Issue", secondary=invites, back_populates="invitees")
 
     projects = db.relationship(
         "Project",

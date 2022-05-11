@@ -2,6 +2,8 @@ from .db import db
 from .user import User
 from .project import Project
 from .issue_type import IssueType
+from .invites_i_u import invites
+
 from datetime import datetime
 
 
@@ -23,7 +25,13 @@ class Issue(db.Model):
     assignee = db.relationship("User", foreign_keys=[assignee_id], back_populates="issues_assigned")
     project = db.relationship("Project", back_populates="issues")
 
+    invitees = db.relationship("User", secondary=invites, back_populates="invited_to")
+
     def to_dict(self):
+        project_user_ids = [user.id for user in Project.query.get(self.project_id).users]
+        invitee_ids = [user.id for user in invitees]
+        deduped_user_ids = set([*project_user_ids, submitter_id, assignee_id, *invitee_ids])
+
         return {
             'id': self.id,
             'submitter_id': self.submitter_id,
@@ -36,6 +44,7 @@ class Issue(db.Model):
             'type': IssueType.query.get(self.type_id),
             'assignee_id': self.assignee_id,
             'assignee': User.query.get(self.assignee_id),
+            'authorized_users': User.query.filter(User.id in deduped_user_ids).all(),
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
