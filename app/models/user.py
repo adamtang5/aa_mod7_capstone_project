@@ -48,7 +48,7 @@ class User(db.Model, UserMixin):
             'email': self.email,
             'display_name': self.display_name,
             'avatar_url': self.avatar_url,
-            'projects': self.projects,
+            'projects': [project.id for project in self.projects],
             'issues': [issue.id for issue in self.issues],
             'created_at': self.created_at,
             'updated_at': self.updated_at
