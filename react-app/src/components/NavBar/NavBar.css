@@ -1,0 +1,8 @@
+.nav-button {
+    display: inline-block;
+    color: #292929;
+}
+
+.nav-button:hover {
+    cursor: pointer;
+}
