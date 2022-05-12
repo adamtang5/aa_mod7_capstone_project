@@ -30,9 +30,6 @@ class User(db.Model, UserMixin):
         back_populates="users"
     )
 
-    submitted_issues = db.relationship("Issue", foreign_keys="[Issue.submitter_id]", back_populates="submitter")
-    assigned_issues = db.relationship("Issue", foreign_keys="[Issue.assignee_id]", back_populates="assignee")
-
     @property
     def password(self):
         return self.hashed_password
