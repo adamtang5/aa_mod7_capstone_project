@@ -1,10 +1,11 @@
 
 import React, { useState } from 'react';
-import { Modal } from './Modal';
+import { Modal } from '../../context/Modal';
 import { NavLink } from 'react-router-dom';
-import LoginForm from './auth/LoginForm';
-import SignUpForm from './auth/SignUpForm';
-import LogoutButton from './auth/LogoutButton';
+import LoginForm from '../auth/LoginForm';
+import SignUpForm from '../auth/SignUpForm';
+import LogoutButton from '../auth/LogoutButton';
+import './NavBar.css';
 
 const NavBar = () => {
   const [showLoginModal, setShowLoginModal] = useState(false);

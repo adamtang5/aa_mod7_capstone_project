@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
-import EmailError from './errors/EmailError';
-import PasswordError from './errors/PasswordError';
+import { SignUpEmailError } from './errors/EmailError';
+import { SignUpPasswordError } from './errors/PasswordError';
 import ConfirmPasswordError from './errors/ConfirmPasswordError';
 import DisplayNameError from './errors/DisplayNameError';
 import AvatarUrlError from './errors/AvatarUrlError';
@@ -163,7 +163,7 @@ const SignUpForm = ({ formTitle, handleSwitchForm }) => {
               value={email}
               required
             />
-            <EmailError
+            <SignUpEmailError
               emailTooShort={emailTooShort}
               emailInvalid={emailInvalid}
             />
@@ -179,7 +179,7 @@ const SignUpForm = ({ formTitle, handleSwitchForm }) => {
               value={password}
               required
             />
-            <PasswordError visible={passwordTooShort} />
+            <SignUpPasswordError visible={passwordTooShort} />
           </label>
 
           <label className="auth-form-element">

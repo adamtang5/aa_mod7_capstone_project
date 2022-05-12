@@ -32,3 +32,15 @@
     z-index: 11;
     border-radius: 10px;
 }
+
+#modal-x {
+    position: relative;
+    top: -92px;
+    left: 920px;
+    color: white;
+    z-index: 30;
+}
+
+#modal-x:hover {
+    color: #f50;
+}
