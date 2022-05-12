@@ -11,9 +11,9 @@
     align-items: center;
 }
 
-.auth-form * {
+/* .auth-form * {
     font-family: gt-super, Georgia, Cambria, 'Times New Roman', Times, serif;
-}
+} */
 
 .auth-form label {
     display: block;
@@ -129,7 +129,7 @@ p.summary-text {
 }
 
 p.switch-form {
-    font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    /* font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif; */
     font-size: 16px;
 }
 

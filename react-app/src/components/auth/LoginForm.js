@@ -6,7 +6,7 @@ import { LogInEmailError } from './errors/EmailError';
 import { LogInPasswordError } from './errors/PasswordError';
 import './auth.css';
 
-const LoginForm = ({ formTitle, handleSwitchForm }) => {
+const LoginForm = ({ formTitle, setShowLoginModal, setShowSignupModal }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
 
@@ -59,7 +59,12 @@ const LoginForm = ({ formTitle, handleSwitchForm }) => {
 
   const validatePassword = e => {
     setPasswordInvalid(password.length < 6);
-  }
+  };
+
+  const handleSwitchForm = e => {
+    setShowLoginModal(false);
+    setShowSignupModal(true);
+  };
 
   return (
     <div
