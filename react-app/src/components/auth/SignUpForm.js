@@ -2,8 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import EmailError from './errors/EmailError';
+import PasswordError from './errors/PasswordError';
+import ConfirmPasswordError from './errors/ConfirmPasswordError';
+import DisplayNameError from './errors/DisplayNameError';
+import AvatarUrlError from './errors/AvatarUrlError';
+import './auth.css';
 
-const SignUpForm = () => {
+
+const SignUpForm = ({ formTitle, handleSwitchForm }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
 
@@ -31,9 +38,6 @@ const SignUpForm = () => {
   const [part1SubmitDisabled, setPart1SumbitDisabled] = useState(true);
   const [showPart1Summary, setShowPart1Summary] = useState(false);
   const [showPart2, setShowPart2] = useState(false);
-  // const [part2SubmitDisabled, setPart2SubmitDisabled] = useState(true);
-  // const [showPart2Summary, setShowPart2Summary] = useState(false);
-  // const [showPart3, setShowPart3] = useState(false);
   const [submitDisabled, setSubmitDisabled] = useState(true);
 
   // submit button is disabled until basic validation is done
@@ -89,18 +93,6 @@ const SignUpForm = () => {
     setAvatarUrl(e.target.value);
   };
 
-  const updateEmail = (e) => {
-    setEmail(e.target.value);
-  };
-
-  const updatePassword = (e) => {
-    setPassword(e.target.value);
-  };
-
-  const updateConfirmPassword = (e) => {
-    setConfirmPassword(e.target.value);
-  };
-
   // basic pre-validation onBlur events
   const validateEmail = e => {
     setEmailTooShort(email.length < 5);
@@ -152,51 +144,129 @@ const SignUpForm = () => {
       id="signup-form"
       className="page-wrapper flex-column centered bordered rounded-corners"
     >
-      <form onSubmit={onSignUp}>
-        <div>
-          {errors.map((error, ind) => (
-            <div key={ind}>{error}</div>
-          ))}
+      <form
+        className="auth-form stacked-form"
+        onSubmit={onSignUp}
+      >
+        <h2 className="centered">{formTitle}</h2>
+        <div
+          id="signup-pt-1"
+          className={`auth-form-group${showPart1 ? '' : ' hidden'}`}
+        >
+          <label className="auth-form-element">
+            <input
+              type='email'
+              name='email'
+              onChange={emailChange}
+              onBlur={validateEmail}
+              placeholder="Email"
+              value={email}
+              required
+            />
+            <EmailError
+              emailTooShort={emailTooShort}
+              emailInvalid={emailInvalid}
+            />
+          </label>
+
+          <label className="auth-form-element">
+            <input
+              type='password'
+              name='password'
+              onChange={passwordChange}
+              onBlur={validatePassword}
+              placeholder="Password"
+              value={password}
+              required
+            />
+            <PasswordError visible={passwordTooShort} />
+          </label>
+
+          <label className="auth-form-element">
+            <input
+              type='password'
+              name='confirm-password'
+              onChange={confirmPasswordChange}
+              onBlur={validateConfirmPassword}
+              placeholder="Confirm Password"
+              value={confirmPassword}
+              required
+            />
+            <ConfirmPasswordError
+              passwordTooShort={passwordTooShort}
+              confirmPasswordTooShort={confirmPasswordTooShort}
+              passwordsDoNotMatch={passwordsDoNotMatch}
+            />
+          </label>
+
+          <button
+            className={`button-submit${part1SubmitDisabled ? ' disabled' : ''}`}
+            disabled={part1SubmitDisabled}
+            onClick={handlePart1Submit}
+          >
+            Next
+          </button>
         </div>
-        <div>
-          <label>Email</label>
-          <input
-            type='text'
-            name='email'
-            onChange={updateEmail}
-            value={email}
-          ></input>
+
+        <div
+          id="signup-pt-1-summary"
+          className={`auth-form-grouop${showPart1Summary ? '' : ' hidden'}`}
+        >
+          <p className="summary-text">Email: {email}</p>
         </div>
-        <div>
-          <label>Password</label>
-          <input
-            type='password'
-            name='password'
-            onChange={updatePassword}
-            value={password}
-          ></input>
+
+        <div
+          id="signup-pt-2"
+          className={`auth-form-group${showPart2 ? '' : ' hidden'}`}
+        >
+          <label className="auth-form-element">
+            <input
+              type='text'
+              name='display_name'
+              onChange={displayNameChange}
+              onBlur={validateDisplayName}
+              placeholder="Display Name"
+              value={displayName}
+              required
+            />
+            <DisplayNameError displayNameTooShort={displayNameTooShort} />
+          </label>
+
+          <label className="auth-form-element">
+            <input
+              type='text'
+              name='avatar_url'
+              onChange={avatarUrlChange}
+              onBlur={validateAvatarUrl}
+              placeholder="Avatar URL"
+              value={avatarUrl}
+            />
+            <AvatarUrlError avatarUrlInvalid={avatarUrlInvalid} />
+          </label>
+
+          <div className="errors">
+            {errors.map((error, ind) => (
+              <div key={ind} className="error-text">{error}</div>
+            ))}
+          </div>
+
+          <button
+            type="submit"
+            className={`button-submit${submitDisabled ? ' disabled' : ''}`}
+            disabled={submitDisabled}
+          >
+            Sign Up
+          </button>
+
         </div>
-        <div>
-          <label>Confirm Password</label>
-          <input
-            type='password'
-            name='confirm_password'
-            onChange={updateConfirmPassword}
-            value={confirmPassword}
-            required={true}
-          ></input>
-        </div>
-        <div>
-          <label>Display Name</label>
-          <input
-            type='text'
-            name='displayName'
-            onChange={updateUsername}
-            value={username}
-          ></input>
-        </div>
-        <button type='submit'>Sign Up</button>
       </form>
+
+      <p className="switch-form">
+        Already have an account? <span
+          className="green-text bolded cursor-pointer"
+          onClick={handleSwitchForm}
+        >Sign in</span>
+      </p>
     </div>
   );
 };

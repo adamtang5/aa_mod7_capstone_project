@@ -1,0 +1,150 @@
+#login-form,
+#signup-form {
+    padding: 50px;
+    padding-top: 30px;
+}
+
+.page-wrapper {
+    width: 550px;
+    height: 500px;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.auth-form * {
+    font-family: gt-super, Georgia, Cambria, 'Times New Roman', Times, serif;
+}
+
+.auth-form label {
+    display: block;
+    font-size: 20px;
+    color: #333;
+}
+
+#signup-pt-2-summary.flex-row {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
+}
+
+#signup-pt-2-summary.flex-row.hidden {
+    display: none;
+}
+
+#signup-pt-3 .radio-label {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    margin-bottom: 5px;
+}
+
+#signup-pt-3 .radio-label input.radio {
+    min-width: auto;
+    width: auto;
+}
+
+#signup-pt-3 .radio-text {
+    font-size: 16px;
+}
+
+.auth-form .auth-form-group {
+    display: block;
+}
+
+.auth-form .auth-form-group.hidden {
+    display: none;
+}
+
+.auth-form .auth-form-element {
+    display: block;
+    margin: 20px 0;
+}
+
+.auth-form .auth-form-element.hidden {
+    display: none;
+}
+
+.auth-form input {
+    display: block;
+    font-size: 16px;
+    line-height: 24px;
+    color: #333;
+    border: 1px solid #777;
+    min-width: 270px;
+}
+
+.auth-form .error-text {
+    font-size: 12px;
+    color: red;
+}
+
+ul.errors {
+    list-style-type: none;
+    background-color: #fdd;
+    border-radius: 10px;
+    color: red;
+    padding: 10px;
+    max-width: 250px;
+    margin-bottom: 0;
+}
+
+.gap-10px {
+    gap: 10px;
+}
+
+p.summary-text {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+.auth-form .button-submit,
+.auth-form .button-demo-user {
+    font-size: 16px;
+    padding: 5px 10px;
+    border-radius: 99em;
+    margin-top: 20px;
+}
+
+.auth-form .button-submit {
+    background-color: #155;
+    color: white;
+    border: none;
+}
+
+.auth-form .button-submit.disabled {
+    background-color: #ccc;
+    color: #555;
+}
+
+.auth-form .button-demo-user {
+    background-color: #191919;
+    color: white;
+    border: #191919 1px solid;
+}
+
+.auth-form .button-demo-user:hover {
+    background-color: white;
+    color: #292929;
+}
+
+p.switch-form {
+    font-family: sohne, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 16px;
+}
+
+p.switch-form span.green-text {
+    color: rgb(26, 137, 23);
+}
+
+p.switch-form span.green-text:hover {
+    color: rgb(27, 117, 24);
+}
+
+p.switch-form .bolded {
+    font-weight: 700;
+}
+
+p.switch-form .cursor-pointer {
+    cursor: pointer;
+}
