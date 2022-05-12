@@ -10,7 +10,7 @@ import AvatarUrlError from './errors/AvatarUrlError';
 import './auth.css';
 
 
-const SignUpForm = ({ formTitle, setShowLoginModal, setShowSignupModal }) => {
+const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
 
@@ -140,8 +140,8 @@ const SignUpForm = ({ formTitle, setShowLoginModal, setShowSignupModal }) => {
   };
 
   const handleSwitchForm = e => {
-    setShowSignupModal(false);
-    setShowLoginModal(true);
+    setShowSignupForm(false);
+    setShowLoginForm(true);
   };
 
   return (
