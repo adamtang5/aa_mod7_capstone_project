@@ -9,6 +9,19 @@
         Droid Sans,
         Helvetica Neue,
         sans-serif;
+    --color-main: #008A27;
+    --color-plus-1: #01A373;
+    --color-plus-2: #088796;
+    --color-minus-1: #21A108;
+    --color-minus-2: #689608;
+}
+
+body {
+    margin: 0;
+}
+
+.bounded-1200 {
+    max-width: 1200px;
 }
 
 .centered {

@@ -2,8 +2,8 @@ import ToggleAuthForm from "../auth/ToggleAuthForm";
 
 const SplashBanner = () => {
     return (
-        <div className="splash-banner-container">
-            <div className="splash-banner centered flex-column">
+        <div className="splash-banner-container flex-row">
+            <div className="splash-banner bounded-1200 centered flex-row">
                 <div className="splash-banner-text">
                     <h1 className="headliner">ITSM unlocked for every project.</h1>
                     <div className="splash-banner-features">

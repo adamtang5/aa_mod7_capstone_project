@@ -1,0 +1,19 @@
+.splash-top-nav {
+    justify-content: space-between;
+}
+
+.splash-banner-container {
+    background-color: var(--color-main);
+    height: 500px;
+    justify-content: center;
+    align-items: center;
+}
+
+.splash-banner {
+    justify-content: space-around;
+    gap: 100px;
+}
+
+.splash-banner-text {
+    color: white;
+}
