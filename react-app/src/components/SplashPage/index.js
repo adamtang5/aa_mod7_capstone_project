@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { Modal } from "../../context/Modal";
-import LoginForm from "../auth/LoginForm";
-import SignUpForm from "../auth/SignUpForm";
+import React from "react";
 import SplashBanner from "./SplashBanner";
+import SplashFooter from "./SplashFooter";
 import SplashHeader from "./SplashHeader";
 import './SplashPage.css';
 
@@ -15,8 +13,8 @@ const SplashPage = () => {
             <main>
                 <SplashBanner />
             </main>
-            <footer className="footer">
-                Footer goes here
+            <footer>
+                <SplashFooter />
             </footer>
         </div>
     )
