@@ -9,10 +9,10 @@ import './SplashPage.css';
 const SplashPage = () => {
     return (
         <div className="page-container">
-            <header className="centered fixed">
+            <header className="bounded-1200 centered fixed">
                 <SplashHeader />
             </header>
-            <main className="centered">
+            <main>
                 <SplashBanner />
             </main>
         </div>
