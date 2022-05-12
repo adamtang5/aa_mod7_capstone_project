@@ -6,7 +6,7 @@ import { LogInEmailError } from './errors/EmailError';
 import { LogInPasswordError } from './errors/PasswordError';
 import './auth.css';
 
-const LoginForm = ({ formTitle, setShowLoginModal, setShowSignupModal }) => {
+const LoginForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
   const dispatch = useDispatch();
   const user = useSelector(state => state.session.user);
 
@@ -62,8 +62,8 @@ const LoginForm = ({ formTitle, setShowLoginModal, setShowSignupModal }) => {
   };
 
   const handleSwitchForm = e => {
-    setShowLoginModal(false);
-    setShowSignupModal(true);
+    setShowLoginForm(false);
+    setShowSignupForm(true);
   };
 
   return (

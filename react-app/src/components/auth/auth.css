@@ -1,12 +1,11 @@
 #login-form,
 #signup-form {
-    padding: 50px;
-    padding-top: 30px;
+    padding: 0;
 }
 
 .page-wrapper {
-    width: 550px;
-    height: 500px;
+    width: 386px;
+    height: 314px;
     justify-content: space-around;
     align-items: center;
 }
