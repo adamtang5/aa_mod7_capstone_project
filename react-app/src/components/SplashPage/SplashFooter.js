@@ -1,3 +1,5 @@
+import TechIconsPanel from "./TechIconsPanel";
+
 const SplashFooter = () => {
     return (
         <div className="splash-footer bounded-1200 centered flex-row">
@@ -13,6 +15,8 @@ const SplashFooter = () => {
                     </div>
                 </a>
             </div>
+            <h3 className="footer-text">Created With: </h3>
+            <TechIconsPanel />
         </div>
     )
 };
