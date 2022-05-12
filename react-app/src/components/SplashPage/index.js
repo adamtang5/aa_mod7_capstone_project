@@ -15,6 +15,9 @@ const SplashPage = () => {
             <main>
                 <SplashBanner />
             </main>
+            <footer className="footer">
+                Footer goes here
+            </footer>
         </div>
     )
 };
