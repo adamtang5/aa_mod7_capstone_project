@@ -10,8 +10,6 @@ class Issue(db.Model):
     __tablename__ = 'Issues'
 
     id = db.Column(db.Integer, primary_key=True)
-    submitter_id = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
-    assignee_id = db.Column(db.Integer, db.ForeignKey("Users.id"))
     project_id = db.Column(db.Integer, db.ForeignKey("Projects.id"), nullable=False)
     project_idx = db.Column(db.Integer, nullable=False)
     title = db.Column(db.String(255), nullable=False)
@@ -22,9 +20,6 @@ class Issue(db.Model):
 
     project = db.relationship("Project", back_populates="issues")
     comments = db.relationship("Comment", back_populates="issue")
-
-    submitter = db.relationship("User", foreign_keys=[submitter_id], back_populates="submitted_issues")
-    assignee = db.relationship("User", foreign_keys=[assignee_id], back_populates="assigned_issues")
 
     users = db.relationship(
         "User",
