@@ -1,7 +1,9 @@
-import { generateAvatarUrl } from "../../../../utils/generateAvatar";
+import { generateAvatarUrl } from "../../../utils/generateAvatar";
 import "./Avatar.css";
 
 const Avatar = ({ user }) => {
+    const dataUrl = generateAvatarUrl('', 'white', 'white');
+
     return (
         <a href={`/users/${user?.id}`}>
             {user && (
@@ -10,13 +12,7 @@ const Avatar = ({ user }) => {
                         <img src={user?.avatar_url} alt={user?.display_name} />
                     ) : (
                         <div>
-                            <img
-                                src={generateAvatarUrl(
-                                    '',
-                                    200,
-                                    'white',
-                                    'white'
-                                )} alt={user?.display_name} />
+                            <img src={dataUrl} alt={user?.display_name} />
                         </div>
                     )}
                 </div>
