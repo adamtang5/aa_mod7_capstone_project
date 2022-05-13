@@ -7,6 +7,7 @@ import { SignUpPasswordError } from './errors/PasswordError';
 import ConfirmPasswordError from './errors/ConfirmPasswordError';
 import DisplayNameError from './errors/DisplayNameError';
 import AvatarUrlError from './errors/AvatarUrlError';
+import { bgColors, generateAvatarUrl, toInitials } from '../../../utils/generateAvatar';
 import './auth.css';
 
 
@@ -118,7 +119,11 @@ const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
     const urlRe = new RegExp("((http|https)://)(www.)?" +
       "[a-zA-Z0-9@:%._\\+~# ?&//=]{2,256}\\.[a-z]" +
       "{2,6}\\b([-a-zA-Z0-9@:%._\\+~# ?&//=]*)")
-    setAvatarUrlInvalid(avatarUrl !== "" && !urlRe.test(avatarUrl));
+    const imageDataRe = /^data:image\//
+    setAvatarUrlInvalid(
+      avatarUrl !== "" &&
+      !urlRe.test(avatarUrl) &&
+      !imageDataRe.test(avatarUrl));
   };
 
   // button onClick handlers
@@ -133,7 +138,15 @@ const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
   const onSignUp = async (e) => {
     e.preventDefault();
     setErrors([]);
-    const data = await dispatch(signUp(email, password, displayName, avatarUrl));
+
+    const avatarUrlForDb = avatarUrl ||
+      generateAvatarUrl(
+        toInitials(displayName),
+        'white',
+        bgColors[1]
+      );
+
+    const data = await dispatch(signUp(email, password, displayName, avatarUrlForDb));
     if (data) {
       setErrors(data)
     }
@@ -205,7 +218,7 @@ const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
           </label>
 
           <button
-            className={`button-submit${part1SubmitDisabled ? ' disabled' : ''}`}
+            className={`cursor-pointer button-submit${part1SubmitDisabled ? ' disabled' : ''}`}
             disabled={part1SubmitDisabled}
             onClick={handlePart1Submit}
           >
@@ -257,7 +270,7 @@ const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
 
           <button
             type="submit"
-            className={`button-submit${submitDisabled ? ' disabled' : ''}`}
+            className={`cursor-pointer button-submit${submitDisabled ? ' disabled' : ''}`}
             disabled={submitDisabled}
           >
             Sign Up
