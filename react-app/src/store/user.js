@@ -1,3 +1,5 @@
+import { setUser } from "./session";
+
 // constants
 const LOAD_USERS = 'user/LOAD_USERS';
 const NEW_USER = 'user/NEW_USER';
@@ -31,9 +33,10 @@ export const editUser = (user) => async (dispatch) => {
     });
 
     if (res.ok) {
-        const data = await res.json();
-        dispatch(newUser(data));
-        return data;
+        const user = await res.json();
+        dispatch(newUser(user));
+        dispatch(setUser(user));
+        return user;
     } else if (res.status < 500) {
         const data = await res.json();
         if (data.errors) {
