@@ -1,3 +1,4 @@
+import { generateAvatarUrl } from "../../../../utils/generateAvatar";
 import "./Avatar.css";
 
 const Avatar = ({ user }) => {
@@ -10,11 +11,11 @@ const Avatar = ({ user }) => {
                     ) : (
                         <div>
                             <img
-                                src={generateAvatar(
-                                    toInitials(user?.display_name),
+                                src={generateAvatarUrl(
+                                    '',
                                     200,
                                     'white',
-                                    bgColors[user?.id % bgColors.length]
+                                    'white'
                                 )} alt={user?.display_name} />
                         </div>
                     )}

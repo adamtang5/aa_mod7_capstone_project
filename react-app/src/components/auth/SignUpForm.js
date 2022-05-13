@@ -7,6 +7,7 @@ import { SignUpPasswordError } from './errors/PasswordError';
 import ConfirmPasswordError from './errors/ConfirmPasswordError';
 import DisplayNameError from './errors/DisplayNameError';
 import AvatarUrlError from './errors/AvatarUrlError';
+import { bgColors, generateAvatarUrl, toInitials } from '../../../utils/generateAvatar';
 import './auth.css';
 
 
@@ -137,7 +138,15 @@ const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
   const onSignUp = async (e) => {
     e.preventDefault();
     setErrors([]);
-    const data = await dispatch(signUp(email, password, displayName, avatarUrl));
+
+    const avatarUrlForDb = avatarUrl ||
+      generateAvatarUrl(
+        toInitials(displayName),
+        'white',
+        bgColors[1]
+      );
+
+    const data = await dispatch(signUp(email, password, displayName, avatarUrlForDb));
     if (data) {
       setErrors(data)
     }

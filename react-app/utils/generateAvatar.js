@@ -1,4 +1,4 @@
-const bgColors = [
+export const bgColors = [
     "#E67025",
     "#E52F19",
     "#E60E9C",
