@@ -69,6 +69,7 @@ def sign_up():
             avatar_url=form.data['avatar_url']
         )
         db.session.add(user)
+        print(user.id)
         db.session.commit()
         login_user(user)
         return user.to_dict()

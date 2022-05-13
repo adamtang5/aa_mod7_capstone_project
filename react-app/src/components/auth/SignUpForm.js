@@ -118,7 +118,11 @@ const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
     const urlRe = new RegExp("((http|https)://)(www.)?" +
       "[a-zA-Z0-9@:%._\\+~# ?&//=]{2,256}\\.[a-z]" +
       "{2,6}\\b([-a-zA-Z0-9@:%._\\+~# ?&//=]*)")
-    setAvatarUrlInvalid(avatarUrl !== "" && !urlRe.test(avatarUrl));
+    const imageDataRe = /^data:image\//
+    setAvatarUrlInvalid(
+      avatarUrl !== "" &&
+      !urlRe.test(avatarUrl) &&
+      !imageDataRe.test(avatarUrl));
   };
 
   // button onClick handlers
@@ -205,7 +209,7 @@ const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
           </label>
 
           <button
-            className={`button-submit${part1SubmitDisabled ? ' disabled' : ''}`}
+            className={`cursor-pointer button-submit${part1SubmitDisabled ? ' disabled' : ''}`}
             disabled={part1SubmitDisabled}
             onClick={handlePart1Submit}
           >
@@ -257,7 +261,7 @@ const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
 
           <button
             type="submit"
-            className={`button-submit${submitDisabled ? ' disabled' : ''}`}
+            className={`cursor-pointer button-submit${submitDisabled ? ' disabled' : ''}`}
             disabled={submitDisabled}
           >
             Sign Up
