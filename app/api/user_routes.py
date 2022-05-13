@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User
+from app.models import User, db
 from app.forms import EditUserForm
 from .validation import validation_errors_to_error_messages
 
@@ -12,7 +12,7 @@ user_routes = Blueprint('users', __name__)
 @login_required
 def users():
     users = User.query.all()
-    return {'users': [user.to_dict() for user in users]}
+    return jsonify([user.to_dict() for user in users])
 
 
 # GET /api/users/:id

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Avatar from './Icons/Avatar';
+import Avatar from '../Icons/Avatar';
 
-function User() {
+function SingleUser() {
   const [user, setUser] = useState({});
   const { userId } = useParams();
 
@@ -38,4 +38,4 @@ function User() {
     </ul>
   );
 }
-export default User;
+export default SingleUser;

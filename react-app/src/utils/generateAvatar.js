@@ -20,7 +20,7 @@ export const getRandomInt = (max) => {
     return Math.floor(Math.random() * max);
 };
 
-export const generateAvatarUrl = (text, foregroundColor = 'white', backgroundColor = 'black') => {
+export const generateAvatarUrl = (text, foregroundColor = 'white', backgroundColor = 'white') => {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext('2d');
 
