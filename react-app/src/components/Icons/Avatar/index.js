@@ -51,9 +51,9 @@ const Avatar = ({ user }) => {
         return name && name.split(' ').map(s => s[0].toUpperCase()).join('');
     };
 
-    const getRandomInt = (max) => {
-        return Math.floor(Math.random() * max);
-    };
+    // const getRandomInt = (max) => {
+    //     return Math.floor(Math.random() * max);
+    // };
 
     return (
         <a href={`/users/${user?.id}`}>
