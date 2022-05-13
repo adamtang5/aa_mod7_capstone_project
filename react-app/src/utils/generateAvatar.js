@@ -42,5 +42,5 @@ export const generateAvatarUrl = (text, foregroundColor = 'white', backgroundCol
         canvas.height / 2
     );
 
-    return canvas.toDataURL("image/png");
+    return canvas.toDataURL("image/png") || "";
 };
