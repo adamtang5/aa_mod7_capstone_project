@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import Avatar from './Icons/Avatar';
 
 function User() {
   const [user, setUser] = useState({});
-  const { userId }  = useParams();
+  const { userId } = useParams();
 
   useEffect(() => {
     if (!userId) {
@@ -26,10 +27,13 @@ function User() {
         <strong>User Id</strong> {userId}
       </li>
       <li>
-        <strong>Username</strong> {user.username}
+        <strong>Email</strong> {user.email}
+      </li>
+      <li className="flex-row">
+        <strong>Avatar</strong> <Avatar user={user} />
       </li>
       <li>
-        <strong>Email</strong> {user.email}
+        <strong>Display Name</strong> {user.display_name}
       </li>
     </ul>
   );
