@@ -12,7 +12,7 @@ const TechIconsPanel = () => {
     return (
         <>
             <div
-                className="panel-toggle"
+                className="panel-toggle cursor-pointer"
                 onClick={togglePanel}
             >{panelOpen ? '<' : '>'}</div>
             <div className="techs flex-row">
