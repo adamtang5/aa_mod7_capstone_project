@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
-import { SignUpEmailError } from './errors/EmailError';
-import { SignUpPasswordError } from './errors/PasswordError';
-import ConfirmPasswordError from './errors/ConfirmPasswordError';
-import { SignUpDisplayNameError } from './errors/DisplayNameError';
-import AvatarUrlError from './errors/AvatarUrlError';
+import { SignUpEmailError } from '../errors/EmailError';
+import { SignUpPasswordError } from '../errors/PasswordError';
+import ConfirmPasswordError from '../errors/ConfirmPasswordError';
+import { SignUpDisplayNameError } from '../errors/DisplayNameError';
+import AvatarUrlError from '../errors/AvatarUrlError';
 import './auth.css';
 
 

@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Redirect, useParams } from "react-router-dom";
 import { editUser } from "../../store/user";
-import { EditUserDisplayNameError } from "../auth/errors/DisplayNameError";
-import AvatarUrlError from "../auth/errors/AvatarUrlError";
+import { EditUserDisplayNameError } from "../errors/DisplayNameError";
+import AvatarUrlError from "../errors/AvatarUrlError";
 
 
 const EditUserForm = () => {
