@@ -139,7 +139,3 @@ p.switch-form span.green-text:hover {
 p.switch-form .bolded {
     font-weight: 700;
 }
-
-p.switch-form .cursor-pointer {
-    cursor: pointer;
-}
