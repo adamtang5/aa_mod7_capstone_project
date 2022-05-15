@@ -2,7 +2,10 @@ import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 
 export default function ProjectsList() {
-    const projects = useSelector(state => Object.values(state.projects));
+    // const projects = useSelector(state => Object.values(state.projects));
+    const projectIds = useSelector(state => state.session.user.projects);
+    const projectsObj = useSelector(state => state.projects);
+    const projects = projectIds.map(id => projectsObj[id]);
 
     const projectComponents = projects?.map(project => {
         return (
