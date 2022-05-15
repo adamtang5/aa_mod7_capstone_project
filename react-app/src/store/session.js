@@ -1,4 +1,4 @@
-import { createProject, fetchProjects } from "./project";
+import { fetchProjects } from "./project";
 import { fetchUsers } from "./user";
 
 // constants
@@ -121,20 +121,13 @@ export const signUp = (email, password, displayName, avatarUrl) => async (dispat
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(setUser(data));
-
-    // create personal project for new user
-    const personalProject = {
-      name: 'Personal Project',
-      key: 'U' + data.id,
-    };
-    dispatch(createProject(personalProject));
+    await dispatch(setUser(data));
 
     // fetch states for starting point
-    dispatch(fetchUsers());
-    dispatch(fetchProjects());
+    await dispatch(fetchUsers());
+    await dispatch(fetchProjects());
 
-    return null;
+    return data.id; // for creating personal project
   } else if (response.status < 500) {
     const data = await response.json();
     if (data.errors) {

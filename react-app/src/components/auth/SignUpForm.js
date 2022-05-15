@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/session';
+import { createProject } from '../../store/project';
 import { SignUpEmailError } from '../errors/EmailError';
 import { SignUpPasswordError } from '../errors/PasswordError';
 import ConfirmPasswordError from '../errors/ConfirmPasswordError';
@@ -139,8 +140,18 @@ const SignUpForm = ({ formTitle, setShowLoginForm, setShowSignupForm }) => {
     setErrors([]);
 
     const data = await dispatch(signUp(email, password, displayName, avatarUrl));
-    if (data) {
+
+    if (data && Array.isArray(data)) {
       setErrors(data)
+    } else if (data && typeof data === "number") {
+      // create personal project for new user
+      const personalProject = {
+        name: 'Personal Project',
+        key: 'U' + data,
+        user_ids: JSON.stringify([data]),
+      };
+      await dispatch(createProject(personalProject));
+
     }
   };
 
