@@ -1,3 +1,5 @@
+import { createProject } from "./project";
+
 // constants
 const SET_USER = 'session/SET_USER';
 const REMOVE_USER = 'session/REMOVE_USER';
@@ -112,7 +114,14 @@ export const signUp = (email, password, displayName, avatarUrl) => async (dispat
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(setUser(data))
+    dispatch(setUser(data));
+
+    // create personal project for new user
+    const personalProject = {
+      name: 'Personal Project',
+      key: 'U' + data.id,
+    };
+    dispatch(createProject(personalProject));
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
