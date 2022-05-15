@@ -21,5 +21,6 @@ class Project(db.Model):
             'id': self.id,
             'name': self.name,
             'key': self.key,
-            'users': self.users
+            'users': [user.id for user in self.users],
+            'issues': [issue.id for issue in self.issues]
         }
