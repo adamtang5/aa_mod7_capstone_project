@@ -1,4 +1,5 @@
-import { createProject } from "./project";
+import { createProject, fetchProjects } from "./project";
+import { fetchUsers } from "./user";
 
 // constants
 const SET_USER = 'session/SET_USER';
@@ -45,7 +46,10 @@ export const login = (email, password) => async (dispatch) => {
 
   if (response.ok) {
     const data = await response.json();
-    dispatch(setUser(data))
+    dispatch(setUser(data));
+    // fetch states for starting point
+    dispatch(fetchUsers());
+    dispatch(fetchProjects());
     return null;
   } else if (response.status < 500) {
     const data = await response.json();
@@ -73,6 +77,9 @@ export const demoLogin = () => async (dispatch) => {
   if (res.ok) {
     const data = await res.json();
     dispatch(setUser(data));
+    // fetch states for starting point
+    dispatch(fetchUsers());
+    dispatch(fetchProjects());
     return null;
   } else if (res.status < 500) {
     const data = await res.json();
@@ -122,6 +129,11 @@ export const signUp = (email, password, displayName, avatarUrl) => async (dispat
       key: 'U' + data.id,
     };
     dispatch(createProject(personalProject));
+
+    // fetch states for starting point
+    dispatch(fetchUsers());
+    dispatch(fetchProjects());
+
     return null;
   } else if (response.status < 500) {
     const data = await response.json();

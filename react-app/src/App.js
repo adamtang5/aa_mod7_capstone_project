@@ -9,6 +9,7 @@ import SingleUser from './components/User/SingleUser';
 import EditUserForm from './components/User/EditUserForm';
 import { authenticate } from './store/session';
 import { fetchUsers } from './store/user';
+import { fetchProjects } from './store/project';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -17,6 +18,7 @@ function App() {
   useEffect(() => {
     dispatch(authenticate())
       .then(() => dispatch(fetchUsers()))
+      .then(() => dispatch(fetchProjects()))
       .then(() => setLoaded(true));
   }, [dispatch]);
 
