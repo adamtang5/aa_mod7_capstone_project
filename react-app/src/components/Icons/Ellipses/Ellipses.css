@@ -4,5 +4,5 @@
 }
 
 .icon-ellipses:hover {
-    background-color: rgba(9, 30, 66, 0.08);
+    background-color: var(--color-hover-bg-1);
 }

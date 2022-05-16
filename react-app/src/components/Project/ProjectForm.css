@@ -1,0 +1,95 @@
+#create-project-form,
+#edit-project-form {
+    margin-bottom: 50px;
+}
+
+#create-project-form *,
+#edit-project-form * {
+    color: var(--color-text-1);
+}
+
+.project-form {
+    max-width: 800px;
+}
+
+.project-form-body {
+    min-height: 320px;
+    margin-bottom: 50px;
+}
+
+.form-element {
+    min-width: 370px;
+}
+
+.form-field-label {
+    margin: 10px 0;
+}
+
+.form-input {
+    min-width: 300px;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.search-results {
+    width: max-content;
+    padding-left: 10px;
+    padding-top: 10px;
+    box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px,
+        rgb(9 30 66 / 31%) 0px 0px 1px;
+}
+
+.search-results-row {
+    min-height: 36px;
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.search-results-row * {
+    font-size: 20px;
+    line-height: 36px;
+}
+
+.search-results-row .avatar {
+    height: 24px;
+    width: 24px;
+}
+
+.participants-list {
+    border: 2px solid var(--color-table-border);
+    padding: 10px;
+    gap: 10px;
+    min-height: 200px;
+    width: 250px;
+}
+
+.user-ticker {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.user-ticker:hover {
+    background-color: var(--color-hover-bg-2);
+}
+
+.user-data {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-action {
+    position: relative;
+    bottom: 2px;
+}
+
+.user-ticker .avatar {
+    width: 24px;
+    height: 24px;
+}
+
+.user-ticker .display-name {
+    font-size: 16px;
+    line-height: 30px;
+}

@@ -101,17 +101,6 @@ p.summary-text {
     margin-top: 20px;
 }
 
-.auth-form .button-submit {
-    background-color: #155;
-    color: white;
-    border: none;
-}
-
-.auth-form .button-submit.disabled {
-    background-color: #ccc;
-    color: #555;
-}
-
 .auth-form .button-demo-user {
     background-color: #191919;
     color: white;

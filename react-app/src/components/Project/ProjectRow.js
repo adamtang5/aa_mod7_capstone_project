@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import Avatar from "../Icons/Avatar";
@@ -9,8 +9,21 @@ const ProjectRow = ({ project, idx }) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     const openDropdown = e => {
+        if (showDropdown) return;
         setShowDropdown(true);
     };
+
+    useEffect(() => {
+        if (!showDropdown) return;
+
+        const closeDropdown = e => {
+            setShowDropdown(false);
+        };
+
+        document.addEventListener('click', closeDropdown);
+
+        return () => document.removeEventListener('click', closeDropdown);
+    }, [showDropdown]);
 
     return (
         <tr
@@ -25,7 +38,7 @@ const ProjectRow = ({ project, idx }) => {
             </td>
             <td className="data-cell">
                 <div className="users-avatars flex-row">
-                    {project?.users?.map(id => <Avatar user={allUsers[id]} />)}
+                    {project?.users?.map(id => <Avatar key={id} user={allUsers[id]} />)}
                 </div>
             </td>
             <td className="data-cell">

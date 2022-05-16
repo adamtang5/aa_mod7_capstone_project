@@ -19,6 +19,9 @@
     --color-table-border: #ADAFB3;
     --color-even-rows: #dde3dc;
     --color-odd-rows: #c9ccc9;
+    --color-warning: #DE350B;
+    --color-hover-bg-1: rgba(9, 30, 66, 0.08);
+    --color-hover-bg-2: rgba(9, 30, 66, 0.1);
 }
 
 body {
@@ -61,12 +64,12 @@ body {
 
 .error-text {
     font-size: 12px;
-    color: red;
+    color: var(--color-warning) !important;
 }
 
 .button {
     background-color: var(--color-main);
-    color: white;
+    color: white !important;
     border-radius: 5px;
     font-size: 14px;
     padding: 8px 12px 10px;
@@ -76,10 +79,33 @@ body {
     background-color: var(--color-minus-1);
 }
 
+.button-submit {
+    background-color: var(--color-main);
+    color: white;
+    border: none;
+}
+
+.button-submit:hover {
+    background-color: var(--color-minus-1);
+}
+
+.button-submit.disabled {
+    background-color: #ccc;
+    color: var(--color-text-2) !important;
+}
+
 .click-to-dropdown {
     position: relative;
 }
 
 .dropdown {
     position: absolute;
+}
+
+.required-field {
+    color: var(--color-warning) !important;
+}
+
+.page-container {
+    padding: 0 40px;
 }
