@@ -1,22 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { useHistory } from 'react-router-dom';
-import { createProject } from '../../store/project';
-import { CreateProjectNameError } from '../errors/NameError';
+import { useHistory, useParams } from 'react-router-dom';
+import { editProject } from '../../store/project';
+import { EditProjectNameError } from '../errors/NameError';
 import Avatar from '../Icons/Avatar';
 import './ProjectForm.css';
 
-const CreateProjectForm = () => {
+const EditProjectForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
+    const { projectId } = useParams();
     const sessionUser = useSelector(state => state.session.user);
     const stateUsers = useSelector(state => state.users);
     const allUsers = useSelector(state => Object.values(state.users));
+    const project = useSelector(state => state.projects[+projectId]);
 
     // slices of state for controlled inputs
-    const [name, setName] = useState('');
-    const [key, setKey] = useState('');
-    const [userIds, setUserIds] = useState([sessionUser.id]);
+    const [name, setName] = useState(project.name);
+    const [key, setKey] = useState(project.key);
+    const [userIds, setUserIds] = useState(project.users);
 
     // slices of state for search box
     const [showResults, setShowResults] = useState(false);
@@ -124,11 +126,12 @@ const CreateProjectForm = () => {
         setUserIds(userIds.filter(userId => userId !== id));
     };
 
-    const handleCreateProject = async (e) => {
+    const handleEditProject = async (e) => {
         e.preventDefault();
         setErrors([]);
 
-        const data = await dispatch(createProject({
+        const data = await dispatch(editProject({
+            id: project.id,
             name,
             key,
             user_ids: JSON.stringify(userIds),
@@ -143,14 +146,14 @@ const CreateProjectForm = () => {
 
     return (
         <div
-            id="create-project-form"
+            id="edit-project-form"
             className="page-container"
         >
             <form
                 className="project-form centered"
-                onSubmit={handleCreateProject}
+                onSubmit={handleEditProject}
             >
-                <h2 className="form-title">Create Project</h2>
+                <h2 className="form-title">Edit Project</h2>
 
                 <div className="project-form-body flex-row">
                     <div className="left-column flex-column">
@@ -168,7 +171,7 @@ const CreateProjectForm = () => {
                                 value={name}
                                 required
                             />
-                            <CreateProjectNameError
+                            <EditProjectNameError
                                 nameInvalid={nameInvalid}
                             />
                         </label>
@@ -228,11 +231,11 @@ const CreateProjectForm = () => {
                             type='text'
                             onChange={e => setUserIds(e.target.value)}
                             value={userIds}
-                            hidden
+                        // hidden
                         />
                     </div>
 
-                    <div className="right-column form-element">
+                    <div className="form-element">
                         <div className="form-field-label">
                             Participants <span className="required-field">*</span>
                         </div>
@@ -271,7 +274,7 @@ const CreateProjectForm = () => {
                     className={`cursor-pointer button button-submit${submitDisabled ? ' disabled' : ''}`}
                     disabled={submitDisabled}
                 >
-                    Create Project
+                    Edit Project
                 </button>
 
             </form>
@@ -279,4 +282,4 @@ const CreateProjectForm = () => {
     )
 };
 
-export default CreateProjectForm;
+export default EditProjectForm;
