@@ -9,14 +9,6 @@ export default function ProjectsList() {
     const projectsObj = useSelector(state => state.projects);
     const projects = projectIds.map(id => projectsObj[id]);
 
-    const projectComponents = projects?.map(project => {
-        return (
-            <li key={project?.id}>
-                <NavLink to={`/projects/${project?.id}`}>{project?.name} - {project?.key}</NavLink>
-            </li>
-        );
-    });
-
     return (
         <div className="page-container">
             <header className="page-header flex-row">

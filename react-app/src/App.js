@@ -12,6 +12,7 @@ import { fetchUsers } from './store/user';
 import { fetchProjects } from './store/project';
 import ProjectsList from './components/Project/ProjectsList';
 import SingleProject from './components/Project/SingleProject';
+import CreateProjectForm from './components/Project/CreateProjectForm';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -49,6 +50,9 @@ function App() {
         </ProtectedRoute>
         <ProtectedRoute path='/projects/:projectId' exact={true} >
           <SingleProject />
+        </ProtectedRoute>
+        <ProtectedRoute path='/new-projects' exact={true} >
+          <CreateProjectForm />
         </ProtectedRoute>
       </Switch>
     </BrowserRouter>
