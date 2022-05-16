@@ -12,6 +12,10 @@ const ProjectRow = ({ project, idx }) => {
         setShowDropdown(true);
     };
 
+    const closeDropdown = e => {
+        setShowDropdown(false);
+    }
+
     return (
         <tr
             key={project?.id}
@@ -35,7 +39,10 @@ const ProjectRow = ({ project, idx }) => {
                 >
                     <Ellipses />
                     {showDropdown && (
-                        <div className="dropdown">
+                        <div
+                            onBlur={closeDropdown}
+                            className="dropdown"
+                        >
                             <Link to={`/projects/${project?.id}/settings`}>Project Settings</Link>
                             <div className="delete-project-confirm">Move to trash</div>
                         </div>
