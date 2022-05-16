@@ -38,7 +38,7 @@ const ProjectRow = ({ project, idx }) => {
             </td>
             <td className="data-cell">
                 <div className="users-avatars flex-row">
-                    {project?.users?.map(id => <Avatar user={allUsers[id]} />)}
+                    {project?.users?.map(id => <Avatar key={id} user={allUsers[id]} />)}
                 </div>
             </td>
             <td className="data-cell">

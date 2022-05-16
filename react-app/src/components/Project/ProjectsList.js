@@ -35,7 +35,7 @@ export default function ProjectsList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {projects?.map((project, idx) => <ProjectRow project={project} idx={idx} />)}
+                    {projects?.map((project, idx) => <ProjectRow key={project.id} project={project} idx={idx} />)}
                 </tbody>
             </table>
         </div>

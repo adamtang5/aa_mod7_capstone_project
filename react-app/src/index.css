@@ -19,6 +19,7 @@
     --color-table-border: #ADAFB3;
     --color-even-rows: #dde3dc;
     --color-odd-rows: #c9ccc9;
+    --color-warning: #DE350B;
 }
 
 body {
@@ -82,4 +83,8 @@ body {
 
 .dropdown {
     position: absolute;
+}
+
+.required-field {
+    color: var(--color-warning);
 }

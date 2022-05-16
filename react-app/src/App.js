@@ -51,7 +51,7 @@ function App() {
         <ProtectedRoute path='/projects/:projectId' exact={true} >
           <SingleProject />
         </ProtectedRoute>
-        <ProtectedRoute path='/new-projects' exact={true} >
+        <ProtectedRoute path='/new-project' exact={true} >
           <CreateProjectForm />
         </ProtectedRoute>
       </Switch>
