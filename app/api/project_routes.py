@@ -55,6 +55,22 @@ def edit_project(id):
         project = Project.query.get(id)
         project.name = form.data['name'] or project.name
         project.key = form.data['key'] or project.key
+
+        # add and subtract in JoinUP
+        new_user_ids = set(json.loads(form.data['user_ids']))
+        old_user_ids = set([user.id for user in project.users])
+
+        subtractions = list(old_user_ids - new_user_ids)
+        additions = list(new_user_ids - old_user_ids)
+
+        for user_id in subtractions:
+            user = User.query.get(user_id)
+            project.users.remove(user)
+
+        for user_id in additions:
+            user = User.query.get(user_id)
+            project.users.append(user)
+
         db.session.commit()
         return project.to_dict()
     else:
