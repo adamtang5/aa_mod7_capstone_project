@@ -1,0 +1,75 @@
+.page-container {
+    padding: 0 40px;
+}
+
+.page-header {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title {
+    font-size: 24px;
+    color: var(--color-text-1);
+}
+
+.project-actions a {
+    text-decoration: none;
+}
+
+table.projects-list {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.projects-list .head-row {
+    color: var(--color-text-2);
+    font-size: 12px;
+    text-align: left;
+}
+
+.projects-list tbody {
+    border-top: 2px solid var(--color-table-border);
+    border-bottom: 2px solid var(--color-table-border);
+}
+
+.projects-list .data-row-odd {
+    background-color: var(--color-odd-rows);
+}
+
+.projects-list .data-row-even {
+    background-color: var(--color-even-rows);
+}
+
+.projects-list .data-cell {
+    font-size: 14px;
+    line-height: 36px;
+}
+
+.projects-list .data-cell a {
+    color: var(--color-minus-1);
+    text-decoration: none;
+}
+
+.projects-list .data-cell a:hover {
+    text-decoration: underline;
+}
+
+.projects-list .users-avatars .avatar {
+    height: 24px;
+    width: 24px;
+}
+
+.dropdown {
+    width: max-content;
+    top: 30px;
+    right: 0;
+    background-color: white;
+    box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px,
+        rgb(9 30 66 / 31%) 0px 0px 1px;
+    padding: 4px 0;
+}
+
+.dropdown * {
+    font-size: 14px;
+    padding: 8px 12px 7px;
+}

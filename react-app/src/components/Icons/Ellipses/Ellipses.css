@@ -1,0 +1,8 @@
+.icon-ellipses {
+    align-items: center;
+    width: fit-content;
+}
+
+.icon-ellipses:hover {
+    background-color: rgba(9, 30, 66, 0.08);
+}
