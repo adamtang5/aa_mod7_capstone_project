@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import Avatar from "../Icons/Avatar";
@@ -9,12 +9,21 @@ const ProjectRow = ({ project, idx }) => {
     const [showDropdown, setShowDropdown] = useState(false);
 
     const openDropdown = e => {
+        if (showDropdown) return;
         setShowDropdown(true);
     };
 
-    const closeDropdown = e => {
-        setShowDropdown(false);
-    }
+    useEffect(() => {
+        if (!showDropdown) return;
+
+        const closeDropdown = e => {
+            setShowDropdown(false);
+        };
+
+        document.addEventListener('click', closeDropdown);
+
+        return () => document.removeEventListener('click', closeDropdown);
+    }, [showDropdown]);
 
     return (
         <tr
@@ -39,10 +48,7 @@ const ProjectRow = ({ project, idx }) => {
                 >
                     <Ellipses />
                     {showDropdown && (
-                        <div
-                            onBlur={closeDropdown}
-                            className="dropdown"
-                        >
+                        <div className="dropdown">
                             <Link to={`/projects/${project?.id}/settings`}>Project Settings</Link>
                             <div className="delete-project-confirm">Move to trash</div>
                         </div>
