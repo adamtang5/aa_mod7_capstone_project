@@ -75,3 +75,16 @@ def edit_project(id):
         return project.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+# DELETE /api/projects/:id
+@project_routes.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_project(id):
+    project = Project.query.get(id)
+    if project:
+        db.session.delete(project)
+        db.session.commit()
+        return {'id': id}
+    else:
+        return {'errors': validation_errors_to_error_messages(form.errors)}, 401
