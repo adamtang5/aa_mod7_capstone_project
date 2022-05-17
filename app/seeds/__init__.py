@@ -3,7 +3,7 @@ from .users import seed_users, undo_users
 from .projects import seed_projects, undo_projects
 from .issue_types import seed_issue_types, undo_issue_types
 from .statuses import seed_statuses, undo_statuses
-from .roles import seed_roles, undo_roles
+# from .roles import seed_roles, undo_roles
 
 
 # Creates a seed group to hold our commands
@@ -18,14 +18,14 @@ def seed():
     seed_projects()
     seed_issue_types()
     seed_statuses()
-    seed_roles()
+    # seed_roles()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
-    undo_roles()
+    # undo_roles()
     undo_statuses()
     undo_issue_types()
     undo_projects()

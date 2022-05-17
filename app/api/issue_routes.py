@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Issue, Project, User, Role, db
+from app.models import Issue, Project, User, db
 from app.forms import CreateIssueForm, EditIssueForm
 from .validation import validation_errors_to_error_messages
 import json
@@ -43,9 +43,13 @@ def create_issue():
         db.session.add(issue)
 
         submitter = User.query.get(form.data['submitter_id'])
+        role_submitter = Role.query.filter(Role.role == "Submitter").one()
 
+        if form.data['assignee_id']:
+            assignee = User.query.get(form.data['assignee_id'])
+            role_assignee = Role.query.filter(Role.role == "Assignee").one()
 
-        user_ids = json.loads(form.data['user_ids'])
+        participants = project.users
         for id in user_ids:
             user = User.query.get(id)
             issue.users.append(user)
