@@ -10,7 +10,8 @@ def seed_projects():
             name="Personal Project",
             key="U" + str(user.id)
         )
-        user.projects.append(project)
+        db.session.add(project)
+        project.users.append(user)
 
     db.session.commit()
 
