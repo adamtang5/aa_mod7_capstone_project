@@ -10,7 +10,6 @@ const EditProjectForm = () => {
     const dispatch = useDispatch();
     const history = useHistory();
     const { projectId } = useParams();
-    const sessionUser = useSelector(state => state.session.user);
     const stateUsers = useSelector(state => state.users);
     const allUsers = useSelector(state => Object.values(state.users));
     const project = useSelector(state => state.projects[+projectId]);
@@ -93,23 +92,41 @@ const EditProjectForm = () => {
         if (key.length <= 5) setKey(e.target.value);
     };
 
-    const userIdsChange = e => {
-        setErrors([]);
-        setUserIds(e.target.value);
-    }
+    // const userIdsChange = e => {
+    //     setErrors([]);
+    //     setUserIds(e.target.value);
+    // }
 
     // basic pre-validation onBlur events
     const validateName = e => {
         setNameInvalid(name.length < 3 || name.length > 50);
+
+        // generate key based on name
+        if (name.trim().split(' ').length === 1) {
+            setKey(name
+                .trim()
+                .slice(0, 5)
+                .toUpperCase()
+            );
+        } else if (name.trim().split(' ').length > 1) {
+            setKey(name
+                .trim()
+                .split(' ')
+                .map(word => word[0])
+                .join('')
+                .slice(0, 5)
+                .toUpperCase()
+            );
+        }
     };
 
     const validateKey = e => {
         setKeyInvalid(!key.length || key.length > 5);
     };
 
-    const validateUserIds = e => {
-        setUserIdsInvalid(!userIds.length);
-    };
+    // const validateUserIds = e => {
+    //     setUserIdsInvalid(!userIds.length);
+    // };
 
     const addUserToParticipants = e => {
         const id = parseInt(e.target.id.split('search-results-li-')[1], 10);
@@ -140,7 +157,7 @@ const EditProjectForm = () => {
         if (data && Array.isArray(data)) {
             setErrors(data);
         } else {
-            history.push(`/projects/${data.id}`);
+            history.push(`/`);
         }
     }
 

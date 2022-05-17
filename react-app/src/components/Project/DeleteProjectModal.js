@@ -1,7 +1,6 @@
 import { useDispatch } from 'react-redux';
 import { Modal } from '../../context/Modal';
 import { deleteProject } from '../../store/project';
-import WarningSign from '../Icons/WarningSign';
 import './DeleteProjectModal.css';
 
 export default function DeleteProjectModal({ setShowDeleteModal, projectId }) {
