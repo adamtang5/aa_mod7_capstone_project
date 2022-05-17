@@ -16,7 +16,7 @@ export default function DeleteProjectModal({ setShowDeleteModal, projectId }) {
         <Modal onClose={() => setShowDeleteModal(false)}>
             <div className="delete-project-modal flex-column">
                 <h1 className="modal-title flex-row">
-                    <WarningSign /> Delete Project?
+                    <i className="fa-solid fa-triangle-exclamation" /> Delete Project?
                 </h1>
                 <p>The project along with its issues will be permanently deleted.</p>
                 <p>Are you sure you want to delete this project?</p>

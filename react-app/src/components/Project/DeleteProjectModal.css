@@ -17,6 +17,10 @@
     margin-bottom: 24px;
 }
 
+.delete-project-modal .modal-title i {
+    color: var(--color-warning);
+}
+
 .delete-project-modal p {
     font-size: 14px;
     margin: 0 0 12px;
