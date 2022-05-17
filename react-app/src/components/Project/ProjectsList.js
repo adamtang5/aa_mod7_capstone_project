@@ -17,7 +17,7 @@ export default function ProjectsList() {
 
     useEffect(() => {
         dispatch(authenticate());
-    }, [])
+    }, [dispatch])
 
     return (
         <div className="page-container">

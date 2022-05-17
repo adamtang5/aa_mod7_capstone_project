@@ -50,9 +50,17 @@ def get_all_projects_by_user(id):
     return jsonify([project.to_dict() for project in user.projects])
 
 
-# GET /api/users/:id/issues/
-@user_routes.route('/<int:id>/issues/')
+# GET /api/users/:id/assigned_issues/
+@user_routes.route('/<int:id>/assigned_issues/')
 @login_required
-def get_all_issues_by_user(id):
+def get_assigned_issues_by_user(id):
     user = User.query.get(id)
-    return jsonify([issue.to_dict() for issue in user.issues])
+    return jsonify([issue.to_dict() for issue in user.assigned_issues])
+
+
+# GET /api/users/:id/submitted_issues/
+@user_routes.route('/<int:id>/submitted_issues/')
+@login_required
+def get_submitted_issues_by_user(id):
+    user = User.query.get(id)
+    return jsonify([issue.to_dict() for issue in user.submitted_issues])
