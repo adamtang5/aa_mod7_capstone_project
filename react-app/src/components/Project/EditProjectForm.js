@@ -231,7 +231,7 @@ const EditProjectForm = () => {
                             type='text'
                             onChange={e => setUserIds(e.target.value)}
                             value={userIds}
-                        // hidden
+                            hidden
                         />
                     </div>
 
