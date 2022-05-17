@@ -1,29 +1,14 @@
-import React, { useState, useEffect } from 'react';
 import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import Avatar from "../Icons/Avatar";
-import Ellipses from "../Icons/Ellipses";
 
-const ProjectRow = ({ project, idx }) => {
+const ProjectRow = ({ project, idx, setProjectId, setShowDeleteModal }) => {
     const allUsers = useSelector(state => state.users);
-    const [showDropdown, setShowDropdown] = useState(false);
 
-    const openDropdown = e => {
-        if (showDropdown) return;
-        setShowDropdown(true);
+    const handleClick = e => {
+        setProjectId(project.id);
+        setShowDeleteModal(true);
     };
-
-    useEffect(() => {
-        if (!showDropdown) return;
-
-        const closeDropdown = e => {
-            setShowDropdown(false);
-        };
-
-        document.addEventListener('click', closeDropdown);
-
-        return () => document.removeEventListener('click', closeDropdown);
-    }, [showDropdown]);
 
     return (
         <tr
@@ -41,18 +26,27 @@ const ProjectRow = ({ project, idx }) => {
                     {project?.users?.map(id => <Avatar key={id} user={allUsers[id]} />)}
                 </div>
             </td>
-            <td className="data-cell">
-                <div
-                    onClick={openDropdown}
-                    className="click-to-dropdown icon-ellipses flex-row cursor-pointer"
-                >
-                    <Ellipses />
-                    {showDropdown && (
-                        <div className="dropdown">
-                            <Link to={`/projects/${project?.id}/settings`}>Project Settings</Link>
-                            <div className="delete-project-confirm">Move to trash</div>
+            <td className="data-cell flex-row">
+                <div className="row-project-actions flex-row">
+                    <div className="edit-project">
+                        <Link
+                            className="edit-project-icon project-actions-icons"
+                            to={`/projects/${project?.id}/settings`}
+                            title="Edit project settings"
+                        >
+                            <i className="fa-solid fa-pen-to-square fa-lg" />
+                        </Link>
+                    </div>
+
+                    <div className="delete-modal">
+                        <div
+                            className="delete-project-confirm project-actions-icons cursor-pointer"
+                            onClick={handleClick}
+                            title="Delete project"
+                        >
+                            <i className="fa-solid fa-trash-can fa-lg" />
                         </div>
-                    )}
+                    </div>
                 </div>
             </td>
         </tr>

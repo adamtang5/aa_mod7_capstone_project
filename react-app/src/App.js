@@ -14,6 +14,7 @@ import ProjectsList from './components/Project/ProjectsList';
 import SingleProject from './components/Project/SingleProject';
 import CreateProjectForm from './components/Project/CreateProjectForm';
 import EditProjectForm from './components/Project/EditProjectForm';
+import { ModalProvider } from './context/Modal';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -31,35 +32,37 @@ function App() {
   }
 
   return (
-    <BrowserRouter>
-      <NavBar />
-      <Switch>
-        <Route path='/welcome' exact={true}>
-          <SplashPage />
-        </Route>
-        <ProtectedRoute path='/users' exact={true} >
-          <UsersList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId' exact={true} >
-          <SingleUser />
-        </ProtectedRoute>
-        <ProtectedRoute path='/users/:userId/edit' exact={true} >
-          <EditUserForm />
-        </ProtectedRoute>
-        <ProtectedRoute path='/' exact={true} >
-          <ProjectsList />
-        </ProtectedRoute>
-        <ProtectedRoute path='/projects/:projectId' exact={true} >
-          <SingleProject />
-        </ProtectedRoute>
-        <ProtectedRoute path='/new-project' exact={true} >
-          <CreateProjectForm />
-        </ProtectedRoute>
-        <ProtectedRoute path='/projects/:projectId/settings' exact={true} >
-          <EditProjectForm />
-        </ProtectedRoute>
-      </Switch>
-    </BrowserRouter>
+    <ModalProvider>
+      <BrowserRouter>
+        <NavBar />
+        <Switch>
+          <Route path='/welcome' exact={true}>
+            <SplashPage />
+          </Route>
+          <ProtectedRoute path='/users' exact={true} >
+            <UsersList />
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId' exact={true} >
+            <SingleUser />
+          </ProtectedRoute>
+          <ProtectedRoute path='/users/:userId/edit' exact={true} >
+            <EditUserForm />
+          </ProtectedRoute>
+          <ProtectedRoute path='/' exact={true} >
+            <ProjectsList />
+          </ProtectedRoute>
+          <ProtectedRoute path='/projects/:projectId' exact={true} >
+            <SingleProject />
+          </ProtectedRoute>
+          <ProtectedRoute path='/new-project' exact={true} >
+            <CreateProjectForm />
+          </ProtectedRoute>
+          <ProtectedRoute path='/projects/:projectId/settings' exact={true} >
+            <EditProjectForm />
+          </ProtectedRoute>
+        </Switch>
+      </BrowserRouter>
+    </ModalProvider>
   );
 }
 

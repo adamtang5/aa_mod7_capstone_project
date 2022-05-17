@@ -1,13 +1,23 @@
-import { useSelector } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 import ProjectRow from "./ProjectRow";
+import DeleteProjectModal from './DeleteProjectModal';
+import { authenticate } from '../../store/session';
 import './ProjectsList.css';
 
 export default function ProjectsList() {
+    const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const projectIds = sessionUser?.projects;
     const projectsObj = useSelector(state => state.projects);
     const projects = projectIds.map(id => projectsObj[id]);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [projectId, setProjectId] = useState(0);
+
+    useEffect(() => {
+        dispatch(authenticate());
+    }, [])
 
     return (
         <div className="page-container">
@@ -35,9 +45,23 @@ export default function ProjectsList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {projects?.map((project, idx) => <ProjectRow key={project.id} project={project} idx={idx} />)}
+                    {projects?.map((project, idx) => (
+                        <ProjectRow
+                            key={project?.id}
+                            project={project}
+                            idx={idx}
+                            setProjectId={setProjectId}
+                            setShowDeleteModal={setShowDeleteModal}
+                        />
+                    ))}
                 </tbody>
             </table>
+            {showDeleteModal && (
+                <DeleteProjectModal
+                    projectId={projectId}
+                    setShowDeleteModal={setShowDeleteModal}
+                />
+            )}
         </div>
     )
 }
