@@ -21,8 +21,8 @@ const removeProject = (id) => ({
     id,
 });
 
-export const fetchProjects = () => async (dispatch) => {
-    const res = await fetch(`/api/projects/`);
+export const fetchProjects = (userId) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/projects/`);
     if (res.ok) {
         const data = await res.json();
         dispatch(loadProjects(data));

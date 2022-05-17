@@ -1,8 +1,9 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import Issue, User, db
+from app.models import Issue, Project, User, db
 from app.forms import EditUserForm
 from .validation import validation_errors_to_error_messages
+from sqlalchemy.orm import joinedload
 
 user_routes = Blueprint('users', __name__)
 
@@ -42,9 +43,17 @@ def edit_user(id):
 ##############
 
 
+# GET /api/users/:id/projects/
+@user_routes.route('/<int:id>/projects/')
+@login_required
+def get_all_projects_by_user(id):
+    user = User.query.get(id)
+    return jsonify([project.to_dict() for project in user.projects])
+
+
 # GET /api/users/:id/issues/
 @user_routes.route('/<int:id>/issues/')
 @login_required
 def get_all_issues_by_user(id):
-    issues = Issue.query.options(joinedload(Issue.users)).all()
-    return jsonify([issue.to_dict() for issue in issues])
+    user = User.query.get(id)
+    return jsonify([issue.to_dict() for issue in user.issues])

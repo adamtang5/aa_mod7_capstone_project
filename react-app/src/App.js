@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SplashPage from './components/SplashPage';
 import NavBar from './components/NavBar';
 import ProtectedRoute from './components/auth/ProtectedRoute';
@@ -19,11 +19,16 @@ import { ModalProvider } from './context/Modal';
 function App() {
   const [loaded, setLoaded] = useState(false);
   const dispatch = useDispatch();
+  const sessionUser = useSelector(state => state.session.user);
 
   useEffect(() => {
     dispatch(authenticate())
       .then(() => dispatch(fetchUsers()))
-      .then(() => dispatch(fetchProjects()))
+      .then(() => {
+        if (sessionUser) {
+          dispatch(fetchProjects(sessionUser.id));
+        }
+      })
       .then(() => setLoaded(true));
   }, [dispatch]);
 
