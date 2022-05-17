@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required
+from flask_login import login_required, current_user
 from app.models import Project, User, db
 from app.forms import CreateProjectForm, EditProjectForm
 from .validation import validation_errors_to_error_messages
@@ -85,6 +85,6 @@ def delete_project(id):
     if project:
         db.session.delete(project)
         db.session.commit()
-        return {'id': id}
+        return current_user.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401

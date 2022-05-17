@@ -2,8 +2,13 @@ import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
 import Avatar from "../Icons/Avatar";
 
-const ProjectRow = ({ project, idx, setShowDeleteModal }) => {
+const ProjectRow = ({ project, idx, setProjectId, setShowDeleteModal }) => {
     const allUsers = useSelector(state => state.users);
+
+    const handleClick = e => {
+        setProjectId(project.id);
+        setShowDeleteModal(true);
+    };
 
     return (
         <tr
@@ -29,17 +34,17 @@ const ProjectRow = ({ project, idx, setShowDeleteModal }) => {
                             to={`/projects/${project?.id}/settings`}
                             title="Edit project settings"
                         >
-                            <i class="fa-solid fa-pen-to-square fa-lg" />
+                            <i className="fa-solid fa-pen-to-square fa-lg" />
                         </Link>
                     </div>
 
                     <div className="delete-modal">
                         <div
                             className="delete-project-confirm project-actions-icons cursor-pointer"
-                            onClick={() => setShowDeleteModal(true)}
+                            onClick={handleClick}
                             title="Delete project"
                         >
-                            <i class="fa-solid fa-trash-can fa-lg" />
+                            <i className="fa-solid fa-trash-can fa-lg" />
                         </div>
                     </div>
                 </div>

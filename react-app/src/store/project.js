@@ -1,3 +1,5 @@
+import { setUser } from "./session";
+
 // constants
 const LOAD_PROJECTS = 'project/LOAD_PROJECTS';
 const NEW_PROJECT = 'project/NEW_PROJECT';
@@ -79,6 +81,8 @@ export const deleteProject = (projectId) => async (dispatch) => {
     });
 
     if (res.ok) {
+        const data = await res.json();
+        dispatch(setUser(data));
         dispatch(removeProject(projectId));
     } else if (res.status < 500) {
         const data = await res.json();
