@@ -1,6 +1,8 @@
+import React, { useState } from 'react';
 import { useSelector } from "react-redux";
-import { NavLink, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import ProjectRow from "./ProjectRow";
+import DeleteProjectModal from './DeleteProjectModal';
 import './ProjectsList.css';
 
 export default function ProjectsList() {
@@ -8,6 +10,7 @@ export default function ProjectsList() {
     const projectIds = sessionUser?.projects;
     const projectsObj = useSelector(state => state.projects);
     const projects = projectIds.map(id => projectsObj[id]);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
 
     return (
         <div className="page-container">
@@ -35,9 +38,21 @@ export default function ProjectsList() {
                     </tr>
                 </thead>
                 <tbody>
-                    {projects?.map((project, idx) => <ProjectRow key={project.id} project={project} idx={idx} />)}
+                    {projects?.map((project, idx) => (
+                        <ProjectRow
+                            key={project.id}
+                            project={project}
+                            idx={idx}
+                            setShowDeleteModal={setShowDeleteModal}
+                        />
+                    ))}
                 </tbody>
             </table>
+            {showDeleteModal && (
+                <DeleteProjectModal
+                    setShowDeleteModal={setShowDeleteModal}
+                />
+            )}
         </div>
     )
 }

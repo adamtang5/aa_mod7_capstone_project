@@ -1,0 +1,29 @@
+.delete-project-modal {
+    box-sizing: border-box;
+    width: 400px;
+    max-height: 375px;
+    padding: 24px;
+}
+
+.delete-project-modal * {
+    color: var(--color-text-1);
+}
+
+.delete-project-modal .modal-title {
+    font-size: 20px;
+    font-weight: 500;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+}
+
+.delete-project-modal p {
+    font-size: 14px;
+    margin: 0 0 12px;
+}
+
+.delete-project-modal .actions {
+    margin: 40px 0;
+    justify-content: flex-end;
+    gap: 15px;
+}

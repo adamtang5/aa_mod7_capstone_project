@@ -1,40 +1,9 @@
-import React, { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { NavLink, Link } from "react-router-dom";
-import { Modal } from '../../context/Modal';
-import { deleteProject } from '../../store/project';
 import Avatar from "../Icons/Avatar";
-import Ellipses from "../Icons/Ellipses";
-import WarningSign from '../Icons/WarningSign';
 
-const ProjectRow = ({ project, idx }) => {
-    const dispatch = useDispatch();
+const ProjectRow = ({ project, idx, setShowDeleteModal }) => {
     const allUsers = useSelector(state => state.users);
-    const [showDropdown, setShowDropdown] = useState(false);
-    const [showDeleteModal, setShowDeleteModal] = useState(false);
-
-    const openDropdown = e => {
-        if (showDropdown) return;
-        setShowDropdown(true);
-    };
-
-    useEffect(() => {
-        if (!showDropdown) return;
-
-        const closeDropdown = e => {
-            setShowDropdown(false);
-        };
-
-        document.addEventListener('click', closeDropdown);
-
-        return () => document.removeEventListener('click', closeDropdown);
-    }, [showDropdown]);
-
-    const handleDeleteProject = e => {
-        const projectId = parseInt(e.target.value.split('delete-project-')[1], 10);
-        setShowDeleteModal(false);
-        dispatch(deleteProject(projectId));
-    }
 
     return (
         <tr
@@ -52,47 +21,27 @@ const ProjectRow = ({ project, idx }) => {
                     {project?.users?.map(id => <Avatar key={id} user={allUsers[id]} />)}
                 </div>
             </td>
-            <td className="data-cell">
-                <div
-                    onClick={openDropdown}
-                    className="click-to-dropdown icon-ellipses flex-row cursor-pointer"
-                >
-                    <Ellipses />
-                    {showDropdown && (
-                        <div className="dropdown flex-column">
-                            <div className="edit-project">
-                                <Link to={`/projects/${project?.id}/settings`}>Project Settings</Link>
-                            </div>
-                            <div className="delete-modal">
-                                <div
-                                    className="delete-project-confirm cursor-pointer"
-                                    onClick={() => setShowDeleteModal(true)}
-                                >Delete Project</div>
-                                {showDeleteModal && (
-                                    <Modal onClose={() => setShowDeleteModal(false)}>
-                                        <div className="delete-project-modal flex-column">
-                                            <h1>
-                                                <WarningSign /> Delete Project?
-                                            </h1>
-                                            <p>The project along with its issues will be permanently deleted.</p>
-                                            <p>Are you sure you want to delete this project?</p>
-                                            <div className="actions flex-row">
-                                                <button
-                                                    className="cancel"
-                                                    onClick={() => setShowDeleteModal(false)}
-                                                >Cancel</button>
-                                                <button
-                                                    id={`delete-project-${project?.id}`}
-                                                    className="delete"
-                                                    onClick={handleDeleteProject}
-                                                >Delete</button>
-                                            </div>
-                                        </div>
-                                    </Modal>
-                                )}
-                            </div>
+            <td className="data-cell flex-row">
+                <div className="row-project-actions flex-row">
+                    <div className="edit-project">
+                        <Link
+                            className="edit-project-icon project-actions-icons"
+                            to={`/projects/${project?.id}/settings`}
+                            title="Edit project settings"
+                        >
+                            <i class="fa-solid fa-pen-to-square fa-lg" />
+                        </Link>
+                    </div>
+
+                    <div className="delete-modal">
+                        <div
+                            className="delete-project-confirm project-actions-icons cursor-pointer"
+                            onClick={() => setShowDeleteModal(true)}
+                            title="Delete project"
+                        >
+                            <i class="fa-solid fa-trash-can fa-lg" />
                         </div>
-                    )}
+                    </div>
                 </div>
             </td>
         </tr>

@@ -56,7 +56,7 @@ table.projects-list {
     width: 24px;
 }
 
-.dropdown {
+/* .dropdown {
     width: max-content;
     top: 28px;
     right: 0;
@@ -81,9 +81,21 @@ table.projects-list {
 
 .projects-list .data-cell .dropdown *:hover {
     text-decoration: none;
+} */
+
+.data-cell.flex-row {
+    justify-content: flex-end;
+    position: relative;
 }
 
-.delete-project-modal {
-    width: 400px;
-    height: 375px;
+.row-project-actions {
+    justify-content: space-around;
+    gap: 10px;
+    position: relative;
+    right: 20px;
+}
+
+.project-actions-icons,
+a.project-actions-icons {
+    color: var(--color-text-1) !important;
 }
