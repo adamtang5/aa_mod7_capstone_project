@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User, db
+from app.models import Issue, User, db
 from app.forms import EditUserForm
 from .validation import validation_errors_to_error_messages
 
@@ -37,3 +37,14 @@ def edit_user(id):
         return user.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+##############
+
+
+# GET /api/users/:id/issues/
+@user_routes.route('/<int:id>/issues/')
+@login_required
+def get_all_issues_by_user(id):
+    issues = Issue.query.options(joinedload(Issue.users)).all()
+    return jsonify([issue.to_dict() for issue in issues])

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Project, User, db
+from app.models import Issue, Project, User, db
 from app.forms import CreateProjectForm, EditProjectForm
 from .validation import validation_errors_to_error_messages
 import json
@@ -88,3 +88,14 @@ def delete_project(id):
         return current_user.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+##############
+
+
+# GET /api/projects/:id/issues/
+@project_routes.route('/<int:id>/issues/')
+@login_required
+def get_all_issues_in_project(id):
+    issues = Issue.query.filter(Issue.project_id == id).all()
+    return jsonify([issue.to_dict() for issue in issues])
