@@ -14,6 +14,7 @@ import ProjectsList from './components/Project/ProjectsList';
 import SingleProject from './components/Project/SingleProject';
 import CreateProjectForm from './components/Project/CreateProjectForm';
 import EditProjectForm from './components/Project/EditProjectForm';
+import CreateIssueForm from './components/Issue/CreateIssueForm';
 import { ModalProvider } from './context/Modal';
 
 function App() {
@@ -59,6 +60,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/projects/:projectId/settings' exact={true} >
             <EditProjectForm />
+          </ProtectedRoute>
+          <ProtectedRoute path='/new-issue' exact={true} >
+            <CreateIssueForm />
           </ProtectedRoute>
         </Switch>
       </BrowserRouter>
