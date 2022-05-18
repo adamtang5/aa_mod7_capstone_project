@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
-from app.models import Issue, Project, User, db
+from app.models import Issue, Project, User, IssueType, db
 from app.forms import CreateIssueForm, EditIssueForm
 from .validation import validation_errors_to_error_messages
 import json
@@ -32,27 +32,19 @@ def create_issue():
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         project = Project.query.get(form.data['project_id'])
+        submitter = User.query.get(form.data['submitter_id'])
+        assignee = User.query.get(form.data['assignee_id'])
 
         issue = Issue(
-            project_id=form.data['project_id'],
+            project=project,
+            submitter=submitter,
+            assignee=assignee,
             project_idx=project.generate_next_idx(),
             type_id=form.data['type_id'],
             title=form.data['title'],
             body=form.data['body'],
         )
         db.session.add(issue)
-
-        submitter = User.query.get(form.data['submitter_id'])
-        role_submitter = Role.query.filter(Role.role == "Submitter").one()
-
-        if form.data['assignee_id']:
-            assignee = User.query.get(form.data['assignee_id'])
-            role_assignee = Role.query.filter(Role.role == "Assignee").one()
-
-        participants = project.users
-        for id in user_ids:
-            user = User.query.get(id)
-            issue.users.append(user)
         db.session.commit()
         return issue.to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
@@ -66,23 +58,10 @@ def edit_issue(id):
     form['csrf_token'].data = request.cookies['csrf_token']
     if form.validate_on_submit():
         issue = Issue.query.get(id)
-        issue.name = form.data['name'] or issue.name
-        issue.key = form.data['key'] or issue.key
-
-        # add and subtract in JoinUP
-        new_user_ids = set(json.loads(form.data['user_ids']))
-        old_user_ids = set([user.id for user in issue.users])
-
-        subtractions = list(old_user_ids - new_user_ids)
-        additions = list(new_user_ids - old_user_ids)
-
-        for user_id in subtractions:
-            user = User.query.get(user_id)
-            issue.users.remove(user)
-
-        for user_id in additions:
-            user = User.query.get(user_id)
-            issue.users.append(user)
+        issue.title = form.data['title'] or issue.title
+        issue.body = form.data['body'] or issue.body
+        assignee = User.query.get(form.data['assignee_id'])
+        issue.assignee = assignee
 
         db.session.commit()
         return issue.to_dict()
