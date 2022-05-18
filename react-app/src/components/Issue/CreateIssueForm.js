@@ -121,14 +121,17 @@ const CreateIssueForm = () => {
         e.preventDefault();
         setErrors([]);
 
-        const data = await dispatch(createIssue({
+        const newIssue = {
             project_id: projectId,
             type_id: typeId,
             title,
             body,
             submitter_id: sessionUser.id,
             assignee_id: assigneeId,
-        }));
+        };
+        console.log("..........newIssue", newIssue);
+
+        const data = await dispatch(createIssue(newIssue));
 
         if (data && Array.isArray(data)) {
             setErrors(data);

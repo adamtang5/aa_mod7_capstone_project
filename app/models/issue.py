@@ -44,7 +44,7 @@ class Issue(db.Model):
             'type': IssueType.query.get(self.type_id),
             'comments': [comment.to_dict() for comment in self.comments],
             'submitter': self.submitter.to_dict(),
-            'assignee': self.assignee.to_dict(),
+            'assignee': self.assignee.to_dict() if self.assignee else {},
             'created_at': self.created_at,
             'updated_at': self.updated_at
         }
