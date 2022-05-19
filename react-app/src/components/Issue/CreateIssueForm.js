@@ -142,6 +142,7 @@ const CreateIssueForm = ({ handleCloseModal }) => {
         if (data && Array.isArray(data)) {
             setErrors(data);
         } else {
+            handleCloseModal();
             history.push(`/issues/${data.id}`);
         }
     };

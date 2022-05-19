@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { authenticate } from '../../store/session';
 import { createProject } from '../../store/project';
 import { CreateProjectNameError } from '../errors/NameError';
 import Avatar from '../Icons/Avatar';
@@ -137,6 +138,7 @@ const CreateProjectForm = () => {
         if (data && Array.isArray(data)) {
             setErrors(data);
         } else {
+            await dispatch(authenticate());
             history.push(`/projects/${data.id}`);
         }
     };
