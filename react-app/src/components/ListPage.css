@@ -1,0 +1,67 @@
+.page-header {
+    justify-content: space-between;
+    align-items: center;
+}
+
+.page-title {
+    font-size: 24px;
+    color: var(--color-text-1);
+}
+
+table.projects-list,
+table.issues-list {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+.projects-list .head-row,
+.issues-list .head-row {
+    color: var(--color-text-2);
+    font-size: 12px;
+    line-height: 24px;
+    text-align: left;
+}
+
+.projects-list tbody,
+.issues-list tbody {
+    border-top: 2px solid var(--color-table-border);
+    border-bottom: 2px solid var(--color-table-border);
+}
+
+.projects-list .data-row-odd,
+.issues-list .data-row-odd {
+    background-color: var(--color-odd-rows);
+}
+
+.projects-list .data-row-even,
+.issues-list .data-row-even {
+    background-color: var(--color-even-rows);
+}
+
+.projects-list .data-cell,
+.issues-list .data-cell {
+    font-size: 14px;
+    line-height: 36px;
+}
+
+.projects-list .data-cell a,
+.issues-list .data-cell a {
+    color: var(--color-minus-1);
+    text-decoration: none;
+}
+
+.projects-list .data-cell a:hover,
+.issues-list .data-cell a:hover {
+    text-decoration: underline;
+}
+
+.projects-list .users-avatars .avatar,
+.issues-list .users-avatars .avatar {
+    height: 24px;
+    width: 24px;
+}
+
+.data-cell.flex-row {
+    justify-content: flex-end;
+    position: relative;
+}
