@@ -27,8 +27,8 @@ class Issue(db.Model):
     assignee = db.relationship("User", foreign_keys=[assignee_id], back_populates="assigned_issues")
 
     def to_dict(self):
-        # status_history = StatusChange.query.filter(StatusChange.issue_id == self.id).order_by(StatusChange.created_at.desc()).all()
-        # print(status_history)
+        status_history = StatusChange.query.filter(StatusChange.issue_id == self.id).order_by(StatusChange.created_at.desc()).all()
+        print(status_history)
 
         return {
             'id': self.id,
@@ -38,7 +38,7 @@ class Issue(db.Model):
             'project_idx': self.project_idx,
             'project_key': self.project.key,
             'project_personal': self.project.name == "Personal Project",
-            # 'project': self.project.to_dict(),
+            'status_history': [status_change.to_dict() for status_change in status_history],
             'title': self.title,
             'body': self.body,
             'type_id': self.type_id,
