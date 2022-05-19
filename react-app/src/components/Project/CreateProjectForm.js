@@ -139,7 +139,7 @@ const CreateProjectForm = () => {
         } else {
             history.push(`/projects/${data.id}`);
         }
-    }
+    };
 
     return (
         <div

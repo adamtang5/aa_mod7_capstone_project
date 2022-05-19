@@ -3,11 +3,15 @@ import thunk from 'redux-thunk';
 import session from './session';
 import users from './user';
 import projects from './project';
+import issues from './issue';
+import types from './type';
 
 const rootReducer = combineReducers({
   session,
   users,
   projects,
+  issues,
+  types,
 });
 
 

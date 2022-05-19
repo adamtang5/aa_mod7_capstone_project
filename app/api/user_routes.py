@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
-from app.models import User, db
+from app.models import Issue, User, db
 from app.forms import EditUserForm
 from .validation import validation_errors_to_error_messages
 
@@ -20,7 +20,7 @@ def users():
 @login_required
 def user(id):
     user = User.query.get(id)
-    return user.to_dict()
+    return user.to_dict_full_details()
 
 
 # PUT /api/users/:id
@@ -37,3 +37,30 @@ def edit_user(id):
         return user.to_dict()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
+
+
+##############
+
+
+# GET /api/users/:id/projects/
+@user_routes.route('/<int:id>/projects/')
+@login_required
+def get_all_projects_by_user(id):
+    user = User.query.get(id)
+    return jsonify([project.to_dict() for project in user.projects])
+
+
+# GET /api/users/:id/assigned_issues/
+@user_routes.route('/<int:id>/assigned_issues/')
+@login_required
+def get_assigned_issues_by_user(id):
+    user = User.query.get(id)
+    return jsonify([issue.to_dict() for issue in user.assigned_issues])
+
+
+# GET /api/users/:id/submitted_issues/
+@user_routes.route('/<int:id>/submitted_issues/')
+@login_required
+def get_submitted_issues_by_user(id):
+    user = User.query.get(id)
+    return jsonify([issue.to_dict() for issue in user.submitted_issues])

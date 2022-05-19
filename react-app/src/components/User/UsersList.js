@@ -1,5 +1,6 @@
 import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import UserCard from '../UserCard';
 
 function UsersList() {
   const users = useSelector(state => Object.values(state.users));
@@ -7,7 +8,7 @@ function UsersList() {
   const userComponents = users?.map((user) => {
     return (
       <li key={user?.id}>
-        <NavLink to={`/users/${user?.id}`}>{user?.email}</NavLink>
+        <UserCard user={user} />
       </li>
     );
   });
