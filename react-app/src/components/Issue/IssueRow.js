@@ -1,5 +1,6 @@
 import { useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
+import Moment from 'react-moment';
 import UserCard from "../UserCard";
 
 const IssueRow = ({ issue, idx }) => {
@@ -30,8 +31,7 @@ const IssueRow = ({ issue, idx }) => {
                 Issue's current status
             </td>
             <td className="data-cell">
-                {/* <DateCard date={issue?.created_at} /> */}
-                Issue's created at date
+                <Moment fromNow>{issue?.created_at}</Moment>
             </td>
         </tr>
     )
