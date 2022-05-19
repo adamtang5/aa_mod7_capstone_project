@@ -5,6 +5,7 @@ import users from './user';
 import projects from './project';
 import issues from './issue';
 import types from './type';
+import statuses from './status';
 
 const rootReducer = combineReducers({
   session,
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   projects,
   issues,
   types,
+  statuses,
 });
 
 

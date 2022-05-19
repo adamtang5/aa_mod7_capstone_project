@@ -27,7 +27,7 @@ const IssueRow = ({ issue, idx }) => {
                 <UserCard user={issue?.assignee} isLink={false} />
             </td>
             <td className="data-cell">
-                {/* <StatusCard status={issue?.current_status} /> */}
+                {/* <StatusCard statusId={issue?.current_status} /> */}
                 Issue's current status
             </td>
             <td className="data-cell">
