@@ -8,7 +8,7 @@ const IssueRow = ({ issue, idx }) => {
     return (
         <tr
             key={issue?.id}
-            className={`data-row${idx % 2 === 0 ? 'even' : 'odd'}`}
+            className={`data-row-${idx % 2 === 0 ? 'even' : 'odd'}`}
         >
             <td className="data-cell">
                 <NavLink to={`/issues/${issue?.id}`}>
