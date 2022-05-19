@@ -1,0 +1,9 @@
+.issues-list .data-cell .user-card {
+    align-items: center;
+    gap: 5px;
+}
+
+.issues-list .data-cell .user-card .avatar {
+    height: 24px;
+    width: 24px;
+}

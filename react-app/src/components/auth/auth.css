@@ -93,23 +93,26 @@ p.summary-text {
     margin-bottom: 5px;
 }
 
+.auth-form .login-buttons {
+    gap: 10px;
+}
+
 .auth-form .button-submit,
 .auth-form .button-demo-user {
     font-size: 16px;
-    padding: 5px 10px;
-    border-radius: 99em;
+    padding: 6px 10px 8px;
+    border-radius: 5px;
     margin-top: 20px;
 }
 
 .auth-form .button-demo-user {
-    background-color: #191919;
+    background-color: var(--color-minus-1);
     color: white;
-    border: #191919 1px solid;
+    border: none;
 }
 
 .auth-form .button-demo-user:hover {
-    background-color: white;
-    color: #292929;
+    background-color: var(--color-plus-1);
 }
 
 p.switch-form {

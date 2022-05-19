@@ -85,7 +85,7 @@ def delete_project(id):
     if project:
         db.session.delete(project)
         db.session.commit()
-        return current_user.to_dict()
+        return current_user.to_dict_full_details()
     else:
         return {'errors': validation_errors_to_error_messages(form.errors)}, 401
 

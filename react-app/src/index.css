@@ -93,6 +93,7 @@ body {
 .button-submit.disabled {
     background-color: #ccc;
     color: var(--color-text-2) !important;
+    cursor: not-allowed;
 }
 
 .button.cancel {

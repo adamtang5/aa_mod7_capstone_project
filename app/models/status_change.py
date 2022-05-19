@@ -4,14 +4,6 @@ from .status import Status
 from datetime import datetime
 
 
-# status_history = db.Table(
-#     "StatusHistory",
-#     db.Column("user_id", db.Integer, db.ForeignKey("Users.id")),
-#     db.Column("issue_id", db.Integer, db.ForeignKey("Issues.id")),
-#     db.Column("status_id", db.Integer, db.ForeignKey("Statuses.id")),
-#     db.Column("created_at", db.DateTime, nullable=False, default=datetime.now())
-# )
-
 class StatusChange(db.Model):
     __tablename__ = 'StatusChanges'
 
@@ -25,9 +17,7 @@ class StatusChange(db.Model):
         return {
             'id': self.id,
             'user_id': self.user_id,
-            'user': User.query.get(self.user_id),
             'issue_id': self.issue_id,
             'status_id': self.status_id,
-            'status': Status.query.get(self.status_id),
             'created_at': self.created_at
         }

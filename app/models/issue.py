@@ -1,7 +1,7 @@
 from .db import db
 from .project import Project
 from .issue_type import IssueType
-# from .join_i_u import issues_users
+from .status_change import StatusChange
 
 from datetime import datetime
 
@@ -23,22 +23,22 @@ class Issue(db.Model):
     project = db.relationship("Project", back_populates="issues")
     comments = db.relationship("Comment", back_populates="issue")
 
-    # users = db.relationship(
-    #     "User",
-    #     secondary=issues_users,
-    #     back_populates="issues"
-    # )
-
     submitter = db.relationship("User", foreign_keys=[submitter_id], back_populates="submitted_issues")
     assignee = db.relationship("User", foreign_keys=[assignee_id], back_populates="assigned_issues")
 
     def to_dict(self):
+        # status_history = StatusChange.query.filter(StatusChange.issue_id == self.id).order_by(StatusChange.created_at.desc()).all()
+        # print(status_history)
+
         return {
             'id': self.id,
             'submitter_id': self.submitter_id,
             'assignee_id': self.assignee_id,
             'project_id': self.project_id,
             'project_idx': self.project_idx,
+            'project_key': self.project.key,
+            'project_personal': self.project.name == "Personal Project",
+            # 'project': self.project.to_dict(),
             'title': self.title,
             'body': self.body,
             'type_id': self.type_id,

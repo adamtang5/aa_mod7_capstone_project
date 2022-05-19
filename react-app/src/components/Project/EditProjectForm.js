@@ -143,6 +143,12 @@ const EditProjectForm = () => {
         setUserIds(userIds.filter(userId => userId !== id));
     };
 
+    const handleCancel = e => {
+        e.preventDefault();
+        setErrors([]);
+        history.push('/');
+    };
+
     const handleEditProject = async (e) => {
         e.preventDefault();
         setErrors([]);
@@ -286,13 +292,24 @@ const EditProjectForm = () => {
                     ))}
                 </div>
 
-                <button
-                    type="submit"
-                    className={`cursor-pointer button button-submit${submitDisabled ? ' disabled' : ''}`}
-                    disabled={submitDisabled}
-                >
-                    Edit Project
-                </button>
+                <footer className="form-footer flex-row">
+                    <button
+                        type="submit"
+                        className={`cursor-pointer button button-submit${submitDisabled ? ' disabled' : ''}`}
+                        disabled={submitDisabled}
+                    >
+                        Save Settings
+                    </button>
+
+                    <button
+                        type="cancel"
+                        className={`cursor-pointer button cancel`}
+                        onClick={handleCancel}
+                    >
+                        Cancel
+                    </button>
+
+                </footer>
 
             </form>
         </div>

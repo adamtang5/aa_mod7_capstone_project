@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import { authenticate } from '../../store/session';
 import { createProject } from '../../store/project';
 import { CreateProjectNameError } from '../errors/NameError';
 import Avatar from '../Icons/Avatar';
@@ -124,6 +125,12 @@ const CreateProjectForm = () => {
         setUserIds(userIds.filter(userId => userId !== id));
     };
 
+    const handleCancel = e => {
+        e.preventDefault();
+        setErrors([]);
+        history.push('/');
+    };
+
     const handleCreateProject = async (e) => {
         e.preventDefault();
         setErrors([]);
@@ -137,7 +144,8 @@ const CreateProjectForm = () => {
         if (data && Array.isArray(data)) {
             setErrors(data);
         } else {
-            history.push(`/projects/${data.id}`);
+            await dispatch(authenticate());
+            history.push(`/`);
         }
     };
 
@@ -266,13 +274,24 @@ const CreateProjectForm = () => {
                     ))}
                 </div>
 
-                <button
-                    type="submit"
-                    className={`cursor-pointer button button-submit${submitDisabled ? ' disabled' : ''}`}
-                    disabled={submitDisabled}
-                >
-                    Create Project
-                </button>
+                <footer className="form-footer flex-row">
+                    <button
+                        type="submit"
+                        className={`cursor-pointer button button-submit${submitDisabled ? ' disabled' : ''}`}
+                        disabled={submitDisabled}
+                    >
+                        Create Project
+                    </button>
+
+                    <button
+                        type="cancel"
+                        className={`cursor-pointer button cancel`}
+                        onClick={handleCancel}
+                    >
+                        Cancel
+                    </button>
+
+                </footer>
 
             </form>
         </div>
