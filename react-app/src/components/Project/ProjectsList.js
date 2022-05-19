@@ -6,18 +6,20 @@ import DeleteProjectModal from './DeleteProjectModal';
 import { authenticate } from '../../store/session';
 import '../ListPage.css';
 import './ProjectsList.css';
+import { fetchUsers } from '../../store/user';
+import { fetchProjects } from '../../store/project';
 
 export default function ProjectsList() {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
-    const projectIds = sessionUser?.projects;
-    const projectsObj = useSelector(state => state.projects);
-    const projects = projectIds?.map(id => projectsObj[id]);
+    const stateProjects = useSelector(state => state.projects);
+    const projects = sessionUser?.projects?.map(id => stateProjects[id]);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [projectId, setProjectId] = useState(0);
 
     useEffect(() => {
-        dispatch(authenticate());
+        dispatch(fetchUsers());
+        dispatch(fetchProjects());
     }, [dispatch])
 
     return (

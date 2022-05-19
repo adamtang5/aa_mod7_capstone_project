@@ -23,8 +23,8 @@ function App() {
 
   useEffect(() => {
     dispatch(authenticate())
-      .then(() => dispatch(fetchUsers()))
-      .then(() => dispatch(fetchProjects()))
+      // .then(() => dispatch(fetchUsers()))
+      // .then(() => dispatch(fetchProjects()))
       .then(() => setLoaded(true));
   }, [dispatch]);
 

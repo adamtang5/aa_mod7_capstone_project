@@ -4,9 +4,13 @@ import { NavLink } from 'react-router-dom';
 import CreateIssueForm from '../Issue/CreateIssueForm';
 import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
+import { useSelector } from 'react-redux';
 
 const NavBar = () => {
+  const sessionUser = useSelector(state => state.session.user);
   const [showCreateIssueModal, setShowCreateIssueModal] = useState(false);
+
+  if (!sessionUser) return null;
 
   const closeModal = () => {
     setShowCreateIssueModal(false);

@@ -30,5 +30,5 @@ def new_status():
         # db.session.execute(sql)
         # INSERT INTO "StatusChanges" (user_id, issue_id, status_id, created_at) VALUES (1, 3, 1, CURRENT_TIMESTAMP);
         db.session.commit()
-        return Issue.query.get(form.data['issue_id']).to_dict()
+        return Issue.query.get(issue_id).to_dict()
     return {'errors': validation_errors_to_error_messages(form.errors)}, 401
