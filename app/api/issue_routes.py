@@ -39,7 +39,7 @@ def create_issue():
             project=project,
             submitter=submitter,
             assignee=assignee,
-            project_idx=project.generate_next_idx(),
+            project_idx=len(project.issues)+1,
             type_id=form.data['type_id'],
             title=form.data['title'],
             body=form.data['body'],
