@@ -125,6 +125,12 @@ const CreateProjectForm = () => {
         setUserIds(userIds.filter(userId => userId !== id));
     };
 
+    const handleCancel = e => {
+        e.preventDefault();
+        setErrors([]);
+        history.push('/');
+    };
+
     const handleCreateProject = async (e) => {
         e.preventDefault();
         setErrors([]);
@@ -139,7 +145,7 @@ const CreateProjectForm = () => {
             setErrors(data);
         } else {
             await dispatch(authenticate());
-            history.push(`/projects/${data.id}`);
+            history.push(`/`);
         }
     };
 
@@ -268,13 +274,24 @@ const CreateProjectForm = () => {
                     ))}
                 </div>
 
-                <button
-                    type="submit"
-                    className={`cursor-pointer button button-submit${submitDisabled ? ' disabled' : ''}`}
-                    disabled={submitDisabled}
-                >
-                    Create Project
-                </button>
+                <footer className="form-footer flex-row">
+                    <button
+                        type="submit"
+                        className={`cursor-pointer button button-submit${submitDisabled ? ' disabled' : ''}`}
+                        disabled={submitDisabled}
+                    >
+                        Create Project
+                    </button>
+
+                    <button
+                        type="cancel"
+                        className={`cursor-pointer button cancel`}
+                        onClick={handleCancel}
+                    >
+                        Cancel
+                    </button>
+
+                </footer>
 
             </form>
         </div>

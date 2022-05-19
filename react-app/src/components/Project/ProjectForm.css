@@ -93,3 +93,11 @@
     font-size: 16px;
     line-height: 30px;
 }
+
+.project-form .form-footer {
+    padding: 0;
+}
+
+.form-footer {
+    justify-content: flex-start;
+}

@@ -309,19 +309,19 @@ const CreateIssueForm = ({ handleCloseModal }) => {
 
                 <footer className="form-footer flex-row">
                     <button
-                        type="cancel"
-                        className={`cursor-pointer button cancel`}
-                        onClick={handleCloseModal}
-                    >
-                        Cancel
-                    </button>
-
-                    <button
                         type="submit"
                         className={`cursor-pointer button button-submit${submitDisabled ? ' disabled' : ''}`}
                         disabled={submitDisabled}
                     >
                         Create
+                    </button>
+
+                    <button
+                        type="cancel"
+                        className={`cursor-pointer button cancel`}
+                        onClick={handleCloseModal}
+                    >
+                        Cancel
                     </button>
 
                 </footer>
