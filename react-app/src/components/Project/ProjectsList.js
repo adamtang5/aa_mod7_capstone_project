@@ -12,7 +12,7 @@ export default function ProjectsList() {
     const sessionUser = useSelector(state => state.session.user);
     const projectIds = sessionUser?.projects;
     const projectsObj = useSelector(state => state.projects);
-    const projects = projectIds.map(id => projectsObj[id]);
+    const projects = projectIds?.map(id => projectsObj[id]);
     const [showDeleteModal, setShowDeleteModal] = useState(false);
     const [projectId, setProjectId] = useState(0);
 
