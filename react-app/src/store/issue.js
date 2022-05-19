@@ -21,8 +21,24 @@ const removeIssue = (id) => ({
     id,
 });
 
-export const fetchIssues = () => async (dispatch) => {
-    const res = await fetch(`/api/issues/`);
+export const fetchIssuesByProject = (projectId) => async (dispatch) => {
+    const res = await fetch(`/api/projects/${projectId}/issues/`);
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(loadIssues(data));
+    }
+};
+
+export const fetchIssuesSubmittedBy = (userId) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/submitted_issues/`);
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(loadIssues(data));
+    }
+};
+
+export const fetchIssuesAssignedTo = (userId) => async (dispatch) => {
+    const res = await fetch(`/api/users/${userId}/assigned_issues/`);
     if (res.ok) {
         const data = await res.json();
         dispatch(loadIssues(data));
@@ -116,7 +132,7 @@ const initialState = {};
 export default function reducer(state = initialState, action) {
     switch (action.type) {
         case LOAD_ISSUES: {
-            const newState = { ...state };
+            const newState = { ...initialState };
             action.issues.forEach(issue => {
                 newState[issue.id] = issue;
             });

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import ProjectRow from "./ProjectRow";
 import DeleteProjectModal from './DeleteProjectModal';
 import { authenticate } from '../../store/session';
+import '../ListPage.css';
 import './ProjectsList.css';
 
 export default function ProjectsList() {
