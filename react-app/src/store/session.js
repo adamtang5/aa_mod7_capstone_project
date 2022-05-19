@@ -78,8 +78,8 @@ export const demoLogin = () => async (dispatch) => {
     const data = await res.json();
     dispatch(setUser(data));
     // fetch states for starting point
-    dispatch(fetchUsers());
-    dispatch(fetchProjects());
+    // dispatch(fetchUsers());
+    // dispatch(fetchProjects());
     return null;
   } else if (res.status < 500) {
     const data = await res.json();
@@ -124,8 +124,8 @@ export const signUp = (email, password, displayName, avatarUrl) => async (dispat
     await dispatch(setUser(data));
 
     // fetch states for starting point
-    await dispatch(fetchUsers());
-    await dispatch(fetchProjects());
+    // await dispatch(fetchUsers());
+    // await dispatch(fetchProjects());
 
     return data.id; // for creating personal project
   } else if (response.status < 500) {
