@@ -19,6 +19,7 @@ class Project(db.Model):
 
     def generate_next_idx(self):
         self._new_issue_idx += 1
+        print("===============", self._new_issue_idx)
         return self._new_issue_idx
 
     def to_dict(self):
