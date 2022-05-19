@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useHistory } from 'react-router-dom';
+import Select from 'react-select';
 import { fetchTypes } from '../../store/type';
 import { createIssue } from '../../store/issue';
 import { CreateIssueProjectIdError } from '../errors/ProjectIdError';
@@ -9,7 +10,7 @@ import { CreateIssueTitleError } from '../errors/TitleError';
 import UserCard from '../UserCard';
 import './IssueForm.css';
 
-const CreateIssueForm = () => {
+const CreateIssueForm = ({ handleCloseModal }) => {
     const dispatch = useDispatch();
     const history = useHistory();
     const sessionUser = useSelector(state => state.session.user);
@@ -19,15 +20,13 @@ const CreateIssueForm = () => {
     const allTypes = useSelector(state => Object.values(state.types));
 
     // slices of state for controlled inputs
-    const [projectId, setProjectId] = useState();
-    const [typeId, setTypeId] = useState();
+    const [projectId, setProjectId] = useState(0);
+    const [typeId, setTypeId] = useState(0);
     const [title, setTitle] = useState('');
     const [body, setBody] = useState('');
-    const [assigneeId, setAssigneeId] = useState();
+    const [assigneeId, setAssigneeId] = useState(0);
 
     // slices of state for dropdowns
-    const [showProjects, setShowProjects] = useState(false);
-    const [showTypes, setShowTypes] = useState(false);
     const [showAssignees, setShowAssignees] = useState(false);
     const [assigneeSearchInput, setAssigneeSearchInput] = useState('');
 
@@ -53,7 +52,6 @@ const CreateIssueForm = () => {
             title.length));
     }, [projectId, typeId, title]);
 
-
     useEffect(() => {
         if (assigneeSearchInput.length) {
             setShowAssignees(true);
@@ -74,17 +72,24 @@ const CreateIssueForm = () => {
         return () => document.removeEventListener('click', closeAssignees);
     }, [showAssignees]);
 
+    // Options for Select components
+    let projectOptions = [];
+    sessionUser?.projects?.forEach(id => {
+        projectOptions.push({
+            value: id,
+            label: stateProjects[id]?.name,
+        });
+    });
+
+    let typeOptions = [];
+    allTypes?.forEach(type => {
+        typeOptions.push({
+            value: type.id,
+            label: type.type,
+        });
+    });
+
     // controlled input events
-    const projectIdChange = e => {
-        setErrors([]);
-        setProjectId(e.target.value);
-    };
-
-    const typeIdChange = e => {
-        setErrors([]);
-        setTypeId(e.target.value);
-    };
-
     const titleChange = e => {
         setErrors([]);
         setTitle(e.target.value);
@@ -114,7 +119,9 @@ const CreateIssueForm = () => {
     };
 
     const addUserToAssignee = e => {
-        setAssigneeId(e.target.value);
+        const id = parseInt(e.currentTarget.id.split('search-results-li-')[1], 10);
+        setAssigneeId(id);
+        setAssigneeSearchInput('');
     };
 
     const handleCreateIssue = async (e) => {
@@ -127,9 +134,8 @@ const CreateIssueForm = () => {
             title,
             body,
             submitter_id: sessionUser.id,
-            assignee_id: assigneeId,
+            assignee_id: assigneeId || 0,
         };
-        console.log("..........newIssue", newIssue);
 
         const data = await dispatch(createIssue(newIssue));
 
@@ -143,15 +149,18 @@ const CreateIssueForm = () => {
     return (
         <div
             id="create-issue-form"
-            className="page-container"
+            className="modal-container"
         >
             <form
-                className="issue-form centered"
+                className="issue-form centered flex-column"
                 onSubmit={handleCreateIssue}
             >
-                <h2 className="form-title">Create Issue</h2>
+                <header className="form-header">
+                    <h2 className="form-title">Create Issue</h2>
+                </header>
 
                 <div className="issue-form-body">
+
                     <label
                         htmlFor="project-id"
                         className="form-element"
@@ -159,22 +168,15 @@ const CreateIssueForm = () => {
                         <div className="form-field-label">
                             Project <span className="required-field">*</span>
                         </div>
-                        <select
+
+                        <Select
+                            options={projectOptions}
                             name='project-id'
-                            className="form-input"
-                            onChange={projectIdChange}
-                            onBlur={validateProjectId}
-                            value={projectId}
-                        >
-                            {sessionUser?.projects?.map(id => (
-                                <option
-                                    key={id}
-                                    value={id}
-                                >
-                                    {stateProjects[id]?.name}
-                                </option>
-                            ))}
-                        </select>
+                            id="project-id-input"
+                            onChange={(value) => setProjectId(value.value)}
+                            placeholder="Select a project"
+                            required
+                        />
                         <CreateIssueProjectIdError
                             projectIdInvalid={projectIdInvalid}
                         />
@@ -187,22 +189,16 @@ const CreateIssueForm = () => {
                         <div className="form-field-label">
                             Type <span className="required-field">*</span>
                         </div>
-                        <select
+
+                        <Select
+                            options={typeOptions}
                             name='type-id'
-                            className="form-input"
-                            onChange={typeIdChange}
-                            onBlur={validateTypeId}
-                            value={typeId}
-                        >
-                            {allTypes?.map(issueType => (
-                                <option
-                                    key={issueType?.id}
-                                    value={issueType?.id}
-                                >
-                                    {issueType?.type}
-                                </option>
-                            ))}
-                        </select>
+                            id="type-id-input"
+                            onChange={(value) => setTypeId(value.value)}
+                            placeholder="Select a Type"
+                            required
+                        />
+
                         <CreateIssueTypeIdError
                             typeIdInvalid={typeIdInvalid}
                         />
@@ -238,58 +234,87 @@ const CreateIssueForm = () => {
                         />
                     </label>
 
-                    <label className="form-element">
-                        <div className="form-field-label">
-                            Reporter
-                        </div>
-                        <div className="form-input-provided">
-                            <UserCard user={sessionUser} />
-                        </div>
-                    </label>
+                    <div className="user-fields flex-row">
+                        <label className="form-element">
+                            <div className="form-field-label">
+                                Reporter
+                            </div>
+                            <div className="form-input-provided">
+                                <UserCard user={sessionUser} />
+                            </div>
+                        </label>
+
+                        <label className="form-element">
+                            <div className="form-field-label">
+                                Assignee
+                            </div>
+                            <div className="selected-assignee">
+                                <UserCard user={stateUsers[assigneeId]} isLink={false} />
+                            </div>
+                        </label>
+                    </div>
 
                     <label className="form-element">
                         <div className="form-field-label">
-                            Assignee
+                            Select Assignee
                         </div>
-                        <input
-                            type='text'
-                            className="form-input"
-                            onChange={e => setAssigneeSearchInput(e.target.value)}
-                            value={assigneeSearchInput}
-                            placeholder="Search by name"
-                        />
-                        {showAssignees && (
-                            <div className="search-results flex-column">
-                                {allUsers
-                                    ?.filter(user => user
-                                        .display_name
-                                        .toLowerCase()
-                                        .includes(assigneeSearchInput.toLowerCase())
-                                    )
-                                    .map(user => (
-                                        <div
-                                            key={user.id}
-                                            id={`search-results-li-${user.id}`}
-                                            className="flex-row cursor-pointer search-results-row"
-                                            onClick={addUserToAssignee}
-                                        >
-                                            <UserCard user={user} />
-                                        </div>
-                                    ))
-                                }
+                        <div className="assignee-row flex-row">
+                            <div className="assignee-search flex-column">
+                                <input
+                                    type='text'
+                                    className="search-box form-input"
+                                    onChange={e => setAssigneeSearchInput(e.target.value)}
+                                    value={assigneeSearchInput}
+                                    placeholder="Search by name"
+                                />
+                                {showAssignees && (
+                                    <div className="search-results flex-column">
+                                        {allUsers
+                                            ?.filter(user => user
+                                                .display_name
+                                                .toLowerCase()
+                                                .includes(assigneeSearchInput.toLowerCase())
+                                            )
+                                            .map(user => (
+                                                <div
+                                                    key={user.id}
+                                                    id={`search-results-li-${user.id}`}
+                                                    className="flex-row cursor-pointer search-results-row"
+                                                    onClick={addUserToAssignee}
+                                                >
+                                                    <UserCard user={user} isLink={false} />
+                                                </div>
+                                            ))
+                                        }
+                                    </div>
+                                )}
                             </div>
-                        )}
+                        </div>
                     </label>
 
                     <input
-                        type='text'
-                        onChange={e => setAssigneeId(e.target.value)}
+                        type='number'
                         value={assigneeId}
-                    // hidden
+                        hidden
                     />
+
+                    <div className="errors">
+                        {errors.map((error, ind) => (
+                            <div key={ind} className="error-text">{error}</div>
+                        ))}
+                    </div>
+
                 </div>
 
                 <footer className="form-footer flex-row">
+                    <button
+                        type="cancel"
+                        className={`cursor-pointer button cancel`}
+                        onClick={handleCloseModal}
+                    >
+                        Cancel
+                    </button>
+
                     <button
                         type="submit"
                         className={`cursor-pointer button button-submit${submitDisabled ? ' disabled' : ''}`}

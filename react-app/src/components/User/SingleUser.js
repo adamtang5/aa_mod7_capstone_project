@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Avatar from '../Icons/Avatar';
+import UserCard from '../UserCard';
 
 function SingleUser() {
   const [user, setUser] = useState({});
@@ -22,20 +23,12 @@ function SingleUser() {
   }
 
   return (
-    <ul>
-      <li>
+    <div>
+      <div>
         <strong>User Id</strong> {userId}
-      </li>
-      <li>
-        <strong>Email</strong> {user.email}
-      </li>
-      <li className="flex-row">
-        <strong>Avatar</strong> <Avatar user={user} />
-      </li>
-      <li>
-        <strong>Display Name</strong> {user.display_name}
-      </li>
-    </ul>
+      </div>
+      <UserCard user={user} />
+    </div>
   );
 }
 export default SingleUser;

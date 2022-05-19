@@ -1,0 +1,77 @@
+#modal-content {
+    top: 60px;
+    bottom: 60px;
+}
+
+.modal-container {
+    width: 800px;
+    height: 100%;
+}
+
+.issue-form {
+    min-height: 0;
+    max-height: 100%;
+}
+
+.form-header {
+    padding: 24px 24px 22px;
+}
+
+.form-header h2 {
+    font-size: 20px;
+    font-weight: 500;
+    margin: 0;
+}
+
+.issue-form-body {
+    padding: 2px 24px;
+    flex: 1 1 auto;
+    overflow: hidden auto;
+}
+
+#project-id-input,
+#type-id-input,
+input.search-box.form-input {
+    width: 50%;
+}
+
+input.form-input,
+textarea.form-input {
+    width: 90%;
+}
+
+textarea.form-input {
+    height: 200px;
+    overflow: auto;
+}
+
+.form-input-provided,
+.selected-assignee {
+    width: 40%;
+    border: 3px solid var(--color-table-border);
+    padding: 10px;
+    user-select: none;
+    min-height: 24px;
+}
+
+.form-input-provided .user-card,
+.selected-assignee .user-card {
+    align-items: center;
+    gap: 5px;
+}
+
+.form-input-provided .user-card .avatar,
+.selected-assignee .user-card .avatar {
+    width: 24px;
+    height: 24px;
+}
+
+.assignee-row {
+    justify-content: space-between;
+}
+
+.form-footer {
+    padding: 22px 24px 24px;
+    justify-content: flex-end;
+    gap: 10px;
+}

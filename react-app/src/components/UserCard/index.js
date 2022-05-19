@@ -1,9 +1,10 @@
 import Avatar from "../Icons/Avatar";
 
-const UserCard = ({ user }) => {
+const UserCard = ({ user, isLink }) => {
+    if (!user) return null;
     return (
         <div className="user-card flex-row">
-            <Avatar user={user} />
+            <Avatar user={user} isLink={isLink} />
             <div className="display-name">
                 {user?.display_name}
             </div>

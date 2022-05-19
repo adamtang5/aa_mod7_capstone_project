@@ -98,6 +98,7 @@ body {
 .button.cancel {
     background-color: var(--color-even-rows);
     color: var(--color-text-2) !important;
+    border: none;
 }
 
 .button.cancel:hover {

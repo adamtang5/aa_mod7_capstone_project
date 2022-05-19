@@ -41,7 +41,7 @@ class Issue(db.Model):
             'project_idx': self.project_idx,
             'title': self.title,
             'body': self.body,
-            'type': IssueType.query.get(self.type_id),
+            'type_id': self.type_id,
             'comments': [comment.to_dict() for comment in self.comments],
             'submitter': self.submitter.to_dict(),
             'assignee': self.assignee.to_dict() if self.assignee else {},
