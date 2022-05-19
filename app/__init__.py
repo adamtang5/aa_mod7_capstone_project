@@ -12,6 +12,7 @@ from .api.project_routes import project_routes
 from .api.issue_routes import issue_routes
 from .api.type_routes import type_routes
 from .api.status_routes import status_routes
+from .api.status_change_routes import status_change_routes
 
 from .seeds import seed_commands
 
@@ -39,6 +40,7 @@ app.register_blueprint(project_routes, url_prefix='/api/projects')
 app.register_blueprint(issue_routes, url_prefix='/api/issues')
 app.register_blueprint(type_routes, url_prefix='/api/types')
 app.register_blueprint(status_routes, url_prefix='/api/statuses')
+app.register_blueprint(status_change_routes, url_prefix='/api/status_changes')
 db.init_app(app)
 Migrate(app, db)
 
