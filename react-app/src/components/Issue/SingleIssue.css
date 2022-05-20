@@ -30,8 +30,13 @@ nav .issue-key-text:hover {
     width: 100%;
 }
 
-.issue-title {
+.issue-title,
+.issue-body {
     width: 100%;
+}
+
+.issue-title {
+    position: relative;
 }
 
 .issue-title .display-title {
@@ -39,18 +44,30 @@ nav .issue-key-text:hover {
     line-height: 36px;
     font-weight: 500;
     padding: 6px 0;
-    width: 90%;
+    width: 100%;
+}
+
+input.display-title,
+textarea.display-body {
+    border: 2px solid var(--color-plus-2);
 }
 
 input.display-title {
-    border: 2px solid var(--color-plus-2);
     line-height: 24px;
+}
+
+.issue-body .display-body {
+    width: 100%;
+    font-size: 14px;
+    height: 200px;
+    overflow-y: scroll;
 }
 
 .title-actions {
     justify-content: flex-end;
+    position: absolute;
     gap: 5px;
-    margin-right: 100px;
+    right: 0;
 }
 
 .title-action-buttons {
@@ -58,4 +75,20 @@ input.display-title {
     box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px,
         rgb(9 30 66 / 31%) 0px 0px 1px;
     color: var(--color-text-2);
+}
+
+h3.issue-body-header {
+    font-size: 16px;
+}
+
+.body-actions {
+    gap: 10px;
+}
+
+.issue-meta {
+    width: 30%;
+}
+
+h3.issue-status-header {
+    font-size: 16px;
 }

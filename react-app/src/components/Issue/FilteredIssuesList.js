@@ -4,7 +4,7 @@ import { fetchIssuesAssignedTo, fetchIssuesByProject, fetchIssuesSubmittedBy } f
 import IssuesList from "./IssuesList";
 
 const FilteredIssuesList = ({ mode }) => {
-    console.log("In Filtered Issues List. Mode: ", mode);
+    // console.log("In Filtered Issues List. Mode: ", mode);
 
     const dispatch = useDispatch();
     const { projectId } = useParams();
