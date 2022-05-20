@@ -46,7 +46,7 @@ export const fetchIssuesAssignedTo = (userId) => async (dispatch) => {
 };
 
 export const createIssue = (issue) => async (dispatch) => {
-    const res = await fetch(`/api/issues/`, {
+    const issueRes = await fetch(`/api/issues/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
@@ -54,12 +54,37 @@ export const createIssue = (issue) => async (dispatch) => {
         body: JSON.stringify(issue),
     });
 
-    if (res.ok) {
-        const data = await res.json();
-        dispatch(newIssue(data));
-        return data;
-    } else if (res.status < 500) {
-        const data = await res.json();
+    if (issueRes.ok) {
+        const initialData = await issueRes.json();
+
+        const initalStatus = {
+            user_id: initialData.submitter_id,
+            issue_id: initialData.id,
+            status_id: 1,
+        };
+
+        const statusRes = await fetch('/api/status_changes/', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(initalStatus),
+        });
+
+        if (statusRes.ok) {
+            const issue = await statusRes.json();
+            dispatch(newIssue(issue));
+            return issue;
+        } else if (statusRes.status < 500) {
+            const data = await statusRes.json();
+            if (data.errors) {
+                return data.errors;
+            }
+        } else {
+            return ['An error occurred. Please try again.'];
+        }
+    } else if (issueRes.status < 500) {
+        const data = await issueRes.json();
         if (data.errors) {
             return data.errors;
         }
@@ -113,16 +138,22 @@ export const deleteIssue = (issueId) => async (dispatch) => {
 // State shape:
 // state.issues --> {
 //   [id]: {
-//     id, submitter_id, assignee_id, project_id, project_idx, title, body, type_id, created_at, updated_at,
-//     submitter: {id, ...},
-//     assignee: {id, ...},
-//     issues: [id, ...],
+//     id, submitter_id, assignee_id, project_id, project_idx, project_key, project_personal,
+//     title, body, type_id, created_at, updated_at,
+//     submitter: {...},
+//     assignee: {...},
+//     status_history: [{...}, {...}, ...],
+//     current_status: {...},
+//     comments: [{...}, {...}, ...],
 //   },
 //   [id]: {
-//     id, submitter_id, assignee_id, project_id, project_idx, title, body, type_id, created_at, updated_at,
-//     submitter: {id, ...},
-//     assignee: {id, ...},
-//     issues: [id, ...],
+//     id, submitter_id, assignee_id, project_id, project_idx, project_key, project_personal,
+//     title, body, type_id, created_at, updated_at,
+//     submitter: {...},
+//     assignee: {...},
+//     status_history: [{...}, {...}, ...],
+//     current_status: {...},
+//     comments: [{...}, {...}, ...],
 //   },
 // }
 
