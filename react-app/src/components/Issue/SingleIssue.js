@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { editIssue } from "../../store/issue";
 import BackCard from "../BackCard";
 import IssueKey from "./IssueKey";
 import './SingleIssue.css';
 
 const SingleIssue = () => {
+    const dispatch = useDispatch();
     const { issueId } = useParams();
     const issue = useSelector(state => state.issues[+issueId]);
     const [showDisplayTitle, setShowDisplayTitle] = useState(true);
@@ -23,11 +25,16 @@ const SingleIssue = () => {
         };
 
         document.addEventListener('click', closeEditTitle);
+        document.getElementById('title-input').focus();
 
-        return () => document.removeEventListener('click', closeEditTitle);
+        return () => {
+            document.removeEventListener('click', closeEditTitle);
+            setTitle(issue?.title);
+        };
     }, [showEditTitle]);
 
     const toggleTitleToEdit = e => {
+        setTitle(issue?.title);
         setShowDisplayTitle(false);
         setShowEditTitle(true);
         setShowTitleActions(true);
@@ -39,6 +46,21 @@ const SingleIssue = () => {
         setShowTitleActions(false);
     };
 
+    const handleTitleEditSubmit = async (e) => {
+        e.stopPropagation();
+        // e.preventDefault();
+
+        await dispatch(editIssue({
+            id: issue?.id,
+            title,
+        }));
+
+        setShowDisplayTitle(true);
+        setShowEditTitle(false);
+        setShowTitleActions(false);
+        await setTitle(issue?.title);
+    };
+
     return (
         <div className="issue-page-container flex-row">
             <div className="issue-content scrollable">
@@ -47,38 +69,38 @@ const SingleIssue = () => {
                     <IssueKey issue={issue} />
                 </nav>
                 <div className="issue-title">
-                    {showDisplayTitle && (
+                    <div
+                        className={`display-title cursor-text${showDisplayTitle ? '' : ' hidden'}`}
+                        onClick={toggleTitleToEdit}
+                    >
+                        {issue?.title}
+                    </div>
+                    <input
+                        id="title-input"
+                        type='text'
+                        className={`display-title${showEditTitle ? '' : ' hidden'}`}
+                        onClick={e => e.stopPropagation()}
+                        onChange={e => setTitle(e.target.value)}
+                        // onBlur={toggleTitleToDisplay}
+                        value={title}
+                        required
+                    />
+                    <div
+                        className={`title-actions flex-row${showTitleActions ? '' : ' hidden'}`}
+                    >
                         <div
-                            className="display-title cursor-text"
-                            onClick={toggleTitleToEdit}
+                            className="title-action-buttons cursor-pointer"
+                            onClick={handleTitleEditSubmit}
                         >
-                            {issue?.title}
+                            <i className="fa-solid fa-check" />
                         </div>
-                    )}
-                    {showEditTitle && (
-                        <input
-                            className="display-title"
-                            onChange={e => setTitle(e.target.value)}
-                            value={title}
-                        />
-                    )}
-                    {showTitleActions && (
                         <div
-                            className="title-actions flex-row"
+                            className="title-action-buttons cursor-pointer"
+                        // onClick={handleTitleEditCancel}
                         >
-                            <div
-                                className="title-action-buttons cursor-pointer"
-                            >
-                                <i className="fa-solid fa-check" />
-                            </div>
-                            <div
-                                className="title-action-buttons cursor-pointer"
-                                onClick={toggleTitleToDisplay}
-                            >
-                                <i className="fa-solid fa-xmark" />
-                            </div>
+                            <i className="fa-solid fa-xmark" />
                         </div>
-                    )}
+                    </div>
                 </div>
             </div>
             <div className="issue-meta fixed">
