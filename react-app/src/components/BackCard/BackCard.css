@@ -1,0 +1,15 @@
+.back-card {
+    justify-content: flex-start;
+    align-items: center;
+    gap: 5px;
+}
+
+.back-card * {
+    color: var(--color-text-2);
+}
+
+.back-card .text {
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 24px;
+}

@@ -1,0 +1,27 @@
+.issue-page-container {
+    padding: 0 58px;
+}
+
+.issue-content {
+    padding: 24px 24px 32px 32px;
+}
+
+nav.flex-row {
+    gap: 25px;
+    align-items: center;
+}
+
+nav .issue-key-text {
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--color-text-2);
+    cursor: pointer;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav .issue-key-text:hover {
+    text-decoration: underline;
+}
