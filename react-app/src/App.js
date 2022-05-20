@@ -8,13 +8,11 @@ import UsersList from './components/User/UsersList';
 import SingleUser from './components/User/SingleUser';
 import EditUserForm from './components/User/EditUserForm';
 import { authenticate } from './store/session';
-import { fetchUsers } from './store/user';
-import { fetchProjects } from './store/project';
 import ProjectsList from './components/Project/ProjectsList';
-import SingleProject from './components/Project/SingleProject';
 import CreateProjectForm from './components/Project/CreateProjectForm';
 import EditProjectForm from './components/Project/EditProjectForm';
 import FilteredIssuesList from './components/Issue/FilteredIssuesList';
+import SingleIssue from './components/Issue/SingleIssue';
 import { ModalProvider } from './context/Modal';
 
 function App() {
@@ -72,6 +70,9 @@ function App() {
           </ProtectedRoute>
           <ProtectedRoute path='/your/assigned/issues' exact={true} >
             <FilteredIssuesList mode="assignee" />
+          </ProtectedRoute>
+          <ProtectedRoute path='/issues/:issueId' exact={true} >
+            <SingleIssue />
           </ProtectedRoute>
         </Switch>
       </BrowserRouter>

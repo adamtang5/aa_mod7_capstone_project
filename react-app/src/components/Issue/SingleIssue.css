@@ -1,0 +1,61 @@
+.issue-page-container {
+    padding: 0 58px;
+}
+
+.issue-content {
+    padding: 24px 24px 32px 32px;
+}
+
+nav.flex-row {
+    gap: 25px;
+    align-items: center;
+}
+
+nav .issue-key-text {
+    font-size: 14px;
+    line-height: 24px;
+    color: var(--color-text-2);
+    cursor: pointer;
+}
+
+nav a {
+    text-decoration: none;
+}
+
+nav .issue-key-text:hover {
+    text-decoration: underline;
+}
+
+.issue-content {
+    width: 100%;
+}
+
+.issue-title {
+    width: 100%;
+}
+
+.issue-title .display-title {
+    font-size: 24px;
+    line-height: 36px;
+    font-weight: 500;
+    padding: 6px 0;
+    width: 90%;
+}
+
+input.display-title {
+    border: 2px solid var(--color-plus-2);
+    line-height: 24px;
+}
+
+.title-actions {
+    justify-content: flex-end;
+    gap: 5px;
+    margin-right: 100px;
+}
+
+.title-action-buttons {
+    padding: 10px;
+    box-shadow: rgb(9 30 66 / 25%) 0px 4px 8px -2px,
+        rgb(9 30 66 / 31%) 0px 0px 1px;
+    color: var(--color-text-2);
+}
