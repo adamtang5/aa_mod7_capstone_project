@@ -8,6 +8,8 @@ import '../ListPage.css';
 import './ProjectsList.css';
 import { fetchUsers } from '../../store/user';
 import { fetchProjects } from '../../store/project';
+import { fetchStatuses } from '../../store/status';
+import { fetchTypes } from '../../store/type';
 
 export default function ProjectsList() {
     const dispatch = useDispatch();
@@ -20,6 +22,8 @@ export default function ProjectsList() {
     useEffect(() => {
         dispatch(fetchUsers());
         dispatch(fetchProjects());
+        dispatch(fetchTypes());
+        dispatch(fetchStatuses());
     }, [dispatch])
 
     return (

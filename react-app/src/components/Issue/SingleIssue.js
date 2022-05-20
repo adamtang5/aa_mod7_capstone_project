@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { editIssue } from "../../store/issue";
 import BackCard from "../BackCard";
 import DynamicBody from "./DynamicBody";
+import DynamicStatus from "./DynamicStatus";
 import DynamicTitle from "./DynamicTitle";
 import IssueKey from "./IssueKey";
 import './SingleIssue.css';
@@ -30,7 +31,9 @@ const SingleIssue = () => {
             </div>
             <div className="issue-meta fixed">
                 <h3 className="issue-status-header">Status</h3>
-
+                <div className="issue-status">
+                    <DynamicStatus issue={issue} />
+                </div>
             </div>
         </div>
     )

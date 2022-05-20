@@ -84,3 +84,11 @@ h3.issue-body-header {
 .body-actions {
     gap: 10px;
 }
+
+.issue-meta {
+    width: 30%;
+}
+
+h3.issue-status-header {
+    font-size: 16px;
+}
