@@ -61,7 +61,7 @@ export const createIssue = (issue) => async (dispatch) => {
             user_id: initialData.submitter_id,
             issue_id: initialData.id,
             status_id: 1,
-            created_at: Date.now(),
+            // created_at: Date.now(),
         };
 
         const statusRes = await fetch('/api/status_changes/', {

@@ -8,4 +8,4 @@ class StatusChangeForm(FlaskForm):
     user_id = IntegerField("User Id", validators=[DataRequired()])
     issue_id = IntegerField("Issue Id", validators=[DataRequired()])
     status_id = IntegerField("Status Id", validators=[DataRequired()])
-    created_at = DateTimeField("Created At", validators=[DataRequired()], default=datetime.now())
+    # created_at = DateTimeField("Created At")

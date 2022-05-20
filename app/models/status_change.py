@@ -11,7 +11,7 @@ class StatusChange(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
     issue_id = db.Column(db.Integer, db.ForeignKey("Issues.id"), nullable=False)
     status_id = db.Column(db.Integer, db.ForeignKey("Statuses.id"), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     def to_dict(self):
         return {
