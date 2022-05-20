@@ -29,6 +29,7 @@ const DynamicStatus = ({ issue }) => {
             user_id: sessionUser.id,
             issue_id: issue.id,
             status_id: value.value,
+            created_at: Date.now(),
         };
 
         const data = await dispatch(createStatusChange(newStatusChange));
