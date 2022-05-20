@@ -35,6 +35,10 @@ nav .issue-key-text:hover {
     width: 100%;
 }
 
+.issue-title {
+    position: relative;
+}
+
 .issue-title .display-title {
     font-size: 24px;
     line-height: 36px;
@@ -61,8 +65,9 @@ input.display-title {
 
 .title-actions {
     justify-content: flex-end;
+    position: absolute;
     gap: 5px;
-    margin-right: 100px;
+    right: 0;
 }
 
 .title-action-buttons {
