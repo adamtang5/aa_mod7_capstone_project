@@ -11,7 +11,7 @@ const loadIssues = (issues) => ({
 });
 
 // for create and edit
-const newIssue = (issue) => ({
+export const newIssue = (issue) => ({
     type: NEW_ISSUE,
     issue,
 });
