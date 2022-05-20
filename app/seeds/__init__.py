@@ -5,6 +5,7 @@ from .issue_types import seed_issue_types, undo_issue_types
 from .statuses import seed_statuses, undo_statuses
 # from .roles import seed_roles, undo_roles
 from .issues import seed_issues, undo_issues
+from .status_changes import seed_status_changes, undo_status_changes
 
 
 # Creates a seed group to hold our commands
@@ -21,12 +22,14 @@ def seed():
     seed_statuses()
     # seed_roles()
     seed_issues()
+    seed_status_changes()
     # Add other seed functions here
 
 
 # Creates the `flask seed undo` command
 @seed_commands.command('undo')
 def undo():
+    undo_status_changes()
     undo_issues()
     # undo_roles()
     undo_statuses()

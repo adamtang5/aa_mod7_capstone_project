@@ -39,7 +39,7 @@ class Issue(db.Model):
             'project_key': self.project.key,
             'project_personal': self.project.name == "Personal Project",
             'status_history': [status_change.to_dict() for status_change in status_history],
-            'current_status': [status_change.to_dict() for status_change in status_history][0],
+            'current_status': [status_change.to_dict() for status_change in status_history][0] if status_history else None,
             'title': self.title,
             'body': self.body,
             'type_id': self.type_id,

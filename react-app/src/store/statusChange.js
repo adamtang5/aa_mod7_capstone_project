@@ -17,7 +17,7 @@ export const fetchStatusHistoryByIssue = (issueId) => async (dispatch) => {
 };
 
 export const createStatusChange = (statusChange) => async (dispatch) => {
-    const res = await fetch(`/api/status_changes`, {
+    const res = await fetch(`/api/status_changes/`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
