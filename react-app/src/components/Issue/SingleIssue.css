@@ -4,6 +4,12 @@
 
 .issue-content {
     padding: 24px 24px 32px 32px;
+    width: 61%;
+}
+
+.issue-meta {
+    padding: 24px 20px 32px 8px;
+    width: 38%;
 }
 
 nav.flex-row {
@@ -85,10 +91,37 @@ h3.issue-body-header {
     gap: 10px;
 }
 
-.issue-meta {
-    width: 30%;
+h3.issue-status-header,
+h3.issue-details-header {
+    font-size: 16px;
 }
 
-h3.issue-status-header {
-    font-size: 16px;
+.issue-status {
+    max-width: 200px;
+}
+
+.issue-details-row {
+    height: 32px;
+    margin-bottom: 12px;
+    align-items: center;
+}
+
+.issue-details-label {
+    width: 40%;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.issue-details-field {
+    width: 60%;
+}
+
+.issue-details-field .user-card {
+    align-items: center;
+    gap: 5px;
+}
+
+.issue-details-field .user-card .avatar {
+    height: 24px;
+    width: 24px;
 }

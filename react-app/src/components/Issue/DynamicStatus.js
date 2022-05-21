@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { createStatusChange } from "../../store/statusChange";
 import Select from 'react-select';
+import makeAnimated from 'react-select/animated';
 
 const DynamicStatus = ({ issue }) => {
     const dispatch = useDispatch();
@@ -22,6 +23,32 @@ const DynamicStatus = ({ issue }) => {
         });
     });
 
+    const customStyles = {
+        option: (provided, state) => ({
+            ...provided,
+            borderBottom: '1px dotted pink',
+            color: state.isSelected ? 'red' : 'blue',
+            padding: 20,
+        }),
+        control: () => ({
+            width: 200,
+        }),
+        singleValue: (provided, state) => {
+            const opacity = state.isDisabled ? 0.5 : 1;
+            const transition = 'opacity 300ms';
+
+            return { ...provided, opacity, transition };
+        }
+    };
+
+    const customTheme = (theme) => ({
+        ...theme,
+        colors: {
+            ...theme.colors,
+            primary: 'green',
+        }
+    });
+
     const handleStatusChange = async (value) => {
         // console.log(value.value);
 
@@ -41,6 +68,8 @@ const DynamicStatus = ({ issue }) => {
 
     return (
         <Select
+            // styles={customStyles}
+            theme={customTheme}
             options={statusOptions}
             name='status-id'
             id='status-id-input'

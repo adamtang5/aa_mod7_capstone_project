@@ -7,6 +7,7 @@ import DynamicBody from "./DynamicBody";
 import DynamicStatus from "./DynamicStatus";
 import DynamicTitle from "./DynamicTitle";
 import IssueKey from "./IssueKey";
+import UserCard from "../UserCard";
 import './SingleIssue.css';
 
 const SingleIssue = () => {
@@ -33,6 +34,27 @@ const SingleIssue = () => {
                 <h3 className="issue-status-header">Status</h3>
                 <div className="issue-status">
                     <DynamicStatus issue={issue} />
+                </div>
+                <h3 className="issue-details-header">Details</h3>
+                <div className="issue-details">
+                    <div className="issue-details-row issue-assignee-row flex-row">
+                        <div className="issue-details-label">Assignee</div>
+                        <div className="issue-details-field">
+                            <UserCard user={issue?.assignee} isLink={false} />
+                        </div>
+                    </div>
+                    <div className="issue-details-row issue-submitter-row flex-row">
+                        <div className="issue-details-label">Reporter</div>
+                        <div className="issue-details-field">
+                            <UserCard user={issue?.submitter} isLink={false} />
+                        </div>
+                    </div>
+                    <div className="issue-details-row issue-type-row flex-row">
+                        <div className="issue-details-label">Issue Type</div>
+                        <div className="issue-details-field">
+                            Current Issue Type
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
