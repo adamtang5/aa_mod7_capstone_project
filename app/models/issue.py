@@ -17,8 +17,8 @@ class Issue(db.Model):
     title = db.Column(db.String(255), nullable=False)
     body = db.Column(db.String)
     type_id = db.Column(db.Integer, db.ForeignKey("IssueTypes.id"), nullable=False)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     project = db.relationship("Project", back_populates="issues")
     comments = db.relationship("Comment", back_populates="issue")

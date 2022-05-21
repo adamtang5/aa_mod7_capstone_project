@@ -10,8 +10,8 @@ class Comment(db.Model):
     issue_id = db.Column(db.Integer, db.ForeignKey("Issues.id"), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey("Users.id"), nullable=False)
     body = db.Column(db.String)
-    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
-    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now())
+    created_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
+    updated_at = db.Column(db.DateTime, nullable=False, default=datetime.now)
 
     issue = db.relationship("Issue", back_populates="comments")
 

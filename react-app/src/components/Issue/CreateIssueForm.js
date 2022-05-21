@@ -89,6 +89,17 @@ const CreateIssueForm = ({ handleCloseModal }) => {
         });
     });
 
+    // Theme for Selects
+    const customTheme = (theme) => ({
+        ...theme,
+        colors: {
+            ...theme.colors,
+            primary: '#088796',     // for outline and bg of selected value
+            primary25: 'rgba(9, 66, 30, 0.2)',    // for bg of unselected options on hover
+            primary50: 'rgba(9, 66, 30, 0.3)',    // for selected value on click
+        }
+    });
+
     // controlled input events
     const titleChange = e => {
         setErrors([]);
@@ -162,48 +173,115 @@ const CreateIssueForm = ({ handleCloseModal }) => {
 
                 <div className="issue-form-body">
 
-                    <label
-                        htmlFor="project-id"
-                        className="form-element"
-                    >
-                        <div className="form-field-label">
-                            Project <span className="required-field">*</span>
+                    <div className="issue-form-selects flex-row">
+                        <div className="issue-form-selects-left flex-column">
+                            <label
+                                htmlFor="project-id"
+                                className="form-element"
+                            >
+                                <div className="form-field-label">
+                                    Project <span className="required-field">*</span>
+                                </div>
+
+                                <Select
+                                    theme={customTheme}
+                                    options={projectOptions}
+                                    name='project-id'
+                                    id="project-id-input"
+                                    onChange={(value) => setProjectId(value.value)}
+                                    placeholder="Select a project"
+                                    required
+                                />
+                                <CreateIssueProjectIdError
+                                    projectIdInvalid={projectIdInvalid}
+                                />
+                            </label>
+
+                            <label
+                                htmlFor="type-id"
+                                className="form-element"
+                            >
+                                <div className="form-field-label">
+                                    Type <span className="required-field">*</span>
+                                </div>
+
+                                <Select
+                                    theme={customTheme}
+                                    options={typeOptions}
+                                    name='type-id'
+                                    id="type-id-input"
+                                    onChange={(value) => setTypeId(value.value)}
+                                    placeholder="Select a Type"
+                                    required
+                                />
+
+                                <CreateIssueTypeIdError
+                                    typeIdInvalid={typeIdInvalid}
+                                />
+                            </label>
+
+                            <label className="form-element">
+                                <div className="form-field-label">
+                                    Select Assignee
+                                </div>
+                                <div className="assignee-row flex-row">
+                                    <div className="assignee-search flex-column">
+                                        <input
+                                            type='text'
+                                            className="search-box form-input"
+                                            onChange={e => setAssigneeSearchInput(e.target.value)}
+                                            value={assigneeSearchInput}
+                                            placeholder="Search by name"
+                                        />
+                                        {showAssignees && (
+                                            <div className="search-results flex-column">
+                                                {allUsers
+                                                    ?.filter(user => user
+                                                        .display_name
+                                                        .toLowerCase()
+                                                        .includes(assigneeSearchInput.toLowerCase())
+                                                    )
+                                                    .map(user => (
+                                                        <div
+                                                            key={user.id}
+                                                            id={`search-results-li-${user.id}`}
+                                                            className="flex-row cursor-pointer search-results-row"
+                                                            onClick={addUserToAssignee}
+                                                        >
+                                                            <UserCard user={user} isLink={false} />
+                                                        </div>
+                                                    ))
+                                                }
+                                            </div>
+                                        )}
+                                    </div>
+                                </div>
+                            </label>
+
                         </div>
 
-                        <Select
-                            options={projectOptions}
-                            name='project-id'
-                            id="project-id-input"
-                            onChange={(value) => setProjectId(value.value)}
-                            placeholder="Select a project"
-                            required
-                        />
-                        <CreateIssueProjectIdError
-                            projectIdInvalid={projectIdInvalid}
-                        />
-                    </label>
+                        <div className="issue-form-selects-right flex-column">
+                            <label className="form-element">
+                                <div className="form-field-label">
+                                    Reporter
+                                </div>
+                                <div className="form-input-provided">
+                                    <UserCard user={sessionUser} />
+                                </div>
+                            </label>
 
-                    <label
-                        htmlFor="type-id"
-                        className="form-element"
-                    >
-                        <div className="form-field-label">
-                            Type <span className="required-field">*</span>
+                            <label className="form-element">
+                                <div className="form-field-label">
+                                    Assignee
+                                </div>
+                                <div className="selected-assignee">
+                                    <UserCard user={stateUsers[assigneeId]} isLink={false} />
+                                </div>
+                            </label>
+
+
                         </div>
-
-                        <Select
-                            options={typeOptions}
-                            name='type-id'
-                            id="type-id-input"
-                            onChange={(value) => setTypeId(value.value)}
-                            placeholder="Select a Type"
-                            required
-                        />
-
-                        <CreateIssueTypeIdError
-                            typeIdInvalid={typeIdInvalid}
-                        />
-                    </label>
+                    </div>
 
                     <label className="form-element">
                         <div className="form-field-label">
@@ -233,64 +311,6 @@ const CreateIssueForm = ({ handleCloseModal }) => {
                             onChange={bodyChange}
                             value={body}
                         />
-                    </label>
-
-                    <div className="user-fields flex-row">
-                        <label className="form-element">
-                            <div className="form-field-label">
-                                Reporter
-                            </div>
-                            <div className="form-input-provided">
-                                <UserCard user={sessionUser} />
-                            </div>
-                        </label>
-
-                        <label className="form-element">
-                            <div className="form-field-label">
-                                Assignee
-                            </div>
-                            <div className="selected-assignee">
-                                <UserCard user={stateUsers[assigneeId]} isLink={false} />
-                            </div>
-                        </label>
-                    </div>
-
-                    <label className="form-element">
-                        <div className="form-field-label">
-                            Select Assignee
-                        </div>
-                        <div className="assignee-row flex-row">
-                            <div className="assignee-search flex-column">
-                                <input
-                                    type='text'
-                                    className="search-box form-input"
-                                    onChange={e => setAssigneeSearchInput(e.target.value)}
-                                    value={assigneeSearchInput}
-                                    placeholder="Search by name"
-                                />
-                                {showAssignees && (
-                                    <div className="search-results flex-column">
-                                        {allUsers
-                                            ?.filter(user => user
-                                                .display_name
-                                                .toLowerCase()
-                                                .includes(assigneeSearchInput.toLowerCase())
-                                            )
-                                            .map(user => (
-                                                <div
-                                                    key={user.id}
-                                                    id={`search-results-li-${user.id}`}
-                                                    className="flex-row cursor-pointer search-results-row"
-                                                    onClick={addUserToAssignee}
-                                                >
-                                                    <UserCard user={user} isLink={false} />
-                                                </div>
-                                            ))
-                                        }
-                                    </div>
-                                )}
-                            </div>
-                        </div>
                     </label>
 
                     <input

@@ -19,7 +19,9 @@ const IssueRow = ({ issue, idx }) => {
                 <UserCard user={issue?.submitter} isLink={false} />
             </td>
             <td className="data-cell">
-                <UserCard user={issue?.assignee} isLink={false} />
+                {issue?.assignee_id ? (
+                    <UserCard user={issue?.assignee} isLink={false} />
+                ) : null}
             </td>
             <td className="data-cell">
                 {/* <StatusCard statusId={issue?.current_status} /> */}
