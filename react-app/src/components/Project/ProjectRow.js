@@ -12,7 +12,6 @@ const ProjectRow = ({ project, idx, setProjectId, setShowDeleteModal }) => {
 
     return (
         <tr
-            key={project?.id}
             className={`data-row-${idx % 2 === 0 ? 'even' : 'odd'}`}
         >
             <td className="data-cell">
