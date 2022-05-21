@@ -6,7 +6,7 @@ import './SplashPage.css';
 
 const SplashPage = () => {
     return (
-        <div className="page-container">
+        <div className="splash-page-container">
             <header className="bounded-1200 centered fixed">
                 <SplashHeader />
             </header>

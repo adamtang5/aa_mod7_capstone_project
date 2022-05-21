@@ -1,0 +1,16 @@
+.logo-card {
+    align-items: center;
+    gap: 10px;
+}
+
+#mira-logo {
+    height: 36px;
+}
+
+.logo-text {
+    font-size: 40px;
+    line-height: 48px;
+    font-weight: 500;
+    user-select: none;
+    color: var(--color-main);
+}

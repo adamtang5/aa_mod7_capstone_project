@@ -1,5 +1,14 @@
+a {
+    text-decoration: none;
+}
+
 .splash-top-nav {
-    justify-content: space-between;
+    justify-content: flex-start;
+    margin: 12px 0;
+}
+
+.splash-top-left {
+    margin-left: 50px;
 }
 
 .splash-banner-container {
@@ -18,9 +27,15 @@
     color: white;
 }
 
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100vw;
+    border-top: 1px solid #dfe1e5;
+}
+
 .splash-footer {
     height: 100px;
-    border-top: 1px solid #dfe1e5;
     gap: 20px;
     align-items: center;
 }

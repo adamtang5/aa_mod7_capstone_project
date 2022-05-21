@@ -5,6 +5,7 @@ import CreateIssueForm from '../Issue/CreateIssueForm';
 import LogoutButton from '../auth/LogoutButton';
 import './NavBar.css';
 import { useSelector } from 'react-redux';
+import Logo from '../Icons/MiraLogo';
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
@@ -20,7 +21,7 @@ const NavBar = () => {
     <nav id="top-nav" className="flex-row">
       <div>
         <NavLink to='/' exact={true} activeClassName='active'>
-          Home
+          <Logo />
         </NavLink>
       </div>
       <div className="create-issue-modal">
@@ -36,11 +37,11 @@ const NavBar = () => {
           </Modal>
         )}
       </div>
-      <div>
+      {/* <div>
         <NavLink to='/users' exact={true} activeClassName='active'>
           Users
         </NavLink>
-      </div>
+      </div> */}
       <div>
         <LogoutButton />
       </div>
