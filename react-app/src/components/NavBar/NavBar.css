@@ -1,7 +1,7 @@
 #top-nav {
     padding: 10px 0;
     border-bottom: 1px solid var(--color-table-border);
-    justify-content: space-evenly;
+    justify-content: space-around;
     align-items: center;
 }
 
