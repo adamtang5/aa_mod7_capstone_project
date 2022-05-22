@@ -14,6 +14,7 @@ import EditProjectForm from './components/Project/EditProjectForm';
 import FilteredIssuesList from './components/Issue/FilteredIssuesList';
 import SingleIssue from './components/Issue/SingleIssue';
 import { ModalProvider } from './context/Modal';
+import PreloadFont from './components/PreloadFont';
 
 function App() {
   const [loaded, setLoaded] = useState(false);
@@ -33,6 +34,7 @@ function App() {
   return (
     <ModalProvider>
       <BrowserRouter>
+        <PreloadFont />
         <NavBar />
         <Switch>
           <Route path='/welcome' exact={true}>
