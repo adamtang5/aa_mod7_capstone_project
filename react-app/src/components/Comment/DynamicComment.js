@@ -2,9 +2,10 @@ import { useEffect, useState } from 'react';
 import Moment from 'react-moment';
 import { useDispatch, useSelector } from 'react-redux';
 import { editComment } from '../../store/comment';
+import { EditCommentBodyError } from '../errors/BodyError';
 import Avatar from "../Icons/Avatar";
 
-const DynamicComment = ({ comment }) => {
+const DynamicComment = ({ comment, setCommentId, setShowDeleteModal }) => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
 
@@ -18,6 +19,10 @@ const DynamicComment = ({ comment }) => {
         setSubmitDisabled(!body);
     }, [body]);
 
+    const bodyChange = e => {
+        setBody(e.target.value);
+    };
+
     const handleEditCancel = e => {
         setBody(comment?.body);
         setShowForm(false);
@@ -26,6 +31,11 @@ const DynamicComment = ({ comment }) => {
     const toggleBodyToEdit = e => {
         setBody(comment?.body);
         setShowForm(true);
+    }
+
+    const handleClickDelete = e => {
+        setCommentId(comment.id);
+        setShowDeleteModal(true);
     }
 
     const handleBodyEditSubmit = async (e) => {
@@ -71,14 +81,14 @@ const DynamicComment = ({ comment }) => {
                         >Edit</div>
                         <div
                             className="comment-delete cursor-pointer"
-                        // onClick={ }
+                            onClick={handleClickDelete}
                         >Delete</div>
                     </div>
                 )}
                 <div className={`comment-edit-form${showForm ? '' : ' hidden'}`}>
                     <textarea
                         className="edit-body"
-                        onChange={e => setBody(e.target.value)}
+                        onChange={bodyChange}
                         value={body}
                     />
 
@@ -90,7 +100,7 @@ const DynamicComment = ({ comment }) => {
 
                     <div className="edit-body-actions flex-row">
                         <div
-                            className="button-submit button cursor-pointer"
+                            className={`button-submit button cursor-pointer${submitDisabled ? ' disabled' : ''}`}
                             onClick={handleBodyEditSubmit}
                             disabled={submitDisabled}
                         >
