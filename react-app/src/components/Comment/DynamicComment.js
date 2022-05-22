@@ -12,6 +12,7 @@ const DynamicComment = ({ comment }) => {
     const [showForm, setShowForm] = useState(false);
     const [body, setBody] = useState(comment?.body);
     const [submitDisabled, setSubmitDisabled] = useState(true);
+    const authorized = comment?.user_id === sessionUser.id;
 
     useEffect(() => {
         setSubmitDisabled(!body);
@@ -62,16 +63,18 @@ const DynamicComment = ({ comment }) => {
                 <div className={`comment-body${showForm ? ' hidden' : ''}`}>
                     <p>{comment.body}</p>
                 </div>
-                <div className={`comment-actions flex-row${showForm ? ' hidden' : ''}`}>
-                    <div
-                        className="comment-edit cursor-pointer"
-                        onClick={toggleBodyToEdit}
-                    >Edit</div>
-                    <div
-                        className="comment-delete cursor-pointer"
-                    // onClick={ }
-                    >Delete</div>
-                </div>
+                {authorized && (
+                    <div className={`comment-actions flex-row${showForm ? ' hidden' : ''}`}>
+                        <div
+                            className="comment-edit cursor-pointer"
+                            onClick={toggleBodyToEdit}
+                        >Edit</div>
+                        <div
+                            className="comment-delete cursor-pointer"
+                        // onClick={ }
+                        >Delete</div>
+                    </div>
+                )}
                 <div className={`comment-edit-form${showForm ? '' : ' hidden'}`}>
                     <textarea
                         className="edit-body"
