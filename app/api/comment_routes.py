@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Issue, User, Comment, db
 from app.forms import CreateCommentForm, EditCommentForm
 from .validation import validation_errors_to_error_messages
+from datetime import datetime
 
 
 comment_routes = Blueprint('comments', __name__)
@@ -44,6 +45,7 @@ def edit_comment(id):
     if form.validate_on_submit():
         comment = Comment.query.get(id)
         comment.body = form.data['body']
+        comment.updated_at = datetime.now()
         db.session.commit()
 
         issue = Issue.query.get(comment.issue_id)

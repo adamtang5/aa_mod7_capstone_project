@@ -2,6 +2,7 @@ from .db import db
 from .project import Project
 from .issue_type import IssueType
 from .status_change import StatusChange
+from .comment import Comment
 
 from datetime import datetime
 
@@ -28,7 +29,9 @@ class Issue(db.Model):
 
     def to_dict(self):
         status_history = StatusChange.query.filter(StatusChange.issue_id == self.id).order_by(StatusChange.created_at.desc()).all()
-        print(status_history)
+        # print(status_history)
+
+        ordered_comments = Comment.query.filter(Comment.issue_id == self.id).order_by(Comment.created_at.asc()).all()
 
         return {
             'id': self.id,
@@ -43,7 +46,7 @@ class Issue(db.Model):
             'title': self.title,
             'body': self.body,
             'type_id': self.type_id,
-            'comments': [comment.to_dict() for comment in self.comments],
+            'comments': [comment.to_dict() for comment in ordered_comments],
             'submitter': self.submitter.to_dict(),
             'assignee': self.assignee.to_dict() if self.assignee else {},
             'created_at': self.created_at,
