@@ -1,0 +1,8 @@
+.off-screen {
+    font-family: assistant;
+    position: relative;
+    top: -92px;
+    left: -920px;
+    visibility: hidden;
+    height: 0;
+}

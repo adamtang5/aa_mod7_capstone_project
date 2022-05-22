@@ -1,0 +1,76 @@
+.comments-list {
+    margin: 24px 0 12px;
+}
+
+.comment-card {
+    margin-top: 28px;
+    align-items: flex-start;
+    gap: 20px;
+    width: 100%;
+    background-color: var(--color-comment-bg);
+}
+
+.comment-content {
+    font-size: 14px;
+    width: 100%;
+}
+
+.comment-meta {
+    justify-content: flex-start;
+    gap: 10px;
+}
+
+.comment-actions {
+    justify-content: flex-start;
+    gap: 20px;
+}
+
+.comment-actions .comment-edit:hover,
+.comment-actions .comment-delete:hover {
+    text-decoration: underline;
+}
+
+.new-comment-form {
+    margin: 16px 0;
+}
+
+#create-comment-form {
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.comment-user .avatar,
+.current-user .avatar {
+    height: 32px;
+    width: 32px;
+}
+
+.dynamic-form {
+    width: 100%;
+}
+
+.dynamic-form .edit-body {
+    width: 100%;
+    height: 150px;
+    font-size: 1em;
+}
+
+.activate-form {
+    padding: 8px 0;
+}
+
+.activate-form-text {
+    color: var(--color-main);
+}
+
+.activate-form-text:hover {
+    text-decoration: underline;
+}
+
+.dynamic-form .edit-body {
+    margin-top: 5px;
+}
+
+.dynamic-form .body-actions {
+    padding: 12px 1px;
+}

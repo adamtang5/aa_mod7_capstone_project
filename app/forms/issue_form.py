@@ -15,7 +15,7 @@ class CreateIssueForm(FlaskForm):
 
 class EditIssueForm(FlaskForm):
     id = IntegerField("id")
-    title = StringField("Summary")
+    title = StringField("Summary", validators=[DataRequired()])
     body = StringField("Description")
     assignee_id = IntegerField("Assignee Id")
     submit = SubmitField("Submit")

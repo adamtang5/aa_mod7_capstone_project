@@ -3,7 +3,6 @@ from flask_login import login_required, current_user
 from app.models import Issue, User, Status, StatusChange, db
 from app.forms import StatusChangeForm
 from .validation import validation_errors_to_error_messages
-from datetime import datetime
 
 
 status_change_routes = Blueprint('status_changes', __name__)
