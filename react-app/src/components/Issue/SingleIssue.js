@@ -9,12 +9,24 @@ import DynamicTitle from "./DynamicTitle";
 import IssueKey from "./IssueKey";
 import UserCard from "../UserCard";
 import CommentsList from "../Comment/CommentsList";
+import DeleteCommentModal from '../Comment/DeleteCommentModal';
+import { fetchUsers } from '../../store/user';
+import { fetchTypes } from '../../store/type';
+import { fetchStatuses } from '../../store/status';
 import './SingleIssue.css';
 
 const SingleIssue = () => {
     const dispatch = useDispatch();
     const { issueId } = useParams();
     const issue = useSelector(state => state.issues[+issueId]);
+    const [showDeleteModal, setShowDeleteModal] = useState(false);
+    const [commentId, setCommentId] = useState(0);
+
+    useEffect(() => {
+        dispatch(fetchUsers());
+        dispatch(fetchTypes());
+        dispatch(fetchStatuses());
+    }, [dispatch]);
 
     return (
         <div className="issue-page-container flex-row">
@@ -32,8 +44,18 @@ const SingleIssue = () => {
                 </div>
                 <div className="issue-comments">
                     <h3 className="issue-comments-header">Comments</h3>
-                    <CommentsList issue={issue} />
+                    <CommentsList
+                        issue={issue}
+                        setCommentId={setCommentId}
+                        setShowDeleteModal={setShowDeleteModal}
+                    />
                 </div>
+                {showDeleteModal && (
+                    <DeleteCommentModal
+                        commentId={commentId}
+                        setShowDeleteModal={setShowDeleteModal}
+                    />
+                )}
             </div>
             <div className="issue-meta fixed">
                 <h3 className="issue-status-header">Status</h3>

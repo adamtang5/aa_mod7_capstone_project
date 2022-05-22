@@ -6,10 +6,10 @@ const IssueKey = ({ issue }) => {
 
     return (
         <NavLink to={`/issues/${issue?.id}`}>
-            <span className="issue-key-text">
+            <div className="issue-key-text">
                 {(issue?.project_personal && Number(issue?.project_key.slice(1)) === sessionUser?.id)
                     ? 'SELF' : issue?.project_key}-{issue?.project_idx}
-            </span>
+            </div>
         </NavLink>
     )
 };
