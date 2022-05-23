@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
-import { Modal } from '../../context/Modal';
+import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import { Modal } from '../../context/Modal';
 import CreateIssueForm from '../Issue/CreateIssueForm';
 import LogoutButton from '../auth/LogoutButton';
-import './NavBar.css';
-import { useSelector } from 'react-redux';
 import Logo from '../Icons/MiraLogo';
+import ProfileButton from '../ProfileButton';
+import './NavBar.css';
 
 const NavBar = () => {
   const sessionUser = useSelector(state => state.session.user);
@@ -42,9 +43,10 @@ const NavBar = () => {
           Users
         </NavLink>
       </div> */}
-      <div>
+      {sessionUser && <ProfileButton user={sessionUser} />}
+      {/* <div>
         <LogoutButton />
-      </div>
+      </div> */}
     </nav>
   );
 }

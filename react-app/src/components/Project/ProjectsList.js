@@ -37,10 +37,10 @@ export default function ProjectsList() {
                     </Link>
                 </div>
             </header>
-            <div className="search-bar filter-controls flex-row">
+            {/* <div className="search-bar filter-controls flex-row">
                 <div className="search-box">Search box goes here</div>
                 <div className="filter-options">Filter dropdown goes here</div>
-            </div>
+            </div> */}
             <table className="projects-list filter-table striped-table">
                 <thead id="table-head">
                     <tr className="head-row">
