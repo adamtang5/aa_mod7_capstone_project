@@ -4,6 +4,7 @@
 
 .comment-card {
     margin-top: 28px;
+    padding: 10px;
     align-items: flex-start;
     gap: 20px;
     width: 100%;
@@ -31,7 +32,7 @@
 }
 
 .new-comment-form {
-    margin: 16px 0;
+    margin: 16px 10px;
 }
 
 #create-comment-form {

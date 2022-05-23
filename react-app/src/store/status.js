@@ -7,7 +7,7 @@ const loadStatuses = (statuses) => ({
 });
 
 export const fetchStatuses = () => async (dispatch) => {
-    const res = await fetch(`/api/statuses`);
+    const res = await fetch(`/api/statuses/`);
     if (res.ok) {
         const data = await res.json();
         dispatch(loadStatuses(data));
