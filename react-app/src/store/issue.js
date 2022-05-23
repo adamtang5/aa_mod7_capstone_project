@@ -45,6 +45,14 @@ export const fetchIssuesAssignedTo = (userId) => async (dispatch) => {
     }
 };
 
+export const fetchIssueById = (issueId) => async (dispatch) => {
+    const res = await fetch(`/api/issues/${issueId}`);
+    if (res.ok) {
+        const data = await res.json();
+        dispatch(newIssue(data));
+    }
+};
+
 export const createIssue = (issue) => async (dispatch) => {
     const issueRes = await fetch(`/api/issues/`, {
         method: 'POST',

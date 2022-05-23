@@ -14,6 +14,8 @@ import DeleteCommentModal from '../Comment/DeleteCommentModal';
 import { fetchUsers } from '../../store/user';
 import { fetchTypes } from '../../store/type';
 import { fetchStatuses } from '../../store/status';
+import { fetchProjects } from "../../store/project";
+import { fetchIssueById } from "../../store/issue";
 import './SingleIssue.css';
 
 const SingleIssue = () => {
@@ -27,6 +29,8 @@ const SingleIssue = () => {
         dispatch(fetchUsers());
         dispatch(fetchTypes());
         dispatch(fetchStatuses());
+        dispatch(fetchProjects());
+        dispatch(fetchIssueById(Number(issueId)));
     }, [dispatch]);
 
     return (
