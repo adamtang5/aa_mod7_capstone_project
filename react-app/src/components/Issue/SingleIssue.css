@@ -111,13 +111,13 @@ h3.issue-details-header {
 }
 
 .issue-details-label {
-    width: 40%;
+    width: 35%;
     font-size: 12px;
     font-weight: 500;
 }
 
 .issue-details-field {
-    width: 60%;
+    width: 65%;
 }
 
 .issue-details-field .user-card {
@@ -128,4 +128,18 @@ h3.issue-details-header {
 .issue-details-field .user-card .avatar {
     height: 24px;
     width: 24px;
+}
+
+/* #dynamic-assignee-form {
+    position: relative;
+    left: 30px;
+} */
+
+#dynamic-assignee-form .assignee-search {
+    width: 200px;
+}
+
+#dynamic-assignee-form input.search-box {
+    font-size: 16px;
+    line-height: 24px;
 }

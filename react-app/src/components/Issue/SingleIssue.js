@@ -14,6 +14,7 @@ import { fetchUsers } from '../../store/user';
 import { fetchTypes } from '../../store/type';
 import { fetchStatuses } from '../../store/status';
 import './SingleIssue.css';
+import DynamicAssignee from "./DynamicAssignee";
 
 const SingleIssue = () => {
     const dispatch = useDispatch();
@@ -65,10 +66,21 @@ const SingleIssue = () => {
                 <h3 className="issue-details-header">Details</h3>
                 <div className="issue-details">
                     <div className="issue-details-row issue-assignee-row flex-row">
-                        <div className="issue-details-label">Assignee</div>
-                        <div className="issue-details-field">
+                        <DynamicAssignee issue={issue} />
+                        {/* <div
+                            className="issue-details-label cursor-pointer no-select"
+                            title="Click to change assignee"
+                            onClick={e => setShowSelectAssignee(!showSelectAssignee)}
+                        >Assignee</div>
+                        <div
+                            className={`issue-details-field${showSelectAssignee ? ' hidden' : ''}`}
+                        >
                             <UserCard user={issue?.assignee} isLink={false} />
                         </div>
+                        <div
+                            className={`dynamic-details-field${showSelectAssignee ? '' : ' hidden'}`}
+                        >
+                        </div> */}
                     </div>
                     <div className="issue-details-row issue-submitter-row flex-row">
                         <div className="issue-details-label">Reporter</div>

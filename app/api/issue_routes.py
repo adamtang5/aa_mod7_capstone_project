@@ -62,7 +62,7 @@ def edit_issue(id):
         issue.title = form.data['title'] or issue.title
         issue.body = form.data['body'] or issue.body
         assignee = User.query.get(form.data['assignee_id'])
-        issue.assignee = assignee
+        issue.assignee = assignee or issue.assignee
         issue.type_id = form.data['type_id'] or issue.type_id
         issue.updated_at = datetime.now()
 
