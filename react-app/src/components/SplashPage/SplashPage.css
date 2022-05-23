@@ -32,15 +32,29 @@ footer#splash-footer {
     bottom: 0;
     width: 100vw;
     border-top: 1px solid #dfe1e5;
+    z-index: 5;
 }
 
 .splash-footer {
     height: 100px;
-    gap: 20px;
+    /* gap: 20px; */
     align-items: center;
 }
 
-.creator-avatar,
+.creator-card {
+    position: relative;
+}
+
+.creator-avatar {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: 1px solid white;
+    bottom: 0;
+    right: 0;
+}
+
 .tech-icon img {
     width: 60px;
     height: 60px;
@@ -51,4 +65,31 @@ footer#splash-footer {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+}
+
+#splash-footer .top-layer {
+    background-color: white;
+    gap: 20px;
+    align-items: center;
+    z-index: 6;
+}
+
+.fade-in {
+    align-items: center;
+    gap: 20px;
+    animation-name: slideup;
+    animation-duration: 3s;
+    animation-delay: 200ms;
+}
+
+@keyframes slideup {
+    from {
+        transform: translateY(200px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
