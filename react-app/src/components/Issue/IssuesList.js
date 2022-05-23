@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import IssueRow from './IssueRow';
+import { fetchTypes } from '../../store/type';
+import { fetchStatuses } from '../../store/status';
 import '../ListPage.css';
 import './IssuesList.css';
 
-const IssuesList = ({ pageTitle }) => {
+const IssuesList = ({ pageTitle, mode }) => {
     const dispatch = useDispatch();
     const sessionUser = useSelector(state => state.session.user);
     const stateIssues = useSelector(state => state.issues);
-    const allIssues = useSelector(state => Object.values(state.issues));
+    let allIssues = useSelector(state => Object.values(state.issues));
+
+    useEffect(() => {
+        dispatch(fetchTypes());
+        dispatch(fetchStatuses());
+    }, [dispatch]);
+
+    if (mode === "project") {
+        allIssues = allIssues?.filter(issue => issue?.current_status?.status_id !== 7);
+    }
 
     return (
         <div className="page-container">

@@ -13,15 +13,15 @@ const FilteredIssuesList = ({ mode }) => {
     switch (mode) {
         case "project": {
             dispatch(fetchIssuesByProject(+projectId));
-            return <IssuesList pageTitle={"All open"} />
+            return <IssuesList pageTitle={"All open"} mode={mode} />
         }
         case "submitter": {
             dispatch(fetchIssuesSubmittedBy(sessionUser?.id));
-            return <IssuesList pageTitle={"All submitted by me"} />
+            return <IssuesList pageTitle={"All submitted by me"} mode={mode} />
         }
         case "assignee": {
             dispatch(fetchIssuesAssignedTo(sessionUser?.id));
-            return <IssuesList pageTitle={"All assigned to me"} />
+            return <IssuesList pageTitle={"All assigned to me"} mode={mode} />
         }
         default:
             return null;
