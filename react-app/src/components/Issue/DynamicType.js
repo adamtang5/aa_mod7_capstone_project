@@ -7,6 +7,8 @@ const DynamicType = ({ issue }) => {
     const stateTypes = useSelector(state => state.types);
     const allTypes = useSelector(state => Object.values(state.types));
 
+    if (!issue) return null;
+
     // Options for Select component
     const currentTypeId = issue?.type_id;
     const currentTypeOptions = {

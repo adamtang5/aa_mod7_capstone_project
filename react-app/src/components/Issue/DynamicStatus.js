@@ -8,8 +8,10 @@ const DynamicStatus = ({ issue }) => {
     const sessionUser = useSelector(state => state.session.user);
     const stateStatuses = useSelector(state => state.statuses);
 
+    if (!issue) return null;
+
     // Options for Select component
-    const currentStatusId = issue?.current_status?.status_id;
+    let currentStatusId = issue?.current_status?.status_id;
     const currentStatusOptions = {
         value: currentStatusId,
         label: stateStatuses[currentStatusId]?.status,
