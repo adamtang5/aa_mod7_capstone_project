@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import { editIssue } from "../../store/issue";
 import BackCard from "../BackCard";
 import DynamicBody from "./DynamicBody";
 import DynamicStatus from "./DynamicStatus";
 import DynamicTitle from "./DynamicTitle";
+import DynamicType from "./DynamicType";
 import IssueKey from "./IssueKey";
 import UserCard from "../UserCard";
 import CommentsList from "../Comment/CommentsList";
@@ -79,7 +79,7 @@ const SingleIssue = () => {
                     <div className="issue-details-row issue-type-row flex-row">
                         <div className="issue-details-label">Issue Type</div>
                         <div className="issue-details-field">
-                            Current Issue Type
+                            <DynamicType issue={issue} />
                         </div>
                     </div>
                 </div>

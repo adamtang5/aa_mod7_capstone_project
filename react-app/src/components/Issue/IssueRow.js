@@ -2,8 +2,12 @@ import { NavLink } from "react-router-dom";
 import Moment from 'react-moment';
 import IssueKey from './IssueKey';
 import UserCard from "../UserCard";
+import StatusCard from "./StatusCard";
+import { useSelector } from "react-redux";
 
 const IssueRow = ({ issue, idx }) => {
+    const stateStatuses = useSelector(state => state.statuses);
+
     return (
         <tr
             key={issue?.id}
@@ -23,9 +27,8 @@ const IssueRow = ({ issue, idx }) => {
                     <UserCard user={issue?.assignee} isLink={false} />
                 ) : null}
             </td>
-            <td className="data-cell">
-                {/* <StatusCard statusId={issue?.current_status} /> */}
-                Issue's current status
+            <td className="data-cell status-card flex-row">
+                <StatusCard status={stateStatuses[issue?.current_status?.status_id]} />
             </td>
             <td className="data-cell">
                 <Moment fromNow>{issue?.created_at}</Moment>
