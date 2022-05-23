@@ -22,7 +22,10 @@ const ProjectRow = ({ project, idx, setProjectId, setShowDeleteModal }) => {
             </td>
             <td className="data-cell">
                 <div className="users-avatars flex-row">
-                    {project?.users?.map(id => <Avatar key={id} user={allUsers[id]} />)}
+                    {project?.users?.map(id => <Avatar
+                        key={id}
+                        user={allUsers[id]}
+                    />)}
                 </div>
             </td>
             <td className="data-cell flex-row">
