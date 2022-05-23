@@ -3,13 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import ProjectRow from "./ProjectRow";
 import DeleteProjectModal from './DeleteProjectModal';
-import { authenticate } from '../../store/session';
-import '../ListPage.css';
-import './ProjectsList.css';
 import { fetchUsers } from '../../store/user';
 import { fetchProjects } from '../../store/project';
 import { fetchStatuses } from '../../store/status';
 import { fetchTypes } from '../../store/type';
+import '../ListPage.css';
+import './ProjectsList.css';
 
 export default function ProjectsList() {
     const dispatch = useDispatch();
@@ -54,7 +53,7 @@ export default function ProjectsList() {
                 <tbody>
                     {projects?.map((project, idx) => (
                         <ProjectRow
-                            key={project?.id}
+                            // key={project?.id}
                             project={project}
                             idx={idx}
                             setProjectId={setProjectId}
