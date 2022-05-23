@@ -25,6 +25,19 @@
     --color-hover-bg-2: rgba(9, 30, 66, 0.1);
     --color-hover-bg-3: rgba(9, 30, 66, 0.2);
     --color-comment-bg: #FFFAE6;
+    --color-open-bg: rgb(223, 225, 230);
+    --color-open-bg-hover: rgb(192, 199, 207);
+    --color-open-text: rgb(62, 83, 108);
+    --color-open-text-hover: rgb(16, 44, 75);
+    --color-wip-bg: rgb(220, 235, 254);
+    --color-wip-bg-hover: rgb(0, 74, 162);
+    --color-wip-text: rgb(0, 74, 162);
+    --color-wip-text-hover: rgb(220, 235, 254);
+    --color-closed-bg: rgb(226, 252, 240);
+    --color-closed-bg-hover: rgb(0, 102, 70);
+    --color-closed-text: rgb(0, 102, 70);
+    --color-closed-text-hover: rgb(226, 252, 240);
+
 }
 
 body {

@@ -7,3 +7,63 @@
     height: 24px;
     width: 24px;
 }
+
+.status-card {
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2px;
+    user-select: none;
+    width: fit-content;
+    box-sizing: border-box;
+    position: relative;
+}
+
+.status-text {
+    line-height: 1em;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 5px;
+    border-radius: 3px;
+    position: relative;
+    top: 9px;
+}
+
+.status-id-1,
+.status-id-8 {
+    background-color: var(--color-open-bg);
+    color: var(--color-open-text);
+}
+
+.status-id-1:hover,
+.status-id-8:hover {
+    background-color: var(--color-open-bg-hover);
+    color: var(--color-open-text-hover);
+}
+
+.status-id-2,
+.status-id-3 {
+    background-color: var(--color-wip-bg);
+    color: var(--color-wip-text);
+}
+
+.status-id-2:hover,
+.status-id-3:hover {
+    background-color: var(--color-wip-bg-hover);
+    color: var(--color-wip-text-hover);
+}
+
+.status-id-4,
+.status-id-5,
+.status-id-6,
+.status-id-7 {
+    background-color: var(--color-closed-bg);
+    color: var(--color-closed-text);
+}
+
+.status-id-4:hover,
+.status-id-5:hover,
+.status-id-6:hover,
+.status-id-7:hover {
+    background-color: var(--color-closed-bg-hover);
+    color: var(--color-closed-text-hover);
+}

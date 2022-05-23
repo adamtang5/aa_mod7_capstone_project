@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import Issue, Project, User, IssueType, db
 from app.forms import CreateIssueForm, EditIssueForm
 from .validation import validation_errors_to_error_messages
+from datetime import datetime
 import json
 
 issue_routes = Blueprint('issues', __name__)
@@ -62,6 +63,8 @@ def edit_issue(id):
         issue.body = form.data['body'] or issue.body
         assignee = User.query.get(form.data['assignee_id'])
         issue.assignee = assignee
+        issue.type_id = form.data['type_id'] or issue.type_id
+        issue.updated_at = datetime.now()
 
         db.session.commit()
         return issue.to_dict()

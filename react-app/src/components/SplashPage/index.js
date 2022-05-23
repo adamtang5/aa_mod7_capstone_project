@@ -13,7 +13,7 @@ const SplashPage = () => {
             <main>
                 <SplashBanner />
             </main>
-            <footer>
+            <footer id="splash-footer">
                 <SplashFooter />
             </footer>
         </div>

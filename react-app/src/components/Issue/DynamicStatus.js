@@ -62,7 +62,8 @@ const DynamicStatus = ({ issue }) => {
         const data = await dispatch(createStatusChange(newStatusChange));
 
         if (!(data && Array.isArray(data))) {
-            console.log(data);
+            // console.log(data);
+            return;
         }
     };
 
