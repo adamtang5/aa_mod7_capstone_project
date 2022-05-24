@@ -6,7 +6,7 @@
 .delete-project-modal {
     box-sizing: border-box;
     width: 400px;
-    max-height: 375px;
+    max-height: 350px;
     padding: 24px;
 }
 
@@ -32,7 +32,7 @@
 }
 
 .delete-project-modal .actions {
-    margin: 40px 0;
+    margin: 40px 0 20px;
     justify-content: flex-end;
     gap: 15px;
 }

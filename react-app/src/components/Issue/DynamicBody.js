@@ -28,6 +28,7 @@ const DynamicBody = ({ issue }) => {
 
         await dispatch(editIssue({
             id: issue?.id,
+            title: issue?.title,    // data required
             body,
         }));
 

@@ -89,7 +89,7 @@ const CreateProjectForm = () => {
 
     const keyChange = e => {
         setErrors([]);
-        if (key.length <= 5) setKey(e.target.value);
+        if (key.length <= 5) setKey(e.target.value.slice(0, 5));
     };
 
     const userIdsChange = e => {
