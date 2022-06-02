@@ -19,11 +19,51 @@ const DynamicStatus = ({ issue }) => {
 
     let statusOptions = [];
     stateStatuses[currentStatusId]?.next?.forEach(status => {
+        let bgColor;
+        let bgColorHover;
+        let color;
+        let colorHover;
+
+        if (status.id % 8 <= 1) {
+            // bgColor = "rgb(223, 225, 230)";
+            bgColor = "#DFE1E6";
+            // bgColorHover = "rgb(192, 199, 207)";
+            bgColorHover = "#C0C7CF";
+            // color = "rgb(62, 83, 108)";
+            color = "#3E536C";
+            // colorHover = "rgb(16, 44, 75)";
+            colorHover = "#102C4B";
+        } else if ((status.id <= 3) && (status.id >= 2)) {
+            // bgColor = "rgb(220, 235, 254)";
+            bgColor = "#DCEBFE";
+            // bgColorHover = "rgb(0, 74, 162)";
+            bgColorHover = "#004AA2";
+            // color = "rgb(0, 74, 162)";
+            color = "#004AA2";
+            // colorHover = "rgb(220, 235, 254)";
+            colorHover = "#DCEBFE";
+        } else {
+            // bgColor = "rgb(226, 252, 240)";
+            bgColor = "#E2FCF0";
+            // bgColorHover = "rgb(0, 102, 70)";
+            bgColorHover = "#006646";
+            // color = "rgb(0, 102, 70)";
+            color = "#006646";
+            // colorHover = "rgb(226, 252, 240)";
+            colorHover = "#E2FCF0";
+        }
+
         statusOptions.push({
             value: status.id,
             label: status.status,
+            bgColor,
+            bgColorHover,
+            color,
+            colorHover,
         });
     });
+
+    console.log(statusOptions);
 
     const customStyles = {
         option: (provided, state) => ({
@@ -51,6 +91,12 @@ const DynamicStatus = ({ issue }) => {
         }
     });
 
+    const valueStyles = (styles, { data }) => ({
+        ...styles,
+        backgroundColor: data.bgColor,
+        color: data.color,
+    });
+
     const handleStatusChange = async (value) => {
         // console.log(value.value);
 
@@ -71,8 +117,8 @@ const DynamicStatus = ({ issue }) => {
 
     return (
         <Select
-            // styles={customStyles}
-            theme={customTheme}
+            styles={{ value: valueStyles }}
+            // theme={customTheme}
             options={statusOptions}
             name='status-id'
             id='status-id-input'
