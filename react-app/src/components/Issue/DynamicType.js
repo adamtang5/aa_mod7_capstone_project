@@ -1,6 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { editIssue } from '../../store/issue';
 import Select from 'react-select';
+import { customTheme } from '../../utils/selectStyles';
 
 const DynamicType = ({ issue }) => {
     const dispatch = useDispatch();
@@ -42,6 +43,7 @@ const DynamicType = ({ issue }) => {
 
     return (
         <Select
+            theme={customTheme}
             options={typeOptions}
             name='type-id'
             id='type-id-input'
