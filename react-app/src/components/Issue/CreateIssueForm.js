@@ -9,6 +9,7 @@ import { CreateIssueTypeIdError } from '../errors/TypeIdError';
 import { CreateIssueTitleError } from '../errors/TitleError';
 import UserCard from '../UserCard';
 import './IssueForm.css';
+import { customTheme } from '../../utils/selectStyles';
 
 const CreateIssueForm = ({ handleCloseModal }) => {
     const dispatch = useDispatch();
@@ -90,15 +91,15 @@ const CreateIssueForm = ({ handleCloseModal }) => {
     });
 
     // Theme for Selects
-    const customTheme = (theme) => ({
-        ...theme,
-        colors: {
-            ...theme.colors,
-            primary: '#088796',     // for outline and bg of selected value
-            primary25: 'rgba(9, 66, 30, 0.2)',    // for bg of unselected options on hover
-            primary50: 'rgba(9, 66, 30, 0.3)',    // for selected value on click
-        }
-    });
+    // const customTheme = (theme) => ({
+    //     ...theme,
+    //     colors: {
+    //         ...theme.colors,
+    //         primary: '#088796',     // for outline and bg of selected value
+    //         primary25: 'rgba(9, 66, 30, 0.2)',    // for bg of unselected options on hover
+    //         primary50: 'rgba(9, 66, 30, 0.3)',    // for selected value on click
+    //     }
+    // });
 
     // controlled input events
     const titleChange = e => {
