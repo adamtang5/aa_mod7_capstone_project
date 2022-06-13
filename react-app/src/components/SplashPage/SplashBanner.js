@@ -9,9 +9,15 @@ const SplashBanner = () => {
                     <div className="splash-banner-features">
                         <h3 className="all-caps">Get it free today:</h3>
                         <ul className="splash-banner-features-list">
-                            <li>Access to ITSM features</li>
-                            <li>Unlimited agents</li>
-                            <li>Unlimited customers</li>
+                            <li>
+                                <p>Access to ITSM features</p>
+                            </li>
+                            <li>
+                                <p>Unlimited agents</p>
+                            </li>
+                            <li>
+                                <p>Unlimited customers</p>
+                            </li>
                         </ul>
                     </div>
                 </div>
