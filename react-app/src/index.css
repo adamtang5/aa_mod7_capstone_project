@@ -27,6 +27,7 @@
     --color-text-1: #081A0E;
     --color-text-2: #3A5243;
     --color-headliner-2: #255838;
+    --filter-headliner-2: invert(28%) sepia(21%) saturate(1001%) hue-rotate(90deg) brightness(95%) contrast(95%);
     --color-table-border: #ADAFB3;
     --color-even-rows: #dde3dc;
     --color-odd-rows: #c9ccc9;
@@ -95,6 +96,10 @@ body {
 
 .all-caps {
     text-transform: uppercase;
+}
+
+.no-filter {
+    filter: unset !important;
 }
 
 .error-text {
