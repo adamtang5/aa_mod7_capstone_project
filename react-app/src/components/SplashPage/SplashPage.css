@@ -1,3 +1,8 @@
+* {
+    --footer-height: 64px;
+    --color-splash-text: #426e52;
+}
+
 a {
     text-decoration: none;
 }
@@ -12,7 +17,7 @@ a {
 }
 
 .splash-page-container main {
-    margin-bottom: 100px;
+    margin-bottom: var(--footer-height);
 }
 
 .splash-banner-container {
@@ -84,6 +89,8 @@ ul.splash-banner-features-list>li:after {
 .splash-section-container {
     padding: 64px 0;
     align-items: center;
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 h2.headliner {
@@ -116,9 +123,30 @@ footer#splash-footer {
 }
 
 .splash-footer {
-    height: 100px;
-    /* gap: 20px; */
+    height: var(--footer-height);
+    justify-content: space-between;
     align-items: center;
+    padding: 0 10px;
+}
+
+.splash-footer * {
+    font-size: 14px;
+    color: var(--color-splash-text);
+}
+
+.splash-footer .tech-icon img {
+    width: 24px;
+    height: 24px;
+    filter: var(--filter-headliner-2);
+}
+
+.footer-left .tech-icon {
+    align-items: center;
+}
+
+.footer-left,
+.footer-right {
+    gap: 5px;
 }
 
 .creator-card {
@@ -140,13 +168,6 @@ footer#splash-footer {
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
-}
-
-#splash-footer .top-layer {
-    background-color: white;
-    gap: 20px;
-    align-items: center;
-    z-index: 6;
 }
 
 .fade-in {
