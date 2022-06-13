@@ -1,13 +1,4 @@
-import React, { useState } from 'react';
-import TechIconsPanel from "./TechIconsPanel";
-
 const SplashFooter = () => {
-    const [panelOpen, setPanelOpen] = useState(false);
-
-    const togglePanel = e => {
-        setPanelOpen(!panelOpen);
-    }
-
     return (
         <div className="splash-footer bounded-1200 centered flex-row">
             <div className="top-layer flex-row">
@@ -36,7 +27,6 @@ const SplashFooter = () => {
                         </div>
                     </a>
                 </div>
-                <TechIconsPanel />
             </div>
         </div>
     )
