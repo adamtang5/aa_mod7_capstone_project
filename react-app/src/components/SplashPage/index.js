@@ -2,6 +2,7 @@ import React from "react";
 import SplashBanner from "./SplashBanner";
 import SplashFooter from "./SplashFooter";
 import SplashHeader from "./SplashHeader";
+import TechIconsPanel from "./TechIconsPanel";
 import './SplashPage.css';
 
 const SplashPage = () => {
@@ -12,6 +13,7 @@ const SplashPage = () => {
             </header>
             <main>
                 <SplashBanner />
+                <TechIconsPanel />
             </main>
             <footer id="splash-footer">
                 <SplashFooter />
