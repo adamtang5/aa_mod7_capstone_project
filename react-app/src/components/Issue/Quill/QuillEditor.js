@@ -35,70 +35,105 @@ function redoChange() {
 };
 
 // Quill Toolbar component
-const QuillToolbar = (props) => {
+const QuillToolbar = () => {
     return (
-        <>
-            {props.toolbarId !== undefined && (
-                <div id={props.toolbarId}>
-                    <span className="ql-formats">
-                        <button className="ql-undo">
-                            <CustomUndo />
-                        </button>
-                        <button className="ql-redo">
-                            <CustomRedo />
-                        </button>
-                    </span>
-                    <span className="ql-formats">
-                        <select className="ql-header">
-                            <option value="" selected>Normal text</option>
-                            <option value="1">Heading 1</option>
-                            <option value="2">Heading 2</option>
-                            <option value="3">Heading 3</option>
-                            <option value="4">Heading 4</option>
-                            <option value="5">Heading 5</option>
-                            <option value="6">Heading 6</option>
-                        </select>
-                    </span>
-                    <span className="ql-formats">
-                        <button className="ql-bold" />
-                        <button className="ql-italic" />
-                        <button className="ql-underline" />
-                        <button className="ql-strike" />
-                        <button className="ql-script" value="super" />
-                        <button className="ql-script" value="sub" />
-                        <button className="ql-code-block" />
-                        <button className="ql-link" />
-                    </span>
-                    <span className="ql-formats">
-                        <button className="ql-list" value="ordered" />
-                        <button className="ql-list" value="bullet" />
-                        <button className="ql-indent" value="-1" />
-                        <button className="ql-indent" value="+1" />
-                    </span>
-                    <span className="ql-formats">
-                        <select className="ql-color" />
-                    </span>
-                    <span className="ql-formats">
-                        <button className="ql-clean" />
-                    </span>
-                </div>
-            )}
-        </>
+        <div id="quill-editor-toolbar">
+            <span className="ql-formats">
+                <button className="ql-undo">
+                    <CustomUndo />
+                </button>
+                <button className="ql-redo">
+                    <CustomRedo />
+                </button>
+            </span>
+            <span className="ql-formats">
+                <select
+                    className="ql-header"
+                    defaultValue={""}
+                    onChange={e => e.persist()}
+                >
+                    <option value="" selected>Normal text</option>
+                    <option value="1">Heading 1</option>
+                    <option value="2">Heading 2</option>
+                    <option value="3">Heading 3</option>
+                </select>
+            </span>
+            <span className="ql-formats">
+                <button className="ql-bold" />
+                <button className="ql-italic" />
+                <button className="ql-underline" />
+                <button className="ql-strike" />
+                <button className="ql-script" value="super" />
+                <button className="ql-script" value="sub" />
+                <button className="ql-code-block" />
+                <button className="ql-link" />
+            </span>
+            <span className="ql-formats">
+                <button className="ql-list" value="ordered" />
+                <button className="ql-list" value="bullet" />
+                <button className="ql-indent" value="-1" />
+                <button className="ql-indent" value="+1" />
+            </span>
+            <span className="ql-formats">
+                <select className="ql-color" />
+            </span>
+            <span className="ql-formats">
+                <button className="ql-clean" />
+            </span>
+        </div>
     )
 };
 
 
-export class QuillEditor extends React.Component {
+class QuillEditor extends React.Component {
+
+    placeholder;
+    onEditorChange;
+    _isMounted;
+
     state = { editorHtml: "" };
 
+    reactQuillRef = null;
+
+    componentDidMount() {
+        this._isMounted = true;
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
+    }
+
     handleChange = html => {
-        this.setState({ editorHtml: html });
+        console.log('html', html);
+
+        this.setState({
+            editorHtml: html
+        }, () => {
+            this.props.onEditorChange(this.state.editorHtml);
+        });
+    };
+
+    render() {
+        return (
+            <div className="text-editor">
+                <QuillToolbar />
+                <ReactQuill
+                    theme={"snow"}
+                    ref={el => this.reactQuillRef = el}
+                    value={this.state.editorHtml}
+                    onChange={this.handleChange}
+                    placeholder={this.props.placeholder}
+                    modules={this.modules}
+                    formats={this.formats}
+                />
+            </div>
+        )
     };
 
     // Modules object for setting up the Quill editor
-    static modules = (props) => ({
+    modules = {
         toolbar: {
-            container: "#" + props,
+            container: "#quill-editor-toolbar",
             handlers: {
                 undo: undoChange,
                 redo: redoChange,
@@ -109,10 +144,10 @@ export class QuillEditor extends React.Component {
             maxStack: 100,
             userOnly: true,
         },
-    });
+    };
 
     // Formats objects for setting up the Quill editor
-    static formats = [
+    formats = [
         "header",
         "bold",
         "italic",
@@ -127,21 +162,6 @@ export class QuillEditor extends React.Component {
         "color",
         "code-block"
     ];
-
-    render() {
-        return (
-            <div className="text-editor">
-                <QuillToolbar />
-                <ReactQuill
-                    value={this.state.editorHtml}
-                    onChange={this.handleChange}
-                    placeholder={this.props.placeholder}
-                    modules={QuillEditor.modules}
-                    formats={QuillEditor.formats}
-                />
-            </div>
-        )
-    }
 };
 
-// export default QuillEditor;
+export default QuillEditor;
