@@ -1,11 +1,22 @@
-import React, { useState } from 'react';
-import ReactQuill from 'react-quill';
-import EditorToolbar, { modules, formats } from './EditorToolbar';
+import React from 'react';
+import QuillEditor from './QuillEditor';
 import 'react-quill/dist/quill.snow.css';
 import './TextEditor.css';
 
-function QuillEdit(props) {
-    const [body, setBody] = useState("");
+const QuillEdit = ({ placeholder, setBody }) => {
+    const onEditorChange = value => {
+        setBody(value);
+        console.log(value);
+    };
 
-
+    return (
+        <div className="quill-add">
+            <QuillEditor
+                placeholder={placeholder}
+                onEditorChange={onEditorChange}
+            />
+        </div>
+    )
 };
+
+export default QuillEdit;
