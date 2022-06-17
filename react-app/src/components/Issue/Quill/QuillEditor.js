@@ -49,10 +49,10 @@ const QuillToolbar = () => {
             <span className="ql-formats">
                 <select
                     className="ql-header"
-                    defaultValue={""}
-                    onChange={e => e.persist()}
+                // defaultValue={""}
+                // onChange={e => e.persist()}
                 >
-                    <option value="" selected>Normal text</option>
+                    <option value="">Normal text</option>
                     <option value="1">Heading 1</option>
                     <option value="2">Heading 2</option>
                     <option value="3">Heading 3</option>

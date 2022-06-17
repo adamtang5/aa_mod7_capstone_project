@@ -303,18 +303,15 @@ const CreateIssueForm = ({ handleCloseModal }) => {
                         />
                     </label>
 
-                    <label className="form-element">
+                    <div className="form-element">
                         <div className="form-field-label">
                             Description
                         </div>
-                        {/* <textarea
-                            name='body'
-                            className="form-input"
-                            onChange={bodyChange}
-                            value={body}
-                        /> */}
-                        <QuillAdd placeholder={"Add a comment..."} />
-                    </label>
+                        <QuillAdd
+                            placeholder={"Add a comment..."}
+                            setBody={setBody}
+                        />
+                    </div>
 
                     <input
                         type='number'

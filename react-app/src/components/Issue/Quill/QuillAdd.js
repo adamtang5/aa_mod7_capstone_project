@@ -4,27 +4,27 @@ import QuillEditor from './QuillEditor';
 import 'react-quill/dist/quill.snow.css';
 import './TextEditor.css';
 
-const QuillAdd = ({ placeholder }) => {
-    const [body, setBody] = useState("");
-    const [error, setError] = useState([]);
+const QuillAdd = ({ placeholder, setBody }) => {
+    // const [body, setBody] = useState("");
+    // const [error, setError] = useState([]);
 
     const onEditorChange = value => {
         setBody(value);
         console.log(value);
     };
 
-    const handleSubmit = e => {
-        e.preventDefault();
+    // const handleSubmit = e => {
+    //     e.preventDefault();
 
 
-        setBody("");
-    };
+    //     setBody("");
+    // };
 
-    const handleCancel = e => {
-        e.preventDefault();
-        e.stopPropagation();
+    // const handleCancel = e => {
+    //     e.preventDefault();
+    //     e.stopPropagation();
 
-    };
+    // };
 
     return (
         <div className="quill-add">
@@ -33,7 +33,7 @@ const QuillAdd = ({ placeholder }) => {
                 onEditorChange={onEditorChange}
             />
 
-            <form onSubmit={handleSubmit}>
+            {/* <form onSubmit={handleSubmit}>
                 <div className="form-actions flex-row">
                     <button className="button button-submit">Submit</button>
                     <button
@@ -41,7 +41,7 @@ const QuillAdd = ({ placeholder }) => {
                         onClick={handleCancel}
                     >Cancel</button>
                 </div>
-            </form>
+            </form> */}
         </div>
     )
 };

@@ -43,9 +43,8 @@ const DynamicBody = ({ issue }) => {
             <div
                 className={`display-body cursor-text${showDisplayBody ? '' : ' hidden'}`}
                 onClick={toggleBodyToEdit}
-            >
-                {issue?.body}
-            </div>
+                dangerouslySetInnerHTML={{ __html: issue?.body }}
+            />
             <textarea
                 id="body-input"
                 className={`display-body${showEditBody ? '' : ' hidden'}`}
