@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editIssue } from '../../store/issue';
+import QuillEdit from './Quill/QuillEdit';
 
 const DynamicBody = ({ issue }) => {
     const dispatch = useDispatch();
@@ -45,12 +46,19 @@ const DynamicBody = ({ issue }) => {
                 onClick={toggleBodyToEdit}
                 dangerouslySetInnerHTML={{ __html: issue?.body }}
             />
-            <textarea
+            {/* <textarea
                 id="body-input"
                 className={`display-body${showEditBody ? '' : ' hidden'}`}
                 onClick={e => e.stopPropagation()}
                 onChange={e => setBody(e.target.value)}
                 value={body}
+            /> */}
+            <QuillEdit
+                placeholder={""}
+                className={`display-body${showEditBody ? '' : ' hidden'}`}
+                value={body}
+                setBody={setBody}
+                elementId={"body-quill-toolbar"}
             />
             <div
                 className={`body-actions flex-row${showBodyActions ? '' : ' hidden'}`}

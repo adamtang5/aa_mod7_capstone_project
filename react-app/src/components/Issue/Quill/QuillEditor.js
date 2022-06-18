@@ -35,9 +35,9 @@ function redoChange() {
 };
 
 // Quill Toolbar component
-const QuillToolbar = () => {
+const QuillToolbar = ({ elementId }) => {
     return (
-        <div id="quill-editor-toolbar">
+        <div id={elementId}>
             <span className="ql-formats">
                 <button className="ql-undo">
                     <CustomUndo />
@@ -85,6 +85,7 @@ class QuillEditor extends React.Component {
 
     placeholder;
     onEditorChange;
+    // elementId;
     _isMounted;
 
     state = { editorHtml: "" };
@@ -129,7 +130,7 @@ class QuillEditor extends React.Component {
     // Modules object for setting up the Quill editor
     modules = {
         toolbar: {
-            container: "#quill-editor-toolbar",
+            container: "#" + this.props.elementId,
             handlers: {
                 undo: undoChange,
                 redo: redoChange,
