@@ -41,7 +41,6 @@ const DynamicBody = ({ issue }) => {
 
     const handleBodyEditCancel = e => {
         e.preventDefault();
-        console.log(issue?.body);
 
         toggleBodyToDisplay(e);
         setBody(issue?.body);
@@ -54,16 +53,16 @@ const DynamicBody = ({ issue }) => {
                 onClick={toggleBodyToEdit}
                 dangerouslySetInnerHTML={{ __html: issue?.body }}
             />
-            <div
-                className={`display-body${showEditBody ? '' : ' hidden'}`}
-            >
-                <QuillEdit
-                    placeholder={"Add a description for the issue..."}
-                    setBody={setBody}
-                    elementId={`issue-${issue?.id}-body-quill-toolbar`}
-                    initialHtml={issue?.body}
-                />
-            </div>
+            {showEditBody && (
+                <div className="display-body">
+                    <QuillEdit
+                        placeholder={"Add a description for the issue..."}
+                        setBody={setBody}
+                        elementId={`issue-${issue?.id}-body-quill-toolbar`}
+                        initialHtml={issue?.body}
+                    />
+                </div>
+            )}
             <div
                 className={`body-actions flex-row${showBodyActions ? '' : ' hidden'}`}
             >
