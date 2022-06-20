@@ -310,6 +310,7 @@ const CreateIssueForm = ({ handleCloseModal }) => {
                         <QuillAdd
                             placeholder={"Add a description for the issue..."}
                             setBody={setBody}
+                            elementId={"new-issue-body-quill-toolbar"}
                         />
                     </div>
 

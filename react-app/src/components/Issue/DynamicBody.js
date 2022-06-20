@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editIssue } from '../../store/issue';
+import QuillEdit from './Quill/QuillEdit';
 
 const DynamicBody = ({ issue }) => {
     const dispatch = useDispatch();
@@ -38,6 +39,14 @@ const DynamicBody = ({ issue }) => {
         await setBody(issue?.body);
     };
 
+    const handleBodyEditCancel = e => {
+        e.preventDefault();
+        console.log(issue?.body);
+
+        toggleBodyToDisplay(e);
+        setBody(issue?.body);
+    }
+
     return (
         <>
             <div
@@ -45,13 +54,16 @@ const DynamicBody = ({ issue }) => {
                 onClick={toggleBodyToEdit}
                 dangerouslySetInnerHTML={{ __html: issue?.body }}
             />
-            <textarea
-                id="body-input"
+            <div
                 className={`display-body${showEditBody ? '' : ' hidden'}`}
-                onClick={e => e.stopPropagation()}
-                onChange={e => setBody(e.target.value)}
-                value={body}
-            />
+            >
+                <QuillEdit
+                    placeholder={"Add a description for the issue..."}
+                    setBody={setBody}
+                    elementId={`issue-${issue?.id}-body-quill-toolbar`}
+                    initialHtml={issue?.body}
+                />
+            </div>
             <div
                 className={`body-actions flex-row${showBodyActions ? '' : ' hidden'}`}
             >
@@ -63,7 +75,7 @@ const DynamicBody = ({ issue }) => {
                 </div>
                 <div
                     className="button cancel body-action-buttons cursor-pointer"
-                    onClick={toggleBodyToDisplay}
+                    onClick={handleBodyEditCancel}
                 >
                     Cancel
                 </div>
