@@ -308,7 +308,7 @@ const CreateIssueForm = ({ handleCloseModal }) => {
                             Description
                         </div>
                         <QuillAdd
-                            placeholder={"Add a comment..."}
+                            placeholder={"Add a description for the issue..."}
                             setBody={setBody}
                         />
                     </div>

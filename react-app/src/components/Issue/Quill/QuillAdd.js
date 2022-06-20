@@ -14,6 +14,7 @@ const QuillAdd = ({ placeholder, setBody }) => {
             <QuillEditor
                 placeholder={placeholder}
                 onEditorChange={onEditorChange}
+                elementId={"body-quill-toolbar"}
             />
         </div>
     )
