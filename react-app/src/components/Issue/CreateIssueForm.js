@@ -10,6 +10,7 @@ import { CreateIssueTitleError } from '../errors/TitleError';
 import UserCard from '../UserCard';
 import './IssueForm.css';
 import { customTheme } from '../../utils/selectStyles';
+import QuillAdd from '../Quill/QuillAdd';
 
 const CreateIssueForm = ({ handleCloseModal }) => {
     const dispatch = useDispatch();
@@ -302,17 +303,16 @@ const CreateIssueForm = ({ handleCloseModal }) => {
                         />
                     </label>
 
-                    <label className="form-element">
+                    <div className="form-element">
                         <div className="form-field-label">
                             Description
                         </div>
-                        <textarea
-                            name='body'
-                            className="form-input"
-                            onChange={bodyChange}
-                            value={body}
+                        <QuillAdd
+                            placeholder={"Add a description for the issue..."}
+                            setBody={setBody}
+                            elementId={"new-issue-body-quill-toolbar"}
                         />
-                    </label>
+                    </div>
 
                     <input
                         type='number'

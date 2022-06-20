@@ -65,8 +65,12 @@ input.display-title {
 .issue-body .display-body {
     width: 100%;
     font-size: 14px;
-    height: 200px;
+    height: 250px;
     overflow-y: scroll;
+}
+
+.display-body .quill-edit {
+    margin-right: 20px;
 }
 
 .title-actions {

@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { createComment } from '../../store/comment';
 import Avatar from '../Icons/Avatar';
+import QuillAdd from '../Quill/QuillAdd';
 
 const CreateCommentForm = ({ issue }) => {
     const dispatch = useDispatch();
@@ -52,12 +53,13 @@ const CreateCommentForm = ({ issue }) => {
                         Add comment
                     </div>
                 </div>
-                <textarea
-                    className={`edit-body${showForm ? '' : ' hidden'}`}
-                    onChange={e => setBody(e.target.value)}
-                    value={body}
-                    placeholder="Add a comment..."
-                />
+                {showForm && (
+                    <QuillAdd
+                        placeholder={"Add a comment..."}
+                        setBody={setBody}
+                        elementId={"new-comment-body-quill-toolbar"}
+                    />
+                )}
 
                 <div className="errors">
                     {errors?.map((error, ind) => (
