@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editIssue } from '../../store/issue';
-import QuillEdit from './Quill/QuillEdit';
+import QuillEdit from '../Quill/QuillEdit';
 
 const DynamicBody = ({ issue }) => {
     const dispatch = useDispatch();

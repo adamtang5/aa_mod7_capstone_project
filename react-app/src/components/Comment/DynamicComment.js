@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { editComment } from '../../store/comment';
 import { EditCommentBodyError } from '../errors/BodyError';
 import Avatar from "../Icons/Avatar";
+import QuillEdit from '../Quill/QuillEdit';
 
 const DynamicComment = ({ comment, setCommentId, setShowDeleteModal }) => {
     const dispatch = useDispatch();
@@ -70,9 +71,10 @@ const DynamicComment = ({ comment, setCommentId, setShowDeleteModal }) => {
                         <Moment fromNow>{comment.created_at}</Moment>
                     </div>
                 </div>
-                <div className={`comment-body${showForm ? ' hidden' : ''}`}>
-                    <p>{comment.body}</p>
-                </div>
+                <div
+                    className={`comment-body${showForm ? ' hidden' : ''}`}
+                    dangerouslySetInnerHTML={{ __html: comment?.body }}
+                />
                 {authorized && (
                     <div className={`comment-actions flex-row${showForm ? ' hidden' : ''}`}>
                         <div
@@ -85,7 +87,42 @@ const DynamicComment = ({ comment, setCommentId, setShowDeleteModal }) => {
                         >Delete</div>
                     </div>
                 )}
-                <div className={`comment-edit-form${showForm ? '' : ' hidden'}`}>
+
+                {showForm && (
+                    <>
+                        <div className="comment-edit-form">
+                            <QuillEdit
+                                placeholder={"Add a comment..."}
+                                setBody={setBody}
+                                elementId={`comment-${comment?.id}-body-quill-toolbar`}
+                                initialHtml={comment?.body}
+                            />
+                        </div>
+
+                        <div className="errors">
+                            {errors?.map((error, ind) => (
+                                <div key={ind} className="error-text">{error}</div>
+                            ))}
+                        </div>
+
+                        <div className="edit-body-actions flex-row">
+                            <div
+                                className={`button-submit button cursor-pointer${submitDisabled ? ' disabled' : ''}`}
+                                onClick={handleBodyEditSubmit}
+                                disabled={submitDisabled}
+                            >
+                                Save
+                            </div>
+                            <div
+                                className="button cancel cursor-pointer"
+                                onClick={handleEditCancel}
+                            >
+                                Cancel
+                            </div>
+                        </div>
+                    </>
+                )}
+                {/* <div className={`comment-edit-form${showForm ? '' : ' hidden'}`}>
                     <textarea
                         className="edit-body"
                         onChange={bodyChange}
@@ -113,7 +150,7 @@ const DynamicComment = ({ comment, setCommentId, setShowDeleteModal }) => {
                             Cancel
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </div >

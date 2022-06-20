@@ -10,7 +10,7 @@ import { CreateIssueTitleError } from '../errors/TitleError';
 import UserCard from '../UserCard';
 import './IssueForm.css';
 import { customTheme } from '../../utils/selectStyles';
-import QuillAdd from './Quill/QuillAdd';
+import QuillAdd from '../Quill/QuillAdd';
 
 const CreateIssueForm = ({ handleCloseModal }) => {
     const dispatch = useDispatch();
