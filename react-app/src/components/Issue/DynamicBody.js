@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { editIssue } from '../../store/issue';
 import QuillEdit from './Quill/QuillEdit';
+import QuillEditor from './Quill/QuillEditor';
 
 const DynamicBody = ({ issue }) => {
     const dispatch = useDispatch();
@@ -39,6 +40,11 @@ const DynamicBody = ({ issue }) => {
         await setBody(issue?.body);
     };
 
+    const onEditorChange = value => {
+        setBody(value);
+        console.log(value);
+    };
+
     return (
         <>
             <div
@@ -53,13 +59,28 @@ const DynamicBody = ({ issue }) => {
                 onChange={e => setBody(e.target.value)}
                 value={body}
             /> */}
-            <QuillEdit
-                placeholder={""}
+            {showEditBody && (
+                <div className="display-body">
+                    <QuillEdit
+                        placeholder={""}
+                        initialHtml={body}
+                        setAttr={setBody}
+                        elementId={"body-quill-toolbar"}
+                    />
+                </div>
+            )}
+            <div
                 className={`display-body${showEditBody ? '' : ' hidden'}`}
-                value={body}
-                setBody={setBody}
-                elementId={"body-quill-toolbar"}
-            />
+            >
+                <div className="quill-edit">
+                    <QuillEditor
+                        placeholder={""}
+                        onEditorChange={onEditorChange}
+                        elementId={"body-quill-toolbar"}
+                        initialHtml={body}
+                    />
+                </div>
+            </div>
             <div
                 className={`body-actions flex-row${showBodyActions ? '' : ' hidden'}`}
             >

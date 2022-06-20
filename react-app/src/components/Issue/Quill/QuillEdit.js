@@ -3,9 +3,9 @@ import QuillEditor from './QuillEditor';
 import 'react-quill/dist/quill.snow.css';
 import './TextEditor.css';
 
-const QuillEdit = ({ placeholder, setBody, elementId, value }) => {
+const QuillEdit = ({ placeholder, setAttr, elementId, initialHtml }) => {
     const onEditorChange = value => {
-        setBody(value);
+        setAttr(value);
         console.log(value);
     };
 
@@ -15,7 +15,7 @@ const QuillEdit = ({ placeholder, setBody, elementId, value }) => {
                 placeholder={placeholder}
                 onEditorChange={onEditorChange}
                 elementId={elementId}
-                value={value}
+                initialHtml={initialHtml}
             />
         </div>
     )

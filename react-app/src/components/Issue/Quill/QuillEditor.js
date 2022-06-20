@@ -85,10 +85,11 @@ class QuillEditor extends React.Component {
 
     placeholder;
     onEditorChange;
+    initialHtml;
     // elementId;
     _isMounted;
 
-    state = { editorHtml: "" };
+    state = { editorHtml: this.props.initialHtml || "" };
 
     reactQuillRef = null;
 
