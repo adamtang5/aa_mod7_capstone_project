@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactQuill, { Quill } from 'react-quill';
-import PropTypes from 'prop-types';
 import 'react-quill/dist/quill.snow.css';
 
 const BlockEmbed = Quill.import('blots/block/embed');

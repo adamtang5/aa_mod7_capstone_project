@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import Avatar from '../Icons/Avatar';
 import UserCard from '../UserCard';
 
 function SingleUser() {

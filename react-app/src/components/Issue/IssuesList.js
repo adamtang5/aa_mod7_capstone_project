@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import IssueRow from './IssueRow';
 import { fetchTypes } from '../../store/type';
@@ -8,8 +8,6 @@ import './IssuesList.css';
 
 const IssuesList = ({ pageTitle, mode }) => {
     const dispatch = useDispatch();
-    const sessionUser = useSelector(state => state.session.user);
-    const stateIssues = useSelector(state => state.issues);
     let allIssues = useSelector(state => Object.values(state.issues));
 
     useEffect(() => {

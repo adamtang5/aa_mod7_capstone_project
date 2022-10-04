@@ -3,7 +3,6 @@ import { useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
 import { Modal } from '../../context/Modal';
 import CreateIssueForm from '../Issue/CreateIssueForm';
-import LogoutButton from '../auth/LogoutButton';
 import Logo from '../Icons/MiraLogo';
 import ProfileButton from '../ProfileButton';
 import './NavBar.css';
@@ -38,15 +37,7 @@ const NavBar = () => {
           </Modal>
         )}
       </div>
-      {/* <div>
-        <NavLink to='/users' exact={true} activeClassName='active'>
-          Users
-        </NavLink>
-      </div> */}
       {sessionUser && <ProfileButton user={sessionUser} />}
-      {/* <div>
-        <LogoutButton />
-      </div> */}
     </nav>
   );
 }
