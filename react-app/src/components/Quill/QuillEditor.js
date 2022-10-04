@@ -1,5 +1,31 @@
 import React from 'react';
 import ReactQuill, { Quill } from 'react-quill';
+import PropTypes from 'prop-types';
+import 'react-quill/dist/quill.snow.css';
+
+const BlockEmbed = Quill.import('blots/block/embed');
+
+class ImageBlot extends BlockEmbed {
+
+    static create(value) {
+        const imgTag = super.create();
+        imgTag.setAttribute('src', value.src);
+        imgTag.setAttribute('alt', value.alt);
+        imgTag.setAttribute('class', 'quill-media');
+        return imgTag;
+    }
+
+    static value(node) {
+        return {
+            src: node.getAttribute('src'),
+            alt: node.getAttribute('alt'),
+        };
+    }
+}
+
+ImageBlot.blotName = 'image';
+ImageBlot.tagName = 'img';
+Quill.register(ImageBlot);
 
 const CustomUndo = () => {
     return (
@@ -135,10 +161,13 @@ class QuillEditor extends React.Component {
                 redo: redoChange,
             },
         },
+        clipboard: {
+            matchVisual: false,
+        },
         history: {
             delay: 500,
-            maxStack: 100,
-            userOnly: true,
+            maxStack: 1000,
+            userOnly: false,
         },
     };
 
@@ -156,8 +185,20 @@ class QuillEditor extends React.Component {
         "indent",
         "link",
         "color",
-        "code-block"
+        "code-block",
+        "image",
     ];
 };
+
+QuillEditor.modules = {
+    toolbar: [
+        [{ 'header': '1' }, { 'header': '2' }, { 'header': '3' },],
+        ['bold', 'italic', 'underline', 'strike', { 'script': 'super' }, { 'script': 'sub' }, 'blockquote', 'link',],
+        [{ 'list': 'ordered' }, { 'list': 'bullet' },],
+        [{ 'indent': '-1' }, { 'indent': '+1' },],
+        [{ 'color': [] }],
+        ['clean'],
+    ]
+}
 
 export default QuillEditor;

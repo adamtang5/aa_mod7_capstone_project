@@ -1,3 +1,11 @@
 .quill {
     height: 150px;
 }
+
+.quill-media {
+    display: block;
+    height: 350px;
+    margin: 0 auto;
+    object-fit: scale-down;
+    width: 700px;
+}
